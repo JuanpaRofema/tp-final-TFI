@@ -1,0 +1,7 @@
+{
+  "name": "CodigoAlPlato",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
