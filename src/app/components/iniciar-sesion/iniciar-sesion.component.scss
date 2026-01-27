@@ -1,0 +1,292 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Raleway, sans-serif;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.screen {
+  background: linear-gradient(90deg, #003566, #0077b6);
+  position: relative;
+  height: 100%;
+  width: 100%;
+  box-shadow: 0px 0px 24px #00b4d8;
+}
+
+.screen__content {
+  z-index: 1;
+  position: relative;
+  height: 100%;
+}
+
+.screen__background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  -webkit-clip-path: inset(0 0 0 0);
+  clip-path: inset(0 0 0 0);
+}
+
+.screen__background__shape {
+  transform: rotate(45deg);
+  position: absolute;
+}
+
+.screen__background__shape1 {
+  height: 680px;
+  width: 620px;
+  background: #90e0ef;
+  top: -100px;
+  right: 120px;
+  border-radius: 0 72px 0 0;
+}
+
+.screen__background__shape2 {
+  height: 280px;
+  width: 200px;
+  background: #007f5f;
+  top: -100px;
+  right: 0;
+  border-radius: 32px;
+}
+
+.screen__background__shape3 {
+  height: 540px;
+  width: 290px;
+  background: linear-gradient(270deg, #003566, #0096c7);
+  top: -24px;
+  right: 0;
+  border-radius: 32px;
+}
+
+.screen__background__shape4 {
+  height: 400px;
+  width: 200px;
+  background: #007f5f;
+  top: 420px;
+  right: 50px;
+  border-radius: 60px;
+}
+
+.login {
+  width: 100%;
+  padding: 20px 15px;
+}
+
+.login__field {
+  padding: 10px 0;
+  position: relative;
+}
+
+.login__icon {
+  // position: absolute;
+  top: 35px;
+  color: #00b4d8;
+  font-size: 18px;
+}
+
+.login__input {
+  border: none;
+  color: #000;
+  border-bottom: 2px solid #000;
+  background: none;
+  padding: 10px;
+  padding-left: 24px;
+  font-weight: 700;
+  font-size: larger;
+  width: 90%;
+  transition: 0.2s;
+}
+
+.login__input::placeholder {
+  color: #000;
+}
+
+.login__input:active,
+.login__input:focus,
+.login__input:hover {
+  outline: none;
+  border-bottom-color: #00b4d8;
+}
+
+.button__icon {
+  font-size: 24px;
+  margin-left: auto;
+  color: #00b4d8;
+}
+
+.login__submit {
+background: #fff;
+    font-size: 28px;
+    /* margin-top: 60px; */
+  margin-left: 10px;
+  padding: 20px 25px;
+  margin-bottom: 20px;
+  border-radius: 26px;
+  border: 1px solid #fff;
+  text-transform: uppercase;
+  font-weight: 750;
+  display: flex;
+  align-items: center;
+  width: 90%;
+  color: #007f5f;
+  box-shadow: 0px 2px 2px #00b4d8;
+  cursor: pointer;
+  transition: 0.2s;
+  // margin-bottom: 10px !important;
+}
+
+.login__submit:active,
+.login__submit:focus,
+.login__submit:hover {
+  border-color: #00b4d8;
+  outline: none;
+}
+
+.small-button-container {
+  display: flex;
+  justify-content: space-around;
+  gap: 5px;
+  margin-top: 5px;
+  margin-right: 15px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  gap: 40px;
+}
+
+.column-title {
+  font-size: 20px;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.second {
+  margin-top: 20px;
+}
+
+.small-button {
+  cursor: pointer;
+  border-radius: 20px;
+  border: 1px solid #fff;
+  background-color: #fff;
+  color: #003566;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 15px;
+  padding: 8px 10px;
+  transition: transform 80ms ease-in;
+  margin: 15px 0;
+  margin-bottom: -100px !important;
+}
+
+.small-button:hover {
+  background-color: #e0fbfc;
+}
+
+.small-button:active {
+  transform: scale(0.95);
+}
+
+.small-button:focus {
+  outline: none;
+}
+
+.small-button.ghost {
+  background-color: transparent;
+  border-color: #e0fbfc;
+}
+
+.error-message {
+  color: #000;
+  line-height: 0px;
+  font-style: italic;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  width: 450px;
+}
+
+.google-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-radius: 30px;
+  border: none;
+  padding: 12px 20px;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.google-button:hover {
+  background-color: #f1f1f1;
+}
+
+.google-button img {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+.google-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: #444;
+}
+
+.google__submit {
+    background: #fff; 
+    font-size: 18px; /* Tamaño de fuente para el texto de Google */
+    padding: 15px 20px;
+    margin-left: 10px;
+    margin-bottom: 20px; 
+    border-radius: 26px; /* Mismo radio que el login__submit */
+    border: 1px solid #00b4d8; /* Borde sutil del color de acento */
+    text-transform: uppercase;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    color: #000; /* Texto en color oscuro */
+    box-shadow: 0px 2px 2px #00b4d8; /* Mismo efecto de sombra que el login__submit */
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.google__submit:active,
+.google__submit:focus,
+.google__submit:hover {
+    border-color: #007f5f; /* Cambiar a verde al interactuar */
+    outline: none;
+    /* Efecto para simular el "click" o enfoque */
+    box-shadow: 0px 4px 4px #007f5f; 
+    transform: translateY(-2px);
+}
+
+.google__submit svg {
+    /* Ajuste de tamaño del icono de Google */
+    width: 25px; 
+    height: 25px;
+    margin-right: 10px;
+}
+

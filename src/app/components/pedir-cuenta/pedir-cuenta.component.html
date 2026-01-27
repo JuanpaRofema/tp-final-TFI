@@ -1,0 +1,81 @@
+<div *ngIf="isLoading" class="spinner-overlay">
+  <div class="spinner-container">
+    <img src="assets/icono.png" class="spinning-logo">
+    <p>{{ diccionario[idioma()]['Procesando'] }}</p>
+  </div>
+</div>
+
+<div class="container">
+  
+  <div class="waiting-view" *ngIf="esperandoCuenta">
+    <div class="icon-pulse">
+      <fa-icon [icon]="faReceipt"></fa-icon>
+    </div>
+    <h2>{{ diccionario[idioma()]['CuentaSolicitada'] }}</h2>
+    <p>{{ diccionario[idioma()]['Estamospreparandotucuenta'] }}</p>
+    <p class="subtext">{{ diccionario[idioma()]['Elmozoorepartidorteenviaráeldetalleenbreve'] }}</p>
+  </div>
+
+
+  <div class="ticket-view" *ngIf="!esperandoCuenta">
+    
+    <h2 class="title">{{ diccionario[idioma()]['TuCuenta'] }}</h2>
+
+    <div class="ticket-card">
+      <div class="ticket-header">
+        <h3>{{ diccionario[idioma()]['RESTAURANTEAPP'] }}</h3>
+        <p>{{ auth.usuarioIngresado.email }}</p>
+        <p class="date">{{  fechaActual | date:'short' }}</p> </div>
+
+      <div class="divider dashed"></div>
+
+      <div class="items-list">
+        <div class="item" *ngFor="let p of productosEntregados">
+          
+          <img [src]="p.image1" class="thumb-img" alt="prod">
+
+          <span class="qty">{{ p.cantidad }}x</span>
+          <span class="name">{{ p.name }}</span>
+          <span class="price">{{ (p.precio * (p.cantidad || 1)) | currency }}</span>
+        
+        </div>
+      </div>
+
+      <div class="divider solid"></div>
+
+      <div class="totals">
+        <div class="row">
+          <span>Subtotal</span>
+          <span>{{ sacarSubTotal() | currency }}</span>
+        </div>
+        
+        <div class="row discount" *ngIf="descuento > 0">
+          <span>Descuento</span>
+          <span>- {{ descuento | currency }}</span>
+        </div>
+
+        <div class="row tip" (click)="escanearPropina()">
+          <div class="tip-label">
+            <fa-icon [icon]="faQrcode"></fa-icon> 
+            <span>{{ diccionario[idioma()]['PropinaScan'] }}</span>
+          </div>
+          <span [class.added]="propinaNumber > 0">{{ propinaNumber | currency }}</span>
+        </div>
+
+        <div class="divider dashed"></div>
+
+        <div class="row final">
+          <span>{{ diccionario[idioma()]['TOTAL'] }}</span>
+          <span class="big-price">{{ sacarTotal() | currency }}</span>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-pay" (click)="guardarCuenta()">
+      <fa-icon [icon]="faCheckCircle"></fa-icon>
+      {{ diccionario[idioma()]['PAGARAHORA'] }}
+    </button>
+
+  </div>
+
+</div>

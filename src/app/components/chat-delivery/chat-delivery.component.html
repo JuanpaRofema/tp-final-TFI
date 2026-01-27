@@ -1,0 +1,58 @@
+<div class="body">
+  <div class="chat-container">
+    
+    <div class="chat-header">
+      <button class="back-button" (click)="volver()">
+        <fa-icon [icon]="faArrowLeft"></fa-icon>
+      </button>
+      
+      <div class="header-info">
+        <fa-icon *ngIf="auth.usuarioIngresado.tipoCliente === 'delivery'" [icon]="faLocationArrow" class="header-icon"></fa-icon>
+        <div class="text-content">
+            <h2>{{ tituloChat }}</h2>
+            <small>{{ subtituloChat }}</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="chat-body" #chatBody>
+      @for (mensaje of mensajes; track mensaje.fecha) { 
+        
+        <!-- Mensaje MIO (Derecha) -->
+        @if (mensaje.verificarUsuario(this.auth.usuarioIngresado?.email)){
+          <div class="message sent">
+            <div class="bubble">
+                <p>{{ mensaje.contenido }}</p>
+                <!-- CORRECCIÓN AQUÍ: Usamos mensaje.fecha directo -->
+                <span class="time">{{ mensaje.fecha | date:'shortTime' }}</span>
+            </div>
+          </div>
+        } 
+        <!-- Mensaje OTRO (Izquierda) -->
+        @else {
+          <div class="message received">
+            <div class="bubble">
+                <small class="sender-name">{{ mensaje.nombre }}</small>
+                <p>{{ mensaje.contenido }}</p>
+                <!-- CORRECCIÓN AQUÍ TAMBIÉN -->
+                <span class="time">{{ mensaje.fecha | date:'shortTime' }}</span>
+            </div>
+          </div>
+        } 
+      }
+    </div>
+
+    <div class="chat-footer">
+      <input
+        [(ngModel)]="mensajeInput"
+        (keyup.enter)="EnviarMensaje()"
+        type="text"
+        placeholder="Escribe un mensaje..."
+        class="input-message"
+      />
+      <button (click)="EnviarMensaje()" class="send-btn">
+        <fa-icon [icon]="faPaperPlane"></fa-icon>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,301 @@
+/* Título */
+.title {
+  color: #f7b267;
+  font-size: 70px;
+  font-weight: bold;
+  margin-bottom: 26px;
+  text-align: center;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+
+.user-list {
+  overflow-y: auto;
+}
+
+.container {.container {
+  padding: 20px;
+  padding-bottom: 100px;
+  background-color: #121212;
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+.title {
+  color: #f7b267; /* Naranja chef */
+  text-align: center;
+  font-weight: bold;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  border-bottom: 1px solid #333;
+  padding-bottom: 10px;
+}
+
+/* TARJETA DE COMANDA */
+.order-card {
+  background-color: #1e1e1e;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  border: 1px solid #333;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  overflow: hidden;
+  animation: fadeUp 0.4s ease-out;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.card-header {
+  background-color: #252525;
+  padding: 15px;
+  border-bottom: 1px solid #333;
+  
+  .header-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      
+      h3 { margin: 0; color: #fff; font-size: 1.2rem; }
+      .time-badge { color: #aaa; font-size: 0.9rem; }
+  }
+}
+
+.card-body {
+  padding: 20px;
+  
+  .section-title {
+      color: #f7b267;
+      font-weight: bold;
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+  }
+
+  .items-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      
+      li {
+          display: flex;
+          align-items: center;
+          padding: 10px;
+          background-color: #2a2a2a;
+          margin-bottom: 8px;
+          border-radius: 8px;
+          border-left: 4px solid #f7b267;
+          
+          .qty { 
+              font-weight: bold; 
+              font-size: 1.4rem; 
+              color: #f7b267; 
+              margin-right: 15px; 
+              min-width: 40px;
+          }
+          .name {
+              color: #fff;
+              font-size: 1.2rem;
+          }
+      }
+  }
+}
+
+.card-actions {
+  padding: 15px;
+  background-color: #181818;
+  
+  .btn-finish {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #4caf50, #2e7d32);
+      color: white;
+      font-weight: bold;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+      
+      &:active { transform: scale(0.98); }
+  }
+}
+
+.empty-state {
+    text-align: center;
+    color: #666;
+    margin-top: 50px;
+    font-size: 1.5rem;
+}
+
+/* REUTILIZABLES (Spinner y Back Button) */
+.back-button {
+  position: fixed; bottom: 20px; left: 20px; z-index: 100;
+  button {
+    width: 50px; height: 50px; border-radius: 50%; background: #333; color: #f7b267;
+    border: none; box-shadow: 0 4px 10px rgba(0,0,0,0.5); font-size: 1.2rem;
+  }
+}
+}
+
+.pedidos-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.pedido {
+  background-color: #121212;
+  border: 1px solid #111;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 8px 0;
+  transition: background-color 0.3s ease;
+  text-align: center;
+}
+
+.pedido:hover {
+  background-color: #454545;
+  cursor: pointer;
+}
+
+.pedido p {
+  margin: 4px 0;
+  font-size: 26px;
+}
+
+/* Estilos para el Modal Overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.pedido-detalle {
+  background-color: #222;
+  border-radius: 8px;
+  padding: 16px;
+  padding-top: 0px;
+  width: 90%;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  max-height: 95%;
+  overflow-y: auto;
+}
+
+.pedido-detalle h3 {
+  text-align: center;
+  align-items: center;
+  color: #fd9527;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-size: 3.5em;
+  margin-bottom: 40px;
+}
+
+.pedido-detalle p {
+  font-size: 1.6em;
+  margin: 20px 0;
+  margin-left: 10px;
+}
+
+.productos-list {
+  align-items: center;
+  text-align: center;
+  list-style-type: none;
+  padding: 0;
+  margin: 20px;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.productos-list li {
+  background-color: #010101;
+  border: 1px solid #290000;
+  border-radius: 6px;
+  padding: 12px;
+  margin: 7px 0;
+}
+
+.productos-list li p {
+  margin: 0;
+  font-size: 25px;
+}
+
+.confirmar-button {
+  background-color: #167800;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 24px;
+  cursor: pointer;
+  font-size: 30px;
+  margin-top: 35px;
+  //   margin-bottom: 10px;
+  display: block;
+  width: 100%;
+}
+
+.confirmar-button:hover {
+  background-color: #105900;
+}
+
+.close-button {
+  background-color: #780000;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 24px;
+  cursor: pointer;
+  font-size: 30px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  display: block;
+  width: 100%;
+}
+
+.close-button:hover {
+  background-color: #560000;
+}
+
+.back-button {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+}
+
+.back-button button {
+  text-align: center;
+  background-color: #f7b267;
+  color: #000;
+  border: none;
+  padding: 20px;
+  border-radius: 50px;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.back-button button:hover {
+  background-color: #dc9952; /* Color de fondo en hover */
+}
+
+.spinner-overlay {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.9);
+  display: flex; justify-content: center; align-items: center; z-index: 9999;
+  .spinner-container { display: flex; flex-direction: column; align-items: center; p { color: #fff; margin-top: 15px; font-weight: bold; }}
+  .spinning-logo { width: 80px; height: 80px; animation: spin 1.5s linear infinite; }
+}
+
+@keyframes spin { 100% { transform: rotate(360deg); } }
+@keyframes slideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }

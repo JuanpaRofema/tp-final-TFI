@@ -1,0 +1,229 @@
+<div class="body">
+  <h2 class="title">{{ diccionario[idioma()]['EncuestadeSatisfacción'] }}</h2>
+  <div class="survey-form">
+    <form [formGroup]="formEncuesta">
+      <div class="form-group">
+        <label for="service-rating" class="titulo-input"
+          >{{ diccionario[idioma()]['Cómocalificaríaslaatención'] }}</label
+        >
+        <input
+          type="range"
+          id="service-rating"
+          name="service-rating"
+          min="1"
+          max="5"
+          [(ngModel)]="serviceRating"
+          formControlName="atencion"
+        />
+        <span>{{ serviceRating }}</span>
+      </div>
+      @if (errorAtencion){
+      <div class="error-message">
+        <p>{{ mensajeAtencion }}</p>
+      </div>
+      }
+      <div class="form-group">
+        <label for="food-rating" class="titulo-input"
+          >{{ diccionario[idioma()]['Cómocalificaríaselsabordelacomida'] }}</label
+        >
+        <input
+          type="range"
+          id="food-rating"
+          name="food-rating"
+          min="1"
+          max="5"
+          [(ngModel)]="saborComida"
+          formControlName="sabor"
+        />
+        <span>{{ saborComida }}</span>
+      </div>
+
+      @if (errorSabor){
+      <div class="error-message">
+        <p>{{ mensajeSabor }}</p>
+      </div>
+      }
+
+      <div class="form-group">
+        <label class="titulo-input">{{ diccionario[idioma()]['Lacomidaestabacaliente'] }}</label>
+        <label>
+          <input
+            type="radio"
+            name="comidaCaliente"
+            value="si"
+            formControlName="comidaCaliente"
+          />
+          {{ diccionario[idioma()]['Sí'] }}
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="comidaCaliente"
+            value="no"
+            formControlName="comidaCaliente"
+          />
+          {{ diccionario[idioma()]['No'] }}
+        </label>
+      </div>
+      @if (errorCaliente){
+      <div class="error-message">
+        <p>{{ mensajeCaliente }}</p>
+      </div>
+      }
+
+      <div class="form-group">
+        <label class="titulo-input">{{ diccionario[idioma()]['Lasporcionesfueronadecuadas'] }}</label>
+        <label>
+          <input
+            type="radio"
+            name="porcionesAdecuadas"
+            value="Muy grandes"
+            formControlName="porcionesAdecuadas"
+          />
+          {{ diccionario[idioma()]['Muygrandes'] }}
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="porcionesAdecuadas"
+            value="Adecuadas"
+            formControlName="porcionesAdecuadas"
+          />
+          {{ diccionario[idioma()]['Adecuadas'] }}
+        </label>
+
+        <label>
+          <input
+            type="radio"
+            name="porcionesAdecuadas"
+            value="Muy pequeñas"
+            formControlName="porcionesAdecuadas"
+          />
+          {{ diccionario[idioma()]['Muypequeñas'] }}
+        </label>
+      </div>
+      @if (errorPorciones){
+      <div class="error-message">
+        <p>{{ mensajePorciones }}</p>
+      </div>
+      }
+
+      <div class="form-group">
+        <label class="titulo-input"
+          >{{ diccionario[idioma()]['Lapresentacióndelosplatillosfueatractiva'] }}</label
+        >
+        <label>
+          <input
+            type="radio"
+            name="presentacionAtractiva"
+            value="si"
+            formControlName="presentacionAtractiva"
+          />
+          {{ diccionario[idioma()]['Sí'] }}
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="presentacionAtractiva"
+            value="no"
+            formControlName="presentacionAtractiva"
+          />
+          {{ diccionario[idioma()]['No'] }}
+        </label>
+      </div>
+
+      @if (errorPresentacion){
+      <div class="error-message">
+        <p>{{ mensajePresentacion }}</p>
+      </div>
+      }
+
+      <div class="form-group">
+        <label class="titulo-input"
+          >{{ diccionario[idioma()]['Quétiposdemenúprefiereenelrestaurante'] }}</label
+        >
+        <div class="checkbox-group">
+          <div class="checkbox-item">
+            <input
+              type="checkbox"
+              id="vegetariano"
+              value="vegetariano"
+              (change)="onCheckboxChange($event)"
+            />
+            <label for="vegetariano">{{ diccionario[idioma()]['Vegetariano'] }}</label>
+          </div>
+          <div class="checkbox-item">
+            <input
+              type="checkbox"
+              id="vegano"
+              value="vegano"
+              (change)="onCheckboxChange($event)"
+            />
+            <label for="vegano">{{ diccionario[idioma()]['Vegano'] }}</label>
+          </div>
+          <div class="checkbox-item">
+            <input
+              type="checkbox"
+              id="gluten-free"
+              value="gluten-free"
+              (change)="onCheckboxChange($event)"
+            />
+            <label for="gluten-free">{{ diccionario[idioma()]['Libredegluten'] }}</label>
+          </div>
+          <div class="checkbox-item">
+            <input
+              type="checkbox"
+              id="organico"
+              value="organico"
+              (change)="onCheckboxChange($event)"
+            />
+            <label for="organico">{{ diccionario[idioma()]['Orgánico'] }}</label>
+          </div>
+        </div>
+      </div>
+
+      @if (errorTipoMenu){
+      <div class="error-message">
+        <p>{{ mensajeMenu }}</p>
+      </div>
+      }
+
+      <div class="form-group">
+        <label for="wait-time" class="titulo-input"
+          >{{ diccionario[idioma()]['Cuántotiempoesperóporlacomida'] }}</label
+        >
+        <select
+          id="wait-time"
+          name="wait-time"
+          required
+          formControlName="tiempoEspera"
+        >
+          <option value="">{{ diccionario[idioma()]['Seleccione'] }}</option>
+          <option value="menos de 15 minutos">{{ diccionario[idioma()]['Menosde15minutos'] }}</option>
+          <option value="15-30 minutos">{{ diccionario[idioma()]['a1530minutos'] }}</option>
+          <option value="30-45 minutos">{{ diccionario[idioma()]['a3045minutos'] }}</option>
+          <option value="más de 45 minutos">{{ diccionario[idioma()]['Másde45minutos'] }}</option>
+        </select>
+      </div>
+      @if (errorTiempo){
+      <div class="error-message">
+        <p>{{ mensajeTiempo }}</p>
+      </div>
+      }
+
+      <div class="form-group">
+        <label for="comments" class="titulo-input"
+          >{{ diccionario[idioma()]['Comentariosadicionales'] }}</label
+        >
+        <textarea
+          id="comments"
+          name="comments"
+          rows="4"
+          formControlName="comentario"
+        ></textarea>
+      </div>
+
+      <button (click)="guardarEncuesta()">{{ diccionario[idioma()]['Enviar'] }}</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,388 @@
+/* Estilos generales de la navbar */
+.navbar {
+  display: flex;
+  // position: absolute;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+}
+
+/* Área izquierda de la navbar */
+.navbar-left img {
+  width: 60px;
+  color: white;
+}
+
+/* Área derecha de la navbar */
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+/* Nombre del usuario */
+.user-name {
+  margin-right: 20px;
+  font-weight: bold;
+  color: #d84f45;
+  font-size: large;
+}
+
+/* Foto del usuario */
+.user-photo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%; /* Hace la imagen circular */
+}
+
+/* Contenedor para centrar y alinear los botones */
+.button-container {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: baseline;
+  height: 100vh; /* Altura total de la pantalla */
+  padding: 1rem;
+  gap: 1rem; /* Espacio entre los botones */
+  // margin-bottom: 50px;
+}
+
+/* Estilos generales para los botones */
+.custom-button {
+  width: 95%;
+  height: 48%; /* Altura para que sean casi cuadrados */
+  background-color: #d84f45; /* Color de fondo */
+  color: #d84f45;
+  border: none;
+  padding: 60px 30px;
+  border-radius: 15px; /* Bordes redondeados */
+  font-size: 1.5rem; /* Tamaño de texto */
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease; /* Animación en hover */
+}
+
+/* Aumenta el tamaño cuando solo hay un botón visible */
+.custom-button:only-of-type {
+  height: 100%;
+}
+
+/* Efecto hover */
+.custom-button:hover {
+  transform: scale(1.05); /* Ligeramente más grande en hover */
+  background-color: #db746d; /* Cambia el color en hover */
+}
+
+.back-button {
+  position: fixed;
+  bottom: 20px;
+  left: 300px;
+  z-index: 1000;
+}
+
+.back-button2 {
+  position: fixed;
+  bottom: 20px;
+  left: 300px;
+  z-index: 1000;
+}
+.back-button2 button {
+  text-align: center;
+  background-color: #202020;
+  color: #d84f45;
+  border: none;
+  padding: 20px;
+  border-radius: 50px;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.back-button2 button:active {
+  background-color: #000;
+}
+
+.back-button button {
+  text-align: center;
+  background-color: #202020;
+  color: #d84f45;
+  border: none;
+  padding: 20px;
+  border-radius: 50px;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.back-button button:active {
+  background-color: #000;
+}
+
+
+/* ====== CONTENEDOR GENERAL ====== */
+.row {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background: linear-gradient(180deg, #9cecfb, #65c7f7, #0052d4);
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+}
+
+/* ====== VIDA ====== */
+.vida {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+}
+
+/* ====== PALABRA OCULTA ====== */
+.palabra-oculta {
+  font-size: 2rem;
+  letter-spacing: 8px;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+/* ====== TABLERO DE LETRAS ====== */
+.tablero {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(45px, 1fr));
+  gap: 8px;
+  justify-items: center;
+  max-width: 340px;
+  margin-top: 1.5rem;
+}
+
+/* ====== BOTONES DE LETRAS ====== */
+.letra-btn {
+  width: 45px;
+  height: 45px;
+  border-radius: 10px;
+  border: none;
+  background-color: #05668d;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.letra-btn:hover:not(:disabled) {
+  background-color: #028090;
+  transform: scale(1.05);
+}
+
+.letra-btn:disabled {
+  background-color: #999;
+  color: #444;
+  cursor: not-allowed;
+}
+
+/* ====== CONTENEDOR GENERAL ====== */
+.row {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background: linear-gradient(180deg, #9cecfb, #65c7f7, #0052d4);
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+}
+
+/* ====== VIDA ====== */
+.vida {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+}
+
+/* ====== PALABRA OCULTA ====== */
+.palabra-oculta {
+  font-size: 2rem;
+  letter-spacing: 8px;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+/* ====== TABLERO DE LETRAS ====== */
+.tablero {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(45px, 1fr));
+  gap: 8px;
+  justify-items: center;
+  max-width: 340px;
+  margin-top: 1.5rem;
+}
+
+/* ====== BOTONES DE LETRAS ====== */
+.letra-btn {
+  width: 45px;
+  height: 45px;
+  border-radius: 10px;
+  border: none;
+  background-color: #05668d;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.letra-btn:hover:not(:disabled) {
+  background-color: #028090;
+  transform: scale(1.05);
+}
+
+.letra-btn:disabled {
+  background-color: #999;
+  color: #444;
+  cursor: not-allowed;
+}
+
+/* ====== FEEDBACK COLORES ====== */
+.correcta {
+  background-color: #2ecc71 !important;
+  color: #fff !important;
+}
+
+.incorrecta {
+  background-color: #e74c3c !important;
+  color: #fff !important;
+}
+
+/* ====== MUÑECO AHORCADO ====== */
+.horca {
+  position: relative;
+  width: 120px;
+  height: 180px;
+  margin-top: 2rem;
+}
+
+.palo-vertical {
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  width: 10px;
+  height: 180px;
+  background: #222;
+}
+
+.palo-horizontal {
+  position: absolute;
+  top: 0;
+  left: 10px;
+  width: 70px;
+  height: 10px;
+  background: #222;
+}
+
+.cuerda {
+  position: absolute;
+  top: 10px;
+  left: 75px;
+  width: 2px;
+  height: 30px;
+  background: #222;
+}
+
+.cabeza {
+  position: absolute;
+  top: 40px;
+  left: 60px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 3px solid #222;
+  background: transparent;
+  display: none;
+}
+
+.cuerpo {
+  position: absolute;
+  top: 70px;
+  left: 73px;
+  width: 4px;
+  height: 45px;
+  background: #222;
+  display: none;
+}
+
+.brazo-izq,
+.brazo-der,
+.pierna-izq,
+.pierna-der {
+  position: absolute;
+  width: 4px;
+  height: 25px;
+  background: #222;
+  display: none;
+}
+
+.brazo-izq {
+  top: 75px;
+  left: 58px;
+  transform: rotate(-45deg);
+}
+
+.brazo-der {
+  top: 75px;
+  left: 84px;
+  transform: rotate(45deg);
+}
+
+.pierna-izq {
+  top: 115px;
+  left: 62px;
+  transform: rotate(30deg);
+}
+
+.pierna-der {
+  top: 115px;
+  left: 80px;
+  transform: rotate(-30deg);
+}
+
+/* ====== MENSAJE FINAL ====== */
+.mensaje {
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* ====== BOTÓN REINICIAR ====== */
+.reiniciar-btn {
+  margin-top: 1rem;
+  padding: 10px 20px;
+  background-color: #202020;
+  color: #d84f45;
+  border: none;
+  border-radius: 20px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  transition: 0.2s ease;
+}
+
+.reiniciar-btn:hover {
+  background-color: #000;
+  transform: scale(1.05);
+}

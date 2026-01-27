@@ -1,0 +1,122 @@
+<nav class="navbar">
+  <div class="navbar-left">
+    @if (this.auth.usuarioIngresado.tipoCliente === "dueño"){
+    <img src="assets/iconos/man_11379344.png" alt="" />
+    }
+  </div>
+  <div class="navbar-right">
+    <span class="user-name">{{ this.auth.usuarioIngresado.nombre }}</span>
+    <img
+      src="{{ this.auth.usuarioIngresado.foto }}"
+      alt="Foto del usuario"
+      class="user-photo"
+    />
+</div>
+
+</nav>
+
+<div *ngIf="isLoading" class="spinner-overlay">
+  <div class="spinner-container">
+    <img src="assets/icono.png" class="spinning-logo">
+    <p>{{ diccionario[idioma()]['Procesando'] }}</p>
+  </div>
+</div>
+
+<div class="container">
+  
+  <h1 class="title">{{ diccionario[idioma()]['RESERVASPENDIENTES'] }}</h1>
+
+  <div class="cards-list" *ngIf="clientes.length > 0; else noReservas">
+    
+    <div class="reservation-card" *ngFor="let cliente of clientes">
+      
+      <div class="card-header">
+        <div class="user-info">
+          <img [src]="cliente.foto" class="avatar" alt="Foto">
+          <div class="text-info">
+            <h3>{{ cliente.nombre }} {{ cliente.apellido }}</h3>
+            <p class="dni">DNI: {{ cliente.dni }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="info-row">
+          <fa-icon [icon]="faClock"></fa-icon>
+          <span>{{ cliente.fechaReservaDate | date:'short' }}</span>
+        </div>
+        <div class="info-row">
+          <fa-icon [icon]="faUsers"></fa-icon>
+          <span>{{ cliente.cantidadComensales }} {{ diccionario[idioma()]['Comensales'] }}</span>
+        </div>
+        <div class="info-row">
+          <fa-icon [icon]="faCalendarCheck"></fa-icon>
+          <span>{{ diccionario[idioma()]['Preferencia'] }} {{ cliente.tipoMesa | titlecase }}</span>
+        </div>
+      </div>
+
+      <div class="card-actions">
+        <button class="btn-reject" (click)="rechazarReserva(cliente)">
+          <fa-icon [icon]="faBan"></fa-icon> {{ diccionario[idioma()]['RECHAZAR'] }}
+        </button>
+        <button class="btn-accept" (click)="abrirSelectorMesa(cliente)">
+          <fa-icon [icon]="faCheckCircle"></fa-icon> {{ diccionario[idioma()]['APROBAR'] }}
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <ng-template #noReservas>
+    <div class="empty-state">
+      <fa-icon [icon]="faCalendarCheck" size="4x" style="color: #555; margin-bottom: 15px;"></fa-icon>
+      <p>{{ diccionario[idioma()]['Nohayreservaspendientes'] }}</p>
+    </div>
+  </ng-template>
+
+</div>
+
+<div class="modal-overlay" *ngIf="mostrarMesasDisponibles" (click)="cerrarSelectorMesa()">
+  
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    
+    <div class="modal-header">
+      <h2>{{ diccionario[idioma()]['AsignarMesa'] }}</h2>
+      <p>{{ diccionario[idioma()]['Para'] }} {{ usuarioSeleccionado?.nombre }}</p>
+      <p class="preference" *ngIf="usuarioSeleccionado?.tipoMesa">
+          {{ diccionario[idioma()]['Preferencia'] }} <strong style="color: #f7b267;">{{ usuarioSeleccionado?.tipoMesa | titlecase }}</strong>
+      </p>
+    </div>
+
+    <div class="tables-grid">
+      
+      <ng-container *ngFor="let mesa of mesas">
+        
+        <div 
+          class="table-item" 
+          *ngIf="!usuarioSeleccionado?.tipoMesa || mesa.tipo === usuarioSeleccionado.tipoMesa"
+          [class.occupied]="mesa.estado === 'ocupada' || mesa.estado === 'reservada'"
+          (click)="(mesa.estado !== 'ocupada' && mesa.estado !== 'reservada') && asignarMesa(mesa)"
+        >
+        <img src={{mesa.foto}} class="table-icon">
+          <span class="table-number">{{ mesa.numero }}</span>
+          <span class="table-type">{{ mesa.tipo | titlecase }}</span>
+          <span class="table-status">
+            {{ (mesa.estado === 'ocupada' || mesa.estado === 'reservada') ? diccionario[idioma()]['Ocupada'] : diccionario[idioma()]['Libre'] }}
+          </span>
+        </div>
+
+      </ng-container>
+
+    </div>
+
+    <button class="btn-close-modal" (click)="cerrarSelectorMesa()">{{ diccionario[idioma()]['Cancelar'] }}</button>
+  </div>
+
+</div>
+
+<div class="back-button">
+  <button routerLink="/home">
+    <fa-icon [icon]="faArrowLeft"></fa-icon>
+  </button>
+</div>

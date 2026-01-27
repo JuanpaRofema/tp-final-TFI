@@ -1,0 +1,103 @@
+<!-- <app-nav></app-nav> -->
+@if (this.auth.usuarioIngresado !== null){
+<nav class="navbar">
+  <div class="navbar-left">
+    <!-- Ícono de usuario usando Font Awesome -->
+    @if (this.auth.usuarioIngresado.tipoCliente === "dueño"){
+    <img src="assets/iconos/man_11379344.png" alt="" />
+    } @else if (this.auth.usuarioIngresado.tipoCliente === "cliente"){
+    <img src="assets/iconos/profile_7310896.png" alt="" />
+    } @else if (this.auth.usuarioIngresado.tipoCliente === "anonimo"){
+    <img src="assets/iconos/intruder_3584762.png" alt="" />
+    } @else if (this.auth.usuarioIngresado.tipoCliente === "chef"){
+    <img src="assets/iconos/chef_2702326.png" alt="" />
+    } @else if (this.auth.usuarioIngresado.tipoCliente === "supervisor"){
+    <img src="assets/iconos/graphic-designer_1596960.png" alt="" />
+    } @else if (this.auth.usuarioIngresado.tipoCliente === "bartender"){
+    <img src="assets/iconos/bartender_3474515.png" alt="" />
+    } @else if (this.auth.usuarioIngresado.tipoCliente === "mesero"){
+    <img src="assets/iconos/waiter_3462052.png" alt="" />
+    } @else if (this.auth.usuarioIngresado.tipoCliente === "maitre"){
+    <img src="assets/iconos/consultant_3473755.png" alt="" />
+    }
+  </div>
+  <div class="navbar-right">
+    <span class="user-name">{{ this.auth.usuarioIngresado.nombre }}</span>
+    <img
+      src="{{ this.auth.usuarioIngresado.foto }}"
+      alt="Foto del usuario"
+      class="user-photo"
+    />
+  </div>
+</nav>
+}
+
+
+<div class="ahorcado-container">
+  <div class="row w-100 justify-content-center align-items-center">
+    <div class="col-3 text-center d-none d-md-block">
+        <p class="vida">{{diccionario[idioma()]["Vida"]}}{{vida}}</p>
+    </div>
+    <div class="horca">
+        <div class="palo-vertical"></div>
+        <div class="palo-horizontal"></div>
+        <div class="cuerda"></div>
+        <div class="cabeza" [style.display]="vida <= 5 ? 'block' : 'none'"></div>
+        <div class="cuerpo" [style.display]="vida <= 4 ? 'block' : 'none'"></div>
+        <div class="brazo-izq" [style.display]="vida <= 3 ? 'block' : 'none'"></div>
+        <div class="brazo-der" [style.display]="vida <= 2 ? 'block' : 'none'"></div>
+        <div class="pierna-izq" [style.display]="vida <= 1 ? 'block' : 'none'"></div>
+        <div class="pierna-der" [style.display]="vida === 0 ? 'block' : 'none'"></div>
+    </div>
+    <div class="palabra-oculta">
+        @for (letra of palabraOculta; track $index) {
+            <span class="letra-oculta">{{ letra }}</span>
+        }
+    </div>
+        <div class="tablero">
+            <button class="letra-btn" (click)="a()" [disabled]="puestoA">A</button>
+            <button class="letra-btn" (click)="b()" [disabled]="puestoB">B</button>
+            <button class="letra-btn" (click)="c()" [disabled]="puestoC">C</button>
+            <button class="letra-btn" (click)="d()" [disabled]="puestoD">D</button>
+            <button class="letra-btn" (click)="e()" [disabled]="puestoE">E</button>
+            <button class="letra-btn" (click)="f()" [disabled]="puestoF">F</button>
+            <button class="letra-btn" (click)="g()" [disabled]="puestoG">G</button>
+            <button class="letra-btn" (click)="h()" [disabled]="puestoH">H</button>
+            <button class="letra-btn" (click)="i()" [disabled]="puestoI">I</button>
+            <button class="letra-btn" (click)="j()" [disabled]="puestoJ">J</button>
+            <button class="letra-btn" (click)="k()" [disabled]="puestoK">K</button>
+            <button class="letra-btn" (click)="l()" [disabled]="puestoL">L</button>
+            <button class="letra-btn" (click)="m()" [disabled]="puestoM">M</button>
+            <button class="letra-btn" (click)="n()" [disabled]="puestoN">N</button>
+            <button class="letra-btn" (click)="enie()" [disabled]="puestoENIE">Ñ</button>
+            <button class="letra-btn" (click)="o()" [disabled]="puestoO">O</button>
+            <button class="letra-btn" (click)="p()" [disabled]="puestoP">P</button>
+            <button class="letra-btn" (click)="q()" [disabled]="puestoQ">Q</button>
+            <button class="letra-btn" (click)="r()" [disabled]="puestoR">R</button>
+            <button class="letra-btn" (click)="s()" [disabled]="puestoS">S</button>
+            <button class="letra-btn" (click)="t()" [disabled]="puestoT">T</button>
+            <button class="letra-btn" (click)="u()" [disabled]="puestoU">U</button>
+            <button class="letra-btn" (click)="v()" [disabled]="puestoV">V</button>
+            <button class="letra-btn" (click)="w()" [disabled]="puestoW">W</button>
+            <button class="letra-btn" (click)="x()" [disabled]="puestoX">X</button>
+            <button class="letra-btn" (click)="y()" [disabled]="puestoY">Y</button>
+            <button class="letra-btn" (click)="z()" [disabled]="puestoZ">Z</button>
+        </div>
+        <!-- <div class="resultado">
+            <p>{{ mensaje }}</p>
+
+            @if (reiniciar) {
+                <button class="reiniciar-btn" (click)="reiniciarPartida()">Otra palabra</button>
+            }
+        </div> -->
+    </div>
+    <div class="col-3"></div>
+  </div>
+
+
+<div class="back-button">
+<button (click)="cerrarSesion()">
+    <fa-icon [icon]="faRightFromBracket"></fa-icon>
+</button>
+</div>
+

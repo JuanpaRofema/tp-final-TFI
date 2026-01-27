@@ -1,0 +1,44 @@
+@if (this.auth.usuarioIngresado !== null){
+<nav class="navbar">
+  <div class="navbar-left">
+    @if (this.auth.usuarioIngresado.tipoCliente === "cliente"){
+    <img src="assets/iconos/profile_7310896.png" alt="" />
+    } @else if (this.auth.usuarioIngresado.tipoCliente === "anonimo"){
+    <img src="assets/iconos/intruder_3584762.png" alt="" />
+    }
+  </div>
+  <div class="navbar-right">
+    <span class="user-name">{{ this.auth.usuarioIngresado.nombre }}</span>
+    <img
+      src="{{ this.auth.usuarioIngresado.foto }}"
+      alt="Foto del usuario"
+      class="user-photo"
+    />
+  </div>
+</nav>
+}
+
+<div class="button-container" id="snapContainer">
+  <div class="card-opcion">
+    <button class="custom-button" (click)="verificarAcceso()">
+      <img src="assets/iconos/espera-mesa/encuesta.png" alt="" />
+    </button>
+    <h2>{{ diccionario[idioma()]['Encuesta'] }}</h2>
+  </div>
+
+  <div class="card-opcion">
+    <button class="custom-button" (click)="pedirCuenta()">
+      <img src="assets/iconos/pedir_la_cuenta.png" alt="" />
+    </button>
+    <h2>{{ diccionario[idioma()]['Pedircuenta'] }}</h2>
+  </div>
+
+  @if(this.auth.usuarioIngresado.tipoCliente === 'cliente'){
+    <div class="card-opcion">
+      <button class="custom-button" routerLink="/juego">
+        <img src="assets/iconos/juegoss.png" alt="" />
+      </button>
+      <h2>{{ diccionario[idioma()]['Juegos'] }}</h2>
+    </div>
+  }
+</div>

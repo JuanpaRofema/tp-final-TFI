@@ -1,0 +1,231 @@
+/* FONDO Y LAYOUT GENERAL */
+.container {
+  padding: 20px;
+  padding-bottom: 100px;
+  background-color: transparent; /* Asegúrate que tenga color de fondo o se verá transparente */
+  min-height: 100vh;
+  overflow-y: auto;
+  
+  /* 🚨 ESTO ARREGLA LA SUPERPOSICIÓN 🚨 */
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Espacio automático entre elementos */
+}
+
+.title {
+  color: #d84f45;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 10px;
+  
+  /* Asegura que el título ocupe su espacio */
+  flex-shrink: 0; 
+}
+
+/* LA SÚPER CARD */
+.delivery-card {
+  background-color: #1e1e1e;
+  border-radius: 20px;
+  margin-bottom: 25px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  border: 1px solid #333;
+  animation: slideIn 0.4s ease-out;
+}
+
+@keyframes slideIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* CABECERA DE LA CARD */
+.card-header {
+  background-color: #2a2a2a;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #333;
+
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #d84f45;
+    }
+
+    h3 { margin: 0; color: #fff; font-size: 1.1rem; }
+    .time-badge { color: #aaa; font-size: 0.85rem; }
+  }
+
+  .price-tag {
+    background-color: #d84f45;
+    color: #fff;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+}
+
+/* CUERPO DE LA CARD */
+.card-body {
+  padding: 20px;
+  color: #ddd;
+
+  .address-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #333;
+    
+    .icon-map { color: #d84f45; font-size: 1.2rem; }
+    p { margin: 0; font-size: 1.1rem; font-weight: 500; color: #fff; }
+  }
+
+  .items-list {
+    .items-title { color: #aaa; font-size: 0.9rem; margin-bottom: 5px; }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      li {
+        margin-bottom: 5px;
+        font-size: 1rem;
+        strong { color: #d84f45; }
+      }
+    }
+  }
+
+  .wait-time {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #aaa;
+    text-align: right;
+    strong { color: #4caf50; }
+  }
+}
+
+/* BOTONES DE ACCIÓN (Grandes y Claros) */
+.card-actions {
+  display: flex;
+  padding: 15px;
+  gap: 15px;
+  background-color: #181818;
+
+  button {
+    flex: 1;
+    padding: 15px;
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.1s;
+
+    &:active { transform: scale(0.98); }
+  }
+
+  .btn-reject {
+    background-color: #2a2a2a;
+    color: #ff5252;
+    border: 1px solid #ff5252;
+  }
+
+  .btn-accept {
+    background: linear-gradient(90deg, #4caf50, #388e3c);
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+  }
+}
+
+/* ESTADO VACÍO */
+.empty-state {
+  text-align: center;
+  color: #666;
+  margin-top: 50px;
+  font-size: 1.2rem;
+}
+
+/* BOTÓN VOLVER */
+.back-button {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 100;
+  
+  button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #333;
+    color: #d84f45;
+    border: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    font-size: 1.2rem;
+  }
+}
+
+/* SPINNER (El mismo que usas en todos lados) */
+.spinner-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.8);
+  display: flex; justify-content: center; align-items: center; z-index: 9999;
+  
+  .spinner-container {
+    display: flex; flex-direction: column; align-items: center;
+    p { color: #fff; margin-top: 10px; font-weight: bold; }
+  }
+  .spinning-logo { width: 80px; height: 80px; animation: spin 1.5s linear infinite; }
+}
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+.title.listos {
+    margin-top: 40px; /* Separación extra visual */
+    color: #4caf50;
+    border-color: #4caf50;
+}
+
+/* Estilo especial para card de Listo */
+.delivery-card.ready {
+    border: 2px solid #4caf50; /* Borde verde */
+    
+    .status-badge {
+        color: #4caf50;
+        font-weight: bold;
+        font-size: 0.9rem;
+    }
+
+    .btn-deliver {
+        width: 100%;
+        background: linear-gradient(90deg, #ff9800, #f57c00); /* Naranja Delivery */
+        color: #fff;
+        font-weight: bold;
+        padding: 15px;
+        border: none;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+}
+
+.cards-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}

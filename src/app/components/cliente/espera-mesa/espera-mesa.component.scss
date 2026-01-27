@@ -1,0 +1,156 @@
+/* VARIABLES NUEVAS PARA EL TIMELINE */
+$bg-dark: #121212;
+$card-bg: #1e1e1e;
+$primary: #d84f45;
+$accent: #f7b267;
+$success: #4caf50;
+$text-light: #ffffff;
+
+:host {
+  display: block;
+  min-height: 100vh;
+  background-color: transparent; /* Tu fondo original */
+}
+
+/* === TU NAVBAR ORIGINAL === */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+}
+
+.navbar-left img {
+  width: 60px;
+  color: white;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.user-name {
+  margin-right: 20px;
+  font-weight: bold;
+  color: #bf813f;
+  font-size: large;
+}
+
+.user-photo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+/* === NUEVOS ESTILOS (Timeline y Container) === */
+
+.main-container {
+  padding: 20px;
+  padding-bottom: 80px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* TARJETA ESTADO */
+.status-card {
+  background: $card-bg;
+  border-radius: 20px;
+  padding: 25px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+  margin-bottom: 30px;
+  border: 1px solid #333;
+  animation: slideUp 0.5s ease-out;
+
+  .icon-header {
+    font-size: 3rem; color: $primary; margin-bottom: 10px;
+    .pulse { animation: pulse 1.5s infinite; }
+    .bounce { animation: bounce 2s infinite; }
+  }
+
+  h2 { color: $text-light; margin-bottom: 30px; font-size: 1.3rem; }
+
+  .timeline {
+    display: flex; flex-direction: column; align-items: flex-start; margin-left: 20px;
+
+    .step {
+      display: flex; align-items: flex-start; position: relative; padding-bottom: 30px; width: 100%;
+      &:last-child { padding-bottom: 0; .line { display: none; } }
+
+      .circle {
+        width: 35px; height: 35px; background-color: #333; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center; color: #666; z-index: 2; transition: all 0.3s;
+        flex-shrink: 0;
+      }
+
+      .line {
+        position: absolute; left: 17px; top: 35px; bottom: 0; width: 2px; background-color: #333; z-index: 1; transition: background 0.3s;
+      }
+
+      p { margin: 0 0 0 15px; margin-top: 7px; font-size: 1rem; color: #666; transition: color 0.3s; }
+
+      &.active {
+        .circle { background-color: $success; color: white; box-shadow: 0 0 10px rgba($success, 0.4); }
+        .line { background-color: $success; }
+        p { color: $text-light; font-weight: bold; }
+      }
+    }
+  }
+}
+
+/* BOTONES ACCIÓN */
+.actions-area {
+  display: flex; flex-direction: column; gap: 15px;
+
+  .action-btn {
+    width: 100%; padding: 18px; border: none; border-radius: 15px;
+    font-size: 1.1rem; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px;
+    cursor: pointer; transition: transform 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    
+    &:active { transform: scale(0.98); }
+
+    &.scan { background: linear-gradient(90deg, $accent, #FF9800); color: white; }
+    &.survey { background-color: #333; color: #aaa; border: 1px solid #444; }
+  }
+}
+
+/* === TU BOTÓN VOLVER ORIGINAL === */
+.back-button {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+
+.back-button button {
+  text-align: center;
+  background-color: #202020;
+  color: #f7b267;
+  border: none;
+  padding: 20px;
+  border-radius: 50px;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.back-button button:active {
+  background-color: #000;
+}
+
+/* SPINNER */
+.spinner-overlay {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.9);
+  display: flex; justify-content: center; align-items: center; z-index: 9999;
+  .spinner-container { display: flex; flex-direction: column; align-items: center; p { color: #fff; margin-top: 15px; font-weight: bold; }}
+  .spinning-logo { width: 80px; height: 80px; animation: spin 1.5s linear infinite; }
+}
+
+@keyframes spin { 100% { transform: rotate(360deg); } }
+@keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+@keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
+@keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
