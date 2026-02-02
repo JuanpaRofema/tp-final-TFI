@@ -32,6 +32,7 @@ import { DatabaseService } from 'src/app/services/database.service';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
+import L from 'leaflet';
 
 @Component({
   selector: 'app-iniciar-sesion',
@@ -48,6 +49,7 @@ import firebase from 'firebase/compat/app';
   providers: [GooglePlus]
 })
 export class IniciarSesionComponent {
+
   formInicioSesion: FormGroup;
 
   acceso: string | null = null;
@@ -66,6 +68,11 @@ export class IniciarSesionComponent {
   mensajeContrasena: string = '';
   mensajeUsuario: string = '';
   private cambioIdioma = inject(CambioIdioma);
+
+  map: any;
+marker: any;
+cordenadasElegidas:any
+
 
   // http: HttpClient = Inject(HttpClient);
 
@@ -182,7 +189,84 @@ export class IniciarSesionComponent {
         });
     }
   }
+  CambiarIdioma() {
+  Swal.fire({
+    title: this.diccionario[this.idioma()]['titulo_config_idioma'],
+    icon: 'question',
+    html: `
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <button id="btn-elegir" class="swal2-confirm swal2-styled" style="margin: 0;">
+          ${this.diccionario[this.idioma()]['btn_elegir_idioma']}
+        </button>
+        <button id="btn-geo" class="swal2-confirm swal2-styled" style="margin: 0; background-color: #6e7d88;">
+          ${this.diccionario[this.idioma()]['btn_idioma_geo']}
+        </button>
+      </div>
+    `,
+    showConfirmButton: false,
+    showCancelButton: true,
+    cancelButtonText: this.diccionario[this.idioma()]['btn_cerrar'],
+    didOpen: () => {
+      document.getElementById('btn-elegir')?.addEventListener('click', () => {
+        Swal.close();
+        this.initMap();
+      });
 
+      document.getElementById('btn-geo')?.addEventListener('click', () => {
+        Swal.close();
+      });
+    }
+  });
+}
+
+initMap() {
+  Swal.fire({
+    title: this.diccionario[this.idioma()]['titulo_perfil_chef'],
+    html: '<div id="map" style="height: 300px; width: 100%; border-radius: 10px;"></div>',
+    confirmButtonText: this.diccionario[this.idioma()]['btn_aceptar'],
+    confirmButtonColor: '#28a745',
+  }).then((result) => {
+    if (result.isConfirmed) { 
+      if(this.cordenadasElegidas) {
+        this.cambioIdioma.cambiarIdiomaManual(this.cordenadasElegidas);
+      }
+      else {
+        this.cambioIdioma.cambiarIdiomaManual([-34.6037, -58.3816]);
+      }
+    }
+  });
+
+  const iconRetinaUrl = 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png';
+  const iconUrl = 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png';
+  const shadowUrl = 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png';
+
+  const iconDefault = L.icon({
+    iconRetinaUrl,
+    iconUrl,
+    shadowUrl,
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    tooltipAnchor: [16, -28],
+    shadowSize: [41, 41]
+  });
+
+  L.Marker.prototype.options.icon = iconDefault;
+
+  this.map = L.map('map').setView([8.9833, -79.5167], 2);
+  this.marker = L.marker([0, 0], { opacity: 0 }).addTo(this.map);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap'
+  }).addTo(this.map);
+
+  this.map.on('click', (e: any) => {
+    const { lat, lng } = e.latlng;
+    this.marker.setLatLng([lat, lng]);
+    this.marker.setOpacity(1);
+    this.cordenadasElegidas = [lat, lng];
+  });
+}
   ValidarCampos() {
     let camposValidados = true;
 

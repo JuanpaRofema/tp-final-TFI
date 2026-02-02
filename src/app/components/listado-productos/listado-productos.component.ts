@@ -38,6 +38,9 @@ export class ListadoProductosComponent implements OnInit, ViewWillEnter, ViewDid
   productsComida: any[] = [];
   productsBebida: any[] = [];
   productsPostres: any[] = [];
+  productsComidaGeneral: any[] = [];
+  productsBebidaGeneral: any[] = [];
+  productsPostresGeneral: any[] = [];
   carrito: any[] = [];
 
   totalPrecio: number = 0;
@@ -72,9 +75,14 @@ export class ListadoProductosComponent implements OnInit, ViewWillEnter, ViewDid
   ) { }
 
   ngOnInit() {
-    this.cambioIdioma.idiomaActual$.subscribe(data => this.idioma.set(data[0]))
+    this.cambioIdioma.idiomaActual$.subscribe(data => {this.idioma.set(data[0])
+            this.productsComida = this.transform(this.productsComidaGeneral,1)
+      this.productsBebida = this.transform(this.productsBebidaGeneral,2)
+      this.productsPostres = this.transform(this.productsPostresGeneral,3)
+    })
     this.db.spinner$.subscribe((val) => this.isLoading = val);
     this.cargarProductos();
+    
   }
 
   toggleSensorFotos() {
@@ -125,12 +133,12 @@ transform(value: any, numero: number): any {
       const prods = productos.map(p => ({ ...p, cantidad: 0, fotoActiva: 1 }));
       console.log("LOS PRODUCTOS SON ESTE FORMATO "+prods)
 
-      this.productsComida = prods.filter(p => p.tipoProducto === 'comida');
-      this.productsBebida = prods.filter(p => p.tipoProducto === 'bebida');
-      this.productsPostres = prods.filter(p => p.tipoProducto === 'postre');
-      this.productsComida = this.transform(this.productsComida,1)
-      this.productsBebida = this.transform(this.productsBebida,2)
-      this.productsPostres = this.transform(this.productsPostres,3)
+      this.productsComidaGeneral = prods.filter(p => p.tipoProducto === 'comida');
+      this.productsBebidaGeneral = prods.filter(p => p.tipoProducto === 'bebida');
+      this.productsPostresGeneral = prods.filter(p => p.tipoProducto === 'postre');
+      this.productsComida = this.transform(this.productsComidaGeneral,1)
+      this.productsBebida = this.transform(this.productsBebidaGeneral,2)
+      this.productsPostres = this.transform(this.productsPostresGeneral,3)
 
 
       if (this.productsComida.length > 0) {

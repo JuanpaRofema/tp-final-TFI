@@ -27,7 +27,17 @@ export class Ahorcado implements ViewWillEnter, ViewDidLeave {
   //primero fijarme que hacer con el icono
   //arreglar el problema con volver a empezar el juego
 
-  palabras = ['FIDEOS', 'MILANESA', 'CARNE', 'POLLO', 'POLENTA', 'ARROZ'];
+  palabras_es = ['FIDEOS', 'MILANESA', 'CARNE', 'POLLO', 'POLENTA', 'ARROZ'];
+
+  palabras_en = ['NOODLES', 'CUTLET', 'MEAT', 'CHICKEN', 'POLENTA', 'RICE'];
+
+  palabras_pt = ['MACARRAO', 'MILANESA', 'CARNE', 'FRANGO', 'POLENTA', 'ARROZ'];
+
+  palabras_ru = ['ЛАПША', 'ШНИЦЕЛЬ', 'МЯСО', 'КУРИЦА', 'ПОЛЕНТА', 'РИС'];
+
+  palabras_de = ['NUDELN', 'SCHNITZEL', 'FLEISCH', 'HUHN', 'POLENTA', 'REIS'];
+
+  palabras_fr = ['PATES', 'MILANAISE', 'VIANDE', 'POULET', 'POLENTA', 'RIZ'];
   vida = 6;
   vida_descuento = 1;
   mensaje = '';
@@ -58,6 +68,23 @@ export class Ahorcado implements ViewWillEnter, ViewDidLeave {
   puestoX = false;
   puestoY = false;
   puestoZ = false;
+  puestoA_ru = false;
+  puestoE_ru = false;
+  puestoI_ru = false;
+  puestoK_ru = false;
+  puestoL_ru = false;
+  puestoM_ru = false;
+  puestoN_ru = false;
+  puestoO_ru = false;
+  puestoP_ru = false;
+  puestoR_ru = false;
+  puestoS_ru = false;
+  puestoT_ru = false;
+  puestoU_ru = false;
+  puestoTS_ru = false;
+  puestoSH_ru = false;
+  puestoSignoBlando_ru = false;
+  puestoYA_ru = false;
 
   usuario = '';
   letras_usadas = 0;
@@ -71,8 +98,13 @@ export class Ahorcado implements ViewWillEnter, ViewDidLeave {
     protected db: DatabaseService,
     private pedidoService: PedidoService) { }
   ngOnInit() {
-    this.cambioIdioma.idiomaActual$.subscribe(data => this.idioma.set(data[0]))
-    console.log("ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+    this.cambioIdioma.idiomaActual$.subscribe(data => {
+      this.idioma.set(data[0])
+      console.log("ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA idioma es " + data)
+      
+    })
+
+
   }
 
   ionViewWillEnter() {
@@ -84,11 +116,54 @@ export class Ahorcado implements ViewWillEnter, ViewDidLeave {
   }
 
   getRandomPalabra(): string {
-    const randomIndex = Math.floor(Math.random() * this.palabras.length);
-    return this.palabras[randomIndex];
+    let lang: any = "es"
+    this.cambioIdioma.idiomaActual$.subscribe(data => lang = data[0]).unsubscribe();
+
+    console.log("el idioma es " + lang)
+    if (lang === 'en') {
+      const randomIndex = Math.floor(Math.random() * this.palabras_en.length);
+      let palabra = this.palabras_fr[randomIndex];
+      console.log("el idioma que tengo es  " + lang + "  y la palabra es " + palabra)
+      return palabra
+    }
+
+    if (lang === 'pt') {
+      const randomIndex = Math.floor(Math.random() * this.palabras_pt.length);
+      let palabra = this.palabras_pt[randomIndex];
+      console.log("el idioma que tengo es  " + lang + "  y la palabra es " + palabra)
+      return palabra
+    }
+
+    if (lang === 'ru') {
+      const randomIndex = Math.floor(Math.random() * this.palabras_ru.length);
+      let palabra = this.palabras_ru[randomIndex];
+      console.log("el idioma que tengo es  " + lang + "  y la palabra es " + palabra)
+      return palabra
+    }
+
+    if (lang === 'de') {
+      const randomIndex = Math.floor(Math.random() * this.palabras_de.length);
+      let palabra = this.palabras_de[randomIndex];
+      console.log("el idioma que tengo es  " + lang + "  y la palabra es " + palabra)
+      return palabra
+    }
+
+    if (lang === 'fr') {
+      const randomIndex = Math.floor(Math.random() * this.palabras_fr.length);
+      let palabra = this.palabras_fr[randomIndex];
+      console.log("el idioma que tengo es  " + lang + "  y la palabra es " + palabra)
+      return palabra
+    }
+
+    // Por defecto (si es 'es' o cualquier otro), usamos la lista en Español
+    const randomIndex = Math.floor(Math.random() * this.palabras_es.length);
+    let palabra = this.palabras_es[randomIndex];
+    console.log("el idioma que tengo es  " + lang + "  y la palabra es " + palabra)
+    return palabra
   }
 
   palabra = this.getRandomPalabra();
+
   palabraOculta = '_'.repeat(this.palabra.length).trim()
   letra = '';
   letrasUsadas: string[] = [];
@@ -380,6 +455,141 @@ export class Ahorcado implements ViewWillEnter, ViewDidLeave {
     this.comprobarLetra();
     this.puestoZ = true;
   }
+  a_ru() {
+    this.letra = "А";
+    this.letrasUsadas.push(this.letra);
+    this.letras_usadas += 1;
+    this.comprobarLetra();
+    this.puestoA_ru = true;
+  }
+
+  e_ru() {
+    this.letra = "Е";
+    this.letrasUsadas.push(this.letra);
+    this.letras_usadas += 1;
+    this.comprobarLetra();
+    this.puestoE_ru = true;
+  }
+
+  i_ru() {
+    this.letra = "И";
+    this.letrasUsadas.push(this.letra);
+    this.letras_usadas += 1;
+    this.comprobarLetra();
+    this.puestoI_ru = true;
+  }
+
+  k_ru() {
+    this.letra = "К";
+    this.letrasUsadas.push(this.letra);
+    this.letras_usadas += 1;
+    this.comprobarLetra();
+    this.puestoK_ru = true;
+  }
+
+  l_ru() {
+    this.letra = "Л";
+    this.letrasUsadas.push(this.letra);
+    this.letras_usadas += 1;
+    this.comprobarLetra();
+    this.puestoL_ru = true;
+  }
+
+  m_ru() {
+    this.letra = "М";
+    this.letrasUsadas.push(this.letra);
+    this.letras_usadas += 1;
+    this.comprobarLetra();
+    this.puestoM_ru = true;
+  }
+
+  n_ru() {
+    this.letra = "Н";
+    this.letrasUsadas.push(this.letra);
+    this.letras_usadas += 1;
+    this.comprobarLetra();
+    this.puestoN_ru = true;
+  }
+
+  o_ru() {
+    this.letra = "О";
+    this.letrasUsadas.push(this.letra);
+    this.letras_usadas += 1;
+    this.comprobarLetra();
+    this.puestoO_ru = true;
+  }
+
+  p_ru() {
+    this.letra = "П";
+    this.letrasUsadas.push(this.letra);
+    this.letras_usadas += 1;
+    this.comprobarLetra();
+    this.puestoP_ru = true;
+  }
+
+  r_ru() {
+    this.letra = "Р";
+    this.letrasUsadas.push(this.letra);
+    this.letras_usadas += 1;
+    this.comprobarLetra();
+    this.puestoR_ru = true;
+  }
+
+  s_ru() {
+    this.letra = "С";
+    this.letrasUsadas.push(this.letra);
+    this.letras_usadas += 1;
+    this.comprobarLetra();
+    this.puestoS_ru = true;
+  }
+
+  t_ru() {
+    this.letra = "Т";
+    this.letrasUsadas.push(this.letra);
+    this.letras_usadas += 1;
+    this.comprobarLetra();
+    this.puestoT_ru = true;
+  }
+
+  u_ru() {
+    this.letra = "У";
+    this.letrasUsadas.push(this.letra);
+    this.letras_usadas += 1;
+    this.comprobarLetra();
+    this.puestoU_ru = true;
+  }
+
+  ts_ru() {
+    this.letra = "Ц";
+    this.letrasUsadas.push(this.letra);
+    this.letras_usadas += 1;
+    this.comprobarLetra();
+    this.puestoTS_ru = true;
+  }
+
+  sh_ru() {
+    this.letra = "Ш";
+    this.letrasUsadas.push(this.letra);
+    this.letras_usadas += 1;
+    this.comprobarLetra();
+    this.puestoSH_ru = true;
+  }
+
+  signoBlando_ru() {
+    this.letra = "Ь";
+    this.letrasUsadas.push(this.letra);
+    this.letras_usadas += 1;
+    this.comprobarLetra();
+    this.puestoSignoBlando_ru = true;
+  }
+
+  ya_ru() {
+    this.letra = "Я";
+    this.letrasUsadas.push(this.letra);
+    this.letras_usadas += 1;
+    this.comprobarLetra();
+    this.puestoYA_ru = true;
+  }
 
   reiniciarPartida() {
     this.reiniciar = false
@@ -414,6 +624,25 @@ export class Ahorcado implements ViewWillEnter, ViewDidLeave {
     this.puestoX = false;
     this.puestoY = false;
     this.puestoZ = false;
+    this.puestoA_ru = false;
+    this.puestoE_ru = false;
+    this.puestoI_ru = false;
+    this.puestoK_ru = false;
+    this.puestoL_ru = false;
+    this.puestoM_ru = false;
+    this.puestoN_ru = false;
+    this.puestoO_ru = false;
+    this.puestoP_ru = false;
+    this.puestoR_ru = false;
+    this.puestoS_ru = false;
+    this.puestoT_ru = false;
+    this.puestoU_ru = false;
+    this.puestoTS_ru = false;
+    this.puestoSH_ru = false;
+    this.puestoSignoBlando_ru = false;
+    this.puestoYA_ru = false;
+    this.puestoO_ru = false;
+    this.puestoT_ru = false;
     this.mensaje = ''
   }
 

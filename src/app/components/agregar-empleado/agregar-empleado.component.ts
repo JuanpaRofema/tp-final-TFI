@@ -39,21 +39,21 @@ import { CambioIdioma } from 'src/app/services/cambio-idioma';
   ],
 })
 export class AgregarEmpleadoComponent implements OnInit {
-  isLoading: boolean = true; 
+  isLoading: boolean = true;
   faArrowLeft = faArrowLeft;
   faCamera = faCamera;
   faQrcode = faQrcode;
-  
+
   clienteForm: FormGroup;
   fotoUrl: string = 'assets/faceless-businessman-user-profile-icon-business-leader-profile-picture-portrait-user-member-people-i.png';
   selectedImage: string = '';
   scanResultDni = '';
-  
+
   mostrarPerfil = false;
   contrasenaDueño: string = '';
   emailDueño: string = '';
 
-  idioma:any = signal("es")
+  idioma: any = signal("es")
   diccionario = DICCIONARIO
   cambioIdioma = inject(CambioIdioma)
 
@@ -66,7 +66,7 @@ export class AgregarEmpleadoComponent implements OnInit {
     private library: FaIconLibrary,
     private router: Router
   ) {
-   
+
     if (this.authService.usuarioIngresado?.tipoCliente === 'dueño') {
       this.emailDueño = this.authService.usuarioIngresado.email;
       this.contrasenaDueño = this.authService.usuarioIngresado.contrasena;
@@ -81,7 +81,7 @@ export class AgregarEmpleadoComponent implements OnInit {
       dni: ['', [Validators.required, Validators.pattern(/^\d{2}.\d{3}.\d{3}$/)]],
       cuil: ['', [Validators.required, Validators.pattern(/^\d{2}.\d{2}.\d{3}.\d{3}.\d{1}$/)]],
       tipoEmpleado: ['', [Validators.required]],
-      perfil: [''], 
+      perfil: [''],
     }, { validators: this.passwordsMatchValidator() });
 
     this.library.addIcons(faQrcode, faCamera);
@@ -89,7 +89,7 @@ export class AgregarEmpleadoComponent implements OnInit {
 
   async ngOnInit() {
     this.cambioIdioma.idiomaActual$.subscribe(data => this.idioma.set(data[0]))
-   
+
     setTimeout(() => {
       this.isLoading = false;
     }, 1500);
@@ -133,11 +133,11 @@ export class AgregarEmpleadoComponent implements OnInit {
 
     await modal.present();
     const { data } = await modal.onWillDismiss();
-    
+
     if (data?.barcode?.displayValue) {
       this.scanResultDni = data.barcode.displayValue;
       const datos = this.scanResultDni.split('@');
-      
+
       this.clienteForm.patchValue({
         apellido: datos[1] || '',
         nombre: datos[2] || '',
@@ -187,7 +187,7 @@ export class AgregarEmpleadoComponent implements OnInit {
 
   onSubmit() {
     if (this.clienteForm.valid) {
-      this.isLoading = true; 
+      this.isLoading = true;
 
       this.authService.RegistrarUsuario(this.clienteForm.value)
         .then(() => {
@@ -206,7 +206,7 @@ export class AgregarEmpleadoComponent implements OnInit {
 
   async subirDatos(dataUrl: string) {
     try {
-      let photoUrl = this.fotoUrl; 
+      let photoUrl = this.fotoUrl;
 
       if (dataUrl && dataUrl.startsWith('data:image/')) {
         const storage = getStorage();
@@ -223,7 +223,7 @@ export class AgregarEmpleadoComponent implements OnInit {
 
       };
 
- 
+
       if (empleadoData.tipoEmpleado === 'cocinero') {
         empleadoData.tipoCliente = empleadoData.perfil === 'chef' ? 'chef' : 'bartender';
         await this.database.GuardarCocinero(empleadoData);
@@ -236,26 +236,26 @@ export class AgregarEmpleadoComponent implements OnInit {
       }
 
       await this.database.enviarNotificacion('dueño', {
-        titulo: 'Nuevo Empleado',
-        cuerpo: `Se registró un ${empleadoData.tipoCliente}.`,
+        titulo: this.diccionario[this.idioma()]['NuevoEmpleado'],
+        cuerpo: `${this.diccionario[this.idioma()]['SeRegistroUn']} ${empleadoData.tipoCliente}.`,
       });
 
-      this.isLoading = false; 
+      this.isLoading = false;
 
       Swal.fire({
-        heightAuto: false,
-        title: this.diccionario[this.idioma()]['EmpleadoRegistrado'],
-        icon: 'success',
-        background: '#333',
-        color: '#fff',
-        confirmButtonColor: '#4caf50',
-        confirmButtonText: this.diccionario[this.idioma()]['Aceptar'],
-      }).then(() => {
-        this.moverAlHome();
-      });
+        heightAuto: false,
+        title: this.diccionario[this.idioma()]['EmpleadoRegistrado'],
+        icon: 'success',
+        background: '#333',
+        color: '#fff',
+        confirmButtonColor: '#4caf50',
+        confirmButtonText: this.diccionario[this.idioma()]['Aceptar'],
+      }).then(() => {
+        this.moverAlHome();
+      });
 
       this.clienteForm.reset();
-      
+
     } catch (error) {
       console.error('Error subiendo empleado:', error);
       this.isLoading = false;

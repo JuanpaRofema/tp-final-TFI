@@ -10,7 +10,7 @@ import { App } from '@capacitor/app';
   providedIn: 'root',
 })
 export class CambioIdioma {
-  public mensajeSource = new BehaviorSubject<any>(['de', true]); 
+  public mensajeSource = new BehaviorSubject<any>(['ru', true]); 
   idiomaActual$ = this.mensajeSource.asObservable();
   lecturaAutomatica = true
   ultimaCordenada = [-34.6037, -58.3816]
@@ -179,6 +179,7 @@ export class CambioIdioma {
     this.lecturaAutomatica = false
     let idiomaNuevo = this.procesarUbicacion(coordenadas[0], coordenadas[1])
     this.mensajeSource.next(idiomaNuevo);
+    console.log("el idioma nuevo es: " + idiomaNuevo)
   }
 
   cambiarIdiomaAutomatico() {

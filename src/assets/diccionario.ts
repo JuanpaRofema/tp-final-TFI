@@ -196,7 +196,14 @@ export const DICCIONARIO: any = {
       { nombre: 'Helado', descripcion: 'Helado artesanal disponible en varios sabores como vainilla, chocolate y fresa.' },
       { nombre: 'Brownie con helado', descripcion: 'Brownie de dulce de leche acompañado con una bocha de helado de crema.' },
       { nombre: 'Chocotorta', descripcion: 'Postre argentino de galletas de chocolate y crema de dulce de leche.' }
-    ]
+    ],
+    //las de iniciar sesion los swal fire
+    "titulo_config_idioma": "Configuración de Idioma",
+    "btn_elegir_idioma": "elegir idioma",
+    "btn_idioma_geo": "obtener idioma geolocalizado",
+    "btn_cerrar": "Cerrar",
+    "titulo_perfil_chef": "Perfil de Chef",
+    "btn_aceptar": "Aceptar"
   },
   en: {
     // --- GENERAL ---
@@ -395,7 +402,13 @@ export const DICCIONARIO: any = {
       { nombre: 'Ice Cream', descripcion: 'Artisanal ice cream available in flavors like vanilla, chocolate and strawberry.' },
       { nombre: 'Brownie with Ice Cream', descripcion: 'Dulce de leche brownie accompanied with a scoop of cream ice cream.' },
       { nombre: 'Chocotorta', descripcion: 'Argentine dessert with chocolate cookies and dulce de leche cream.' }
-    ]
+    ],
+    titulo_config_idioma: "Language Configuration",
+    btn_elegir_idioma: "choose language",
+    btn_idioma_geo: "get geolocated language",
+    btn_cerrar: "Close",
+    titulo_perfil_chef: "Chef Profile",
+    btn_aceptar: "Accept"
   },
   pt: {
     // --- GERAL ---
@@ -594,8 +607,20 @@ export const DICCIONARIO: any = {
       { nombre: 'Sorvete', descripcion: 'Sorvete artesanal disponível em sabores como baunilha, chocolate e morango.' },
       { nombre: 'Brownie com Sorvete', descripcion: 'Brownie de doce de leite acompanhado com uma bola de sorvete de creme.' },
       { nombre: 'Chocotorta', descripcion: 'Sobremesa argentina de biscoitos de chocolate e creme de doce de leite.' }
-    ]
+    ],
+    titulo_config_idioma: "Configuração de Idioma",
+    btn_elegir_idioma: "escolher idioma",
+    btn_idioma_geo: "obter idioma geolocalizado",
+    btn_cerrar: "Fechar",
+    titulo_perfil_chef: "Perfil de Chef",
+    btn_aceptar: "Aceitar",
+
+    //otra que falto
+  Seregistróun:'Se registró un'
   },
+  
+    
+
   ru: {
     // --- GENERAL ---
     Procesando: 'Обработка...', Guardando: 'Сохранение...', Aceptar: 'Принять', Error: 'Ошибка', Nombre: 'Имя', Apellido: 'Фамилия', DNI: 'ID', CUIL: 'ИНН', Correo: 'Эл. почта', Contraseña: 'Пароль', FotoUsuario: 'Фото пользователя',
@@ -793,7 +818,13 @@ export const DICCIONARIO: any = {
       { nombre: 'Мороженое', descripcion: 'Ремесленное мороженое, вкусы: ваниль, шоколад и клубника.' },
       { nombre: 'Брауни с мороженым', descripcion: 'Брауни с вареной сгущенкой и шариком сливочного мороженого.' },
       { nombre: 'Чокоторта', descripcion: 'Аргентинский десерт из шоколадного печенья и крема из вареной сгущенки.' }
-    ]
+    ],
+    titulo_config_idioma: "Настройка языка",
+    btn_elegir_idioma: "выбрать язык",
+    btn_idioma_geo: "определить язык по геолокации",
+    btn_cerrar: "Закрыть",
+    titulo_perfil_chef: "Профиль Шеф-повара",
+    btn_aceptar: "Принять"
   },
   de: {
     // --- GENERAL ---
@@ -992,7 +1023,13 @@ export const DICCIONARIO: any = {
       { nombre: 'Eis', descripcion: 'Handwerkliches Eis, Geschmacksrichtungen: Vanille, Schokolade und Erdbeere.' },
       { nombre: 'Brownie mit Eis', descripcion: 'Brownie mit Dulce de Leche und einer Kugel Sahneeis.' },
       { nombre: 'Chocotorta', descripcion: 'Argentinisches Dessert aus Schokokeksen und Dulce de Leche Creme.' }
-    ]
+    ],
+    titulo_config_idioma: "Sprachkonfiguration",
+    btn_elegir_idioma: "Sprache wählen",
+    btn_idioma_geo: "geolokalisierte Sprache abrufen",
+    btn_cerrar: "Schließen",
+    titulo_perfil_chef: "Küchenchef-Profil",
+    btn_aceptar: "Akzeptieren"
   },
   fr: {
     // --- GENERAL ---
@@ -1191,6 +1228,12 @@ export const DICCIONARIO: any = {
       { nombre: 'Glace', descripcion: 'Glace artisanale disponible en vanille, chocolat et fraise.' },
       { nombre: 'Brownie à la glace', descripcion: 'Brownie au dulce de leche accompagné d\'une boule de glace crème.' },
       { nombre: 'Chocotorta', descripcion: 'Dessert argentin aux biscuits chocolat et crème dulce de leche.' }
-    ]
+    ],
+    titulo_config_idioma: "Configuration de la langue",
+    btn_elegir_idioma: "choisir la langue",
+    btn_idioma_geo: "obtenir la langue géolocalisée",
+    btn_cerrar: "Fermer",
+    titulo_perfil_chef: "Profil du Chef",
+    btn_aceptar: "Accepter"
   }
 };
