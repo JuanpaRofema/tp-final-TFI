@@ -1,0 +1,77 @@
+<div class="menu-container">
+  
+  <header class="menu-fixed-header">
+    <h1>{{ diccionario[idioma_actual()]["menu_titulo"] }}</h1>
+  </header>
+
+  <div class="lista-productos-unica">
+
+    <div class="item-snap">
+      <div class="product-card">
+        <img src="burrataartesanal.png" [alt]="diccionario[idioma_actual()]['p1_nombre']" class="product-img">
+        <div class="product-info">
+          <h3>{{ diccionario[idioma_actual()]["p1_nombre"] }}</h3>
+          <p>{{ diccionario[idioma_actual()]["p1_desc"] }}</p>
+          <span class="price">$4.500</span>
+          <button class="btn-add">{{ diccionario[idioma_actual()]["btn_agregar"] }}</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="item-snap">
+      <div class="product-card">
+        <img src="empanadasdecordero.png" [alt]="diccionario[idioma_actual()]['p2_nombre']" class="product-img">
+        <div class="product-info">
+          <h3>{{ diccionario[idioma_actual()]["p2_nombre"] }}</h3>
+          <p>{{ diccionario[idioma_actual()]["p2_desc"] }}</p>
+          <span class="price">$3.200</span>
+          <button class="btn-add">{{ diccionario[idioma_actual()]["btn_agregar"] }}</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="item-snap">
+      <div class="product-card">
+        <img src="oJodebife.png" [alt]="diccionario[idioma_actual()]['p3_nombre']" class="product-img">
+        <div class="product-info">
+          <h3>{{ diccionario[idioma_actual()]["p3_nombre"] }}</h3>
+          <p>{{ diccionario[idioma_actual()]["p3_desc"] }}</p>
+          <span class="price">$12.500</span>
+          <button class="btn-add">{{ diccionario[idioma_actual()]["btn_agregar"] }}</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="item-snap">
+      <div class="product-card">
+        <img src="risotto-de-hongos-casero.jpg" [alt]="diccionario[idioma_actual()]['p4_nombre']" class="product-img">
+        <div class="product-info">
+          <h3>{{ diccionario[idioma_actual()]["p4_nombre"] }}</h3>
+          <p>{{ diccionario[idioma_actual()]["p4_desc"] }}</p>
+          <span class="price">$9.800</span>
+          <button class="btn-add">{{ diccionario[idioma_actual()]["btn_agregar"] }}</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="item-snap">
+      <div class="product-card">
+        <img src="salmon.png" [alt]="diccionario[idioma_actual()]['p5_nombre']" class="product-img">
+        <div class="product-info">
+          <h3>{{ diccionario[idioma_actual()]["p5_nombre"] }}</h3>
+          <p>{{ diccionario[idioma_actual()]["p5_desc"] }}</p>
+          <span class="price">$14.200</span>
+          <button class="btn-add">{{ diccionario[idioma_actual()]["btn_agregar"] }}</button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="menu-footer item-snap">
+      <button (click)="abrirMapaEnModal()" class="cambiar-idioma">
+        {{diccionario[idioma_actual()]["idioma"]}}
+      </button>
+      <a routerLink="/" class="btn-back">← {{ diccionario[idioma_actual()]["btn_volver"] }}</a>
+    </footer>
+
+  </div>
+</div>

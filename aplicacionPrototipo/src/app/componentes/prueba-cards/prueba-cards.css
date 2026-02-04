@@ -1,0 +1,10 @@
+.libro {
+  height: 300px;           /* El tamaño de nuestra 'ventana' */
+  overflow-y: scroll;      /* Permitimos deslizar arriba/abajo */
+  scroll-snap-type: y mandatory; /* El imán vertical obligatorio */
+  background-color: red;
+}
+.pagina {
+  height: 300px;           /* Cada página mide lo mismo que la ventana */
+  scroll-snap-align: start; /* El imán se pega apenas empieza la carta */
+}
