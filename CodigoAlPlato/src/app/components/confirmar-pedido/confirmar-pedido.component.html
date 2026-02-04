@@ -1,0 +1,77 @@
+<nav class="navbar">
+  <div class="navbar-left">
+    @if (this.auth.usuarioIngresado.tipoCliente === "mesero"){
+    <img src="assets/iconos/waiter_3462052.png" alt="" />
+    }
+  </div>
+  <div class="navbar-right">
+    <span class="user-name">{{ this.auth.usuarioIngresado.nombre }}</span>
+    <img
+      src="{{ this.auth.usuarioIngresado.foto }}"
+      alt="Foto del usuario"
+      class="user-photo"
+    />
+</div>
+</nav>
+
+
+<div *ngIf="isLoading" class="spinner-overlay">
+  <div class="spinner-container">
+    <img src="assets/icono.png" class="spinning-logo">
+    <p>{{ diccionario[idioma()]['BuscandoPedidos'] }}</p>
+  </div>
+</div>
+
+<div class="container">
+  
+  <h1 class="title">{{ diccionario[idioma()]['PEDIDOSDEMESAS'] }}</h1>
+  
+  <div class="cards-list" *ngIf="pedidosPendientes.length > 0; else noPendientes">
+    
+    <div class="order-card" *ngFor="let p of pedidosPendientes">
+        
+        <div class="card-header">
+            <div class="user-info">
+                <div class="mesa-badge">{{ diccionario[idioma()]['Mesa'] }} {{ p.mesa }}</div>
+                <div class="client-info">
+                    <h3>{{ p.cliente }}</h3>
+                    <span class="time-badge">
+                        <fa-icon [icon]="faClock"></fa-icon> {{ p.fecha | date:'shortTime' }}
+                    </span>
+                </div>
+            </div>
+            <div class="price-tag">${{ p.total }}</div>
+        </div>
+
+        <div class="card-body">
+            <div class="items-list">
+                <ul>
+                    <li *ngFor="let prod of p.productos">
+                        <strong>x{{ prod.cantidad }}</strong> {{ prod.name }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card-actions">
+            <button class="btn-reject" (click)="rechazarPedido(p)">{{ diccionario[idioma()]['RECHAZAR'] }}</button>
+            <button class="btn-accept" (click)="confirmarPedido(p)">{{ diccionario[idioma()]['ACEPTAR'] }}</button>
+        </div>
+
+    </div>
+  </div>
+  
+  <ng-template #noPendientes>
+    <div class="empty-state">
+        <fa-icon [icon]="faClipboardList" size="4x" style="color: #555; margin-bottom: 15px;"></fa-icon>
+        <p>{{ diccionario[idioma()]['Nohaypedidospendientesdeconfirmación'] }}</p>
+    </div>
+  </ng-template>
+
+</div>
+
+<div class="back-button">
+    <button routerLink="/home">
+      <fa-icon [icon]="faArrowLeft"></fa-icon>
+    </button>
+</div>

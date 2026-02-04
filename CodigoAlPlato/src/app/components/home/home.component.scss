@@ -1,0 +1,203 @@
+/* ========================== NAVBAR ========================== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+  flex-shrink: 0; /* evita que la navbar se encoja */
+  z-index: 100;
+}
+
+.navbar-left img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-name {
+  font-weight: bold;
+  color: #d84f45;
+  font-size: 1.1rem;
+}
+
+.user-photo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #d84f45;
+}
+
+/* ========================== PANTALLA COMPLETA ========================== */
+.pantalla {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  overflow: hidden; /* importante */
+}
+
+.button-container {
+  flex: 1;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: auto;
+  padding-top: 80px;             /* ACÁ controlás qué tan arriba quedan */
+}
+
+
+.button-container::-webkit-scrollbar {
+  display: none;
+}
+
+.button-container::-webkit-scrollbar {
+  display: none;
+}
+
+#snapContainer {
+  height: calc(100vh - 70px);
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+
+  scroll-behavior: smooth;
+
+  overscroll-behavior: contain;
+  scroll-padding-top: 0px;
+}
+
+/* Cada tarjeta */
+.card-opcion {
+  height: calc(100vh - 70px);
+  scroll-snap-align: start;
+  scroll-snap-stop: always; 
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 80px;
+}
+
+
+
+.custom-button {
+  width: 85vw;
+  max-width: 420px;
+  height: 420px; /* cuadrado grande y vistoso */
+  background: linear-gradient(145deg, #d84f45, #c03e35);
+  border: none;
+  border-radius: 28px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  box-shadow: 
+    0 15px 30px rgba(0,0,0,0.6),
+    inset 0 0 20px rgba(255,255,255,0.1);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.custom-button img {
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.7));
+}
+
+.custom-button:hover,
+.custom-button:active {
+  transform: translateY(-10px) scale(1.03);
+  background: linear-gradient(145deg, #e05a50, #d84f45);
+  box-shadow: 0 20px 40px rgba(216, 79, 69, 0.5);
+}
+
+/* Títulos debajo de cada botón */
+.card-opcion h2, a {
+  margin: 0;
+  padding: 16px 32px;
+  font-size: 1.4rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 1.5px;
+  color: #d84f45;
+  background: rgba(30, 30, 30, 0.9);
+  border: 2px solid #d84f45;
+  border-radius: 16px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+  animation: aparecerTitulo 0.5s ease-out;
+}
+
+@keyframes aparecerTitulo {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ========================== BOTONES FIJOS (logout, etc.) ========================== */
+.back-button,
+.back-button2 {
+  position: fixed;
+  bottom: 25px;
+  z-index: 1000;
+}
+
+.back-button {
+  left: 25px;
+}
+
+.back-button2 {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.back-button button,
+.back-button2 button {
+  background: #202020;
+  color: #d84f45;
+  border: 3px solid #d84f45;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+  transition: all 0.3s;
+}
+
+.back-button button:active,
+.back-button2 button:active {
+  background: #d84f45;
+  color: #000;
+  transform: scale(0.9);
+}
+
+/* SPINNER CUSTOM */
+.spinner-overlay {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.9);
+  display: flex; justify-content: center; align-items: center; z-index: 9999;
+  
+  .spinner-container {
+    display: flex; flex-direction: column; align-items: center;
+    p { color: #fff; font-weight: bold; margin-top: 15px; }
+  }
+  .spinning-logo { width: 80px; height: 80px; animation: spin 1.5s linear infinite; }
+}
+
+@keyframes spin { 100% { transform: rotate(360deg); } }
+@keyframes slideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }

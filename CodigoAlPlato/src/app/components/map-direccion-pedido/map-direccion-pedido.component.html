@@ -1,0 +1,35 @@
+<div class="map-wrapper">
+  
+  <div id="map"></div>
+
+  <div class="top-bar">
+    <button class="icon-btn back" (click)="volver()">
+      <fa-icon [icon]="faArrowLeft"></fa-icon>
+    </button>
+    
+    <div class="search-box">
+      <input 
+        type="text" 
+        [placeholder]="diccionario[idioma()]['Buscarcalleyaltura']" 
+        [(ngModel)]="direccion" 
+        (keyup.enter)="buscarDireccion()"
+      >
+      <button class="search-btn" (click)="buscarDireccion()">
+        <fa-icon [icon]="faSearch" [spin]="buscando"></fa-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="bottom-bar" *ngIf="coordenadaSeleccionada">
+    <div class="info-card">
+      <div class="text-info">
+        <small>{{ diccionario[idioma()]['Ubicaciónseleccionada'] }}</small>
+        <h3>{{ direccion || diccionario[idioma()]['Puntoenelmapa'] }}</h3>
+      </div>
+      <button class="confirm-btn" (click)="confirmarUbicacion()">
+        {{ diccionario[idioma()]['CONFIRMAR'] }}
+      </button>
+    </div>
+  </div>
+
+</div>

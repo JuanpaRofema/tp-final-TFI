@@ -1,0 +1,16 @@
+<div class="ion-page" id="main-content">
+
+   <div class="no-scroll" style="height: 100vh;  display: flex; justify-content: center; align-items: center; position: relative;">
+
+    @if (jugando)
+    {
+      <div id="personaje" class="personaje" style="position: relative;">
+        <img [src]="imagenPersonaje" style="width: 100px; height: 100px; object-fit: contain;">
+      </div>
+
+      <!-- Coloca los puntos en la esquina superior derecha -->
+      <p style="position: absolute; font-size: 50px; top: 10px; right: -100px; margin: 0;">{{puntos}}</p>
+    }
+
+  </div>
+</div>

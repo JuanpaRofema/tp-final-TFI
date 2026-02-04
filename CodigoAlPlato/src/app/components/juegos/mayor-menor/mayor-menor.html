@@ -1,0 +1,81 @@
+@if (this.auth.usuarioIngresado !== null){
+<nav class="navbar">
+  <div class="navbar-left">
+    <!-- Ícono de usuario usando Font Awesome -->
+    @if (this.auth.usuarioIngresado.tipoCliente === "dueño"){
+    <img src="assets/iconos/man_11379344.png" alt="" />
+    } @else if (this.auth.usuarioIngresado.tipoCliente === "cliente"){
+    <img src="assets/iconos/profile_7310896.png" alt="" />
+    } @else if (this.auth.usuarioIngresado.tipoCliente === "anonimo"){
+    <img src="assets/iconos/intruder_3584762.png" alt="" />
+    } @else if (this.auth.usuarioIngresado.tipoCliente === "chef"){
+    <img src="assets/iconos/chef_2702326.png" alt="" />
+    } @else if (this.auth.usuarioIngresado.tipoCliente === "supervisor"){
+    <img src="assets/iconos/graphic-designer_1596960.png" alt="" />
+    } @else if (this.auth.usuarioIngresado.tipoCliente === "bartender"){
+    <img src="assets/iconos/bartender_3474515.png" alt="" />
+    } @else if (this.auth.usuarioIngresado.tipoCliente === "mesero"){
+    <img src="assets/iconos/waiter_3462052.png" alt="" />
+    } @else if (this.auth.usuarioIngresado.tipoCliente === "maitre"){
+    <img src="assets/iconos/consultant_3473755.png" alt="" />
+    }
+  </div>
+  <div class="navbar-right">
+    <span class="user-name">{{ this.auth.usuarioIngresado.nombre }}</span>
+    <img src="{{ this.auth.usuarioIngresado.foto }}" alt="Foto del usuario" class="user-photo" />
+  </div>
+</nav>
+}
+
+<!-- 
+  @if(estadoJuego) {
+  <h2>¿Que sera la siguiente carta?</h2>
+  }
+  @else {
+  <h2>Juego Mayor O Menor</h2>
+  } -->
+
+<section class="carta">
+  @if(this.estadoJuego == true){
+  <img class="carta-photo" [src]="cartaActual.imagen" [alt]="cartaActual.valor">
+  }@else{
+  @if (idioma() === 'es') {
+  <img class="carta-photo" src="assets/iconos/cartas/sinCarta_es.png" [alt]="cartaActual.valor">
+  }
+  @else if (idioma() === 'en') {
+  <img class="carta-photo" src="assets/iconos/cartas/sinCarta_en.png" [alt]="cartaActual.valor">
+  }
+  @else if (idioma() === 'pt') {
+  <img class="carta-photo" src="assets/iconos/cartas/sinCarta_pt.png" [alt]="cartaActual.valor">
+  }
+  @else if (idioma() === 'ru') {
+  <img class="carta-photo" src="assets/iconos/cartas/sinCarta_ru.png" [alt]="cartaActual.valor">
+  }
+  @else if (idioma() === 'de') {
+  <img class="carta-photo" src="assets/iconos/cartas/sinCarta_de.png" [alt]="cartaActual.valor">
+  }
+  @else if (idioma() === 'fr') {
+  <img class="carta-photo" src="assets/iconos/cartas/sinCarta_fr.png" [alt]="cartaActual.valor">
+  }
+  }
+
+  <img class="carta-photo" src="assets\iconos\cartas\cartaMisteriosa.jpg" alt="???">
+</section>
+<section class="opciones">
+  @if(estadoJuego) {
+  <button class="button-19" (click)="mayorQue()">Mas alta</button>
+  <button class="button-19" (click)="menorQue()">Mas baja</button>
+  }
+  @else {
+  <button class="button-19" (click)="comenzarAJugar()">Comenzar</button>
+
+  }
+
+</section>
+
+
+<div class="back-button">
+  <button (click)="cerrarSesion()">
+    <fa-icon [icon]="faRightFromBracket"></fa-icon>
+  </button>
+</div>

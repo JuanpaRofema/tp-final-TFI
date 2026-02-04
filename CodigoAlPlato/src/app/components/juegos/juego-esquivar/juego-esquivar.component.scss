@@ -1,0 +1,258 @@
+:host {
+    font-family: 'Segoe UI', sans-serif;
+    display: block;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+
+    background-color: transparent; 
+    position: relative;
+
+    background-image: url('b.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #000; 
+}
+
+.game-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.back-button {
+  position: fixed;
+  bottom: 20px;
+  left: 300px;
+  z-index: 1000;
+}
+
+.back-button button {
+  text-align: center;
+  background-color: #202020;
+  color: #d84f45;
+  border: none;
+  padding: 20px;
+  border-radius: 50px;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.back-button button:active {
+  background-color: #000;
+}
+
+
+.game-board {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: rgba(0, 0, 0, 0.3); 
+}
+
+.game-item {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    user-select: none;
+}
+
+.player {
+    background: radial-gradient(circle at 30% 30%, #ffffff, #d1d1d1); /* Efecto 3D sutil */
+    border-radius: 50%;
+    border: 3px solid #3880ff; /* Borde de color del equipo/jugador */
+    box-shadow: 0 6px 10px rgba(0,0,0,0.4), inset 0 -3px 5px rgba(0,0,0,0.1);
+    z-index: 10;
+    transition: transform 0.1s linear; /* Suaviza el movimiento */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.2rem; /* Emoji más grande */
+}
+.player .tray {
+    position: absolute;
+    font-size: 1.2rem;
+    bottom: -5px;
+    right: -5px;
+    background: #fff;
+    border-radius: 50%;
+    padding: 2px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.goal {
+    background-color: rgba(76, 217, 100, 0.2);
+    border: 3px dashed #4cd964;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    box-shadow: 0 0 15px rgba(76, 217, 100, 0.4); /* Resplandor verde */
+    animation: pulse-border 1.5s infinite; /* ¡Animación clave! */
+}
+
+@keyframes pulse-border {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(76, 217, 100, 0.7); }
+    70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(76, 217, 100, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(76, 217, 100, 0); }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0px); }
+}
+
+.obstacle {
+    background-color: rgba(255, 255, 255, 0.2); /* Fondo semitransparente */
+    border: 2px solid rgba(255, 50, 50, 0.5); /* Borde rojo suave */
+    border-radius: 15px; /* Cuadrado redondeado */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    z-index: 5;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    /* Animación sutil para que no parezcan estáticos */
+    animation: float 3s ease-in-out infinite; 
+}
+/* Overlay UI */
+.overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    background: rgba(10, 10, 15, 0.92);
+    backdrop-filter: blur(8px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+    /* Animación de entrada suave */
+    animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Título principal */
+.overlay h2 {
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 900;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    margin: 0 0 16px 8px;
+    background: linear-gradient(90deg, #ffffff, #a0a0a0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+    animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+    from { filter: brightness(1); }
+    to   { filter: brightness(1.3); }
+}
+
+/* Títulos con color especial */
+.text-green-500 {
+    background: linear-gradient(90deg, #4ade80, #86efac, #22c55e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 40px rgba(74, 222, 128, 0.6);
+}
+
+.text-red-500 {
+    background: linear-gradient(90deg, #f87171, #fca5a5, #ef4444);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 40px rgba(248, 113, 113, 0.6);
+}
+
+.description {
+    font-size: clamp(1.1rem, 4vw, 1.5rem);
+    color: #cccccc;
+    line-height: 1.6;
+    max-width: 90%;
+    margin: 20px auto;
+    font-weight: 500;
+    opacity: 0.95;
+}
+
+.play-btn {
+    margin-top: 40px;
+    padding: 20px 60px;
+    font-size: 1.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: white;
+    background: linear-gradient(45deg, #2563eb, #3b82f6, #60a5fa);
+    border: none;
+    border-radius: 60px;
+    box-shadow: 
+        0 10px 25px rgba(37, 99, 235, 0.4),
+        0 0 0 6px rgba(59, 130, 246, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.play-btn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.6s;
+}
+
+.play-btn:hover::before {
+    left: 100%;
+}
+
+.play-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 
+        0 15px 35px rgba(37, 99, 235, 0.5),
+        0 0 0 8px rgba(59, 130, 246, 0.3);
+}
+
+.play-btn:active {
+    transform: translateY(1px) scale(0.98);
+}
+
+.shake-screen {
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+    background-color: rgba(255, 0, 0, 0.2) !important; /* Flash rojo */
+}
+
+@keyframes shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+.bonus-text {
+    color: #ffd700;
+    font-weight: bold;
+    font-size: 1.1rem;
+    display: block;
+    margin-top: 10px;
+}
+
+
+.description { color: #eee; margin-top: 10px; line-height: 1.5; }
+.debug-text { font-size: 0.8rem; color: #666; margin-top: 30px; }

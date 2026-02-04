@@ -1,0 +1,93 @@
+<nav class="navbar">
+  <div class="navbar-left">
+      @if (this.authService.usuarioIngresado.tipoCliente === "bartender"){
+      <img src="assets/iconos/bartender_3474515.png" alt="" />
+      } 
+    </div>
+    <div class="navbar-right">
+      <span class="user-name">{{ this.authService.usuarioIngresado.nombre }}</span>
+      <img
+        src="{{ this.authService.usuarioIngresado.foto }}"
+        alt="Foto del usuario"
+        class="user-photo"
+      />
+  </div>
+</nav>
+
+<div *ngIf="isLoading" class="spinner-overlay">
+  <div class="spinner-container">
+    <img src="assets/icono.png" class="spinning-logo">
+    <p>{{ diccionario[idioma()]['Guardando'] }}</p>
+  </div>
+</div>
+
+<div class="main-content">
+  <div class="card-container">
+    
+    <div class="photos-section">
+      <p class="label-photos">{{ diccionario[idioma()]['FotosBebida'] }} {{ diccionario[idioma()]['TocaAgregar'] }}</p>
+      <div class="photos-grid">
+        
+        <div class="photo-slot" (click)="tomarFoto(0)">
+          <img [src]="fotos[0]" class="prod-img">
+          <div class="camera-badge"><fa-icon [icon]="faCamera"></fa-icon> 1</div>
+        </div>
+
+        <div class="photo-slot" (click)="tomarFoto(1)">
+          <img [src]="fotos[1]" class="prod-img">
+          <div class="camera-badge"><fa-icon [icon]="faCamera"></fa-icon> 2</div>
+        </div>
+
+        <div class="photo-slot" (click)="tomarFoto(2)">
+          <img [src]="fotos[2]" class="prod-img">
+          <div class="camera-badge"><fa-icon [icon]="faCamera"></fa-icon> 3</div>
+        </div>
+
+      </div>
+    </div>
+
+    <form (ngSubmit)="guardarProducto()" #formAlta="ngForm" class="custom-form">
+      
+      <ion-item class="custom-item">
+        <ion-label position="floating">{{ diccionario[idioma()]['NombreBebida'] }}</ion-label>
+        <ion-input type="text" name="name" [(ngModel)]="nuevoProducto.name" required></ion-input>
+      </ion-item>
+
+      <ion-item class="custom-item">
+        <ion-label position="floating">{{ diccionario[idioma()]['Descripcion'] }}</ion-label>
+        <ion-textarea name="description" [(ngModel)]="nuevoProducto.description" required rows="2"></ion-textarea>
+      </ion-item>
+
+      <div class="input-row">
+        <ion-item class="custom-item">
+          <ion-label position="floating">{{ diccionario[idioma()]['Precio'] }}</ion-label>
+          <ion-input type="number" name="precio" [(ngModel)]="nuevoProducto.precio" required></ion-input>
+        </ion-item>
+
+        <ion-item class="custom-item">
+          <ion-label position="floating">{{ diccionario[idioma()]['Tiempo'] }}</ion-label>
+          <ion-input type="number" name="tiempoEstimado" [(ngModel)]="nuevoProducto.tiempoEstimado" required></ion-input>
+        </ion-item>
+      </div>
+
+      <ion-item class="custom-item">
+        <ion-label position="floating">{{ diccionario[idioma()]['Tipo'] }}</ion-label>
+        <ion-select name="tipoProducto" [(ngModel)]="nuevoProducto.tipoProducto" required>
+          <ion-select-option value="bebida">{{ diccionario[idioma()]['Bebida'] }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <button class="btn-register" type="submit" [disabled]="!formAlta.form.valid">
+        {{ diccionario[idioma()]['CrearBebida'] }}
+      </button>
+
+    </form>
+
+  </div>
+</div>
+
+<div class="back-button">
+  <button (click)="moverAlHome()">
+    <fa-icon [icon]="faArrowLeft"></fa-icon>
+  </button>
+</div>

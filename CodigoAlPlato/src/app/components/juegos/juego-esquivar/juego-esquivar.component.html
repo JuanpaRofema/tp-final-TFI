@@ -1,0 +1,59 @@
+<div class="game-container">
+  
+  <div *ngIf="!isPlaying" class="overlay">
+    
+    <h2 *ngIf="gameState === 'start'">
+      {{ diccionario[idioma()]['AyudaalMozo'] }}
+    </h2>
+    
+    <h2 *ngIf="gameState === 'win'" class="text-green-500">
+      {{ diccionario[idioma()]['PedidoEntregado'] }}
+    </h2>
+    
+    <h2 *ngIf="gameState === 'lose'" class="text-red-500">
+      {{ diccionario[idioma()]['Secayóelpedido'] }}
+    </h2>
+    
+    <p class="description" *ngIf="gameState === 'start'">
+      {{ diccionario[idioma()]['Llevalapizzaalamesainclinandoelcelular'] }}
+    </p>
+
+    <button (click)="startGame()" class="play-btn">
+      {{ gameState === 'start' ? diccionario[idioma()]['Comenzar'] : diccionario[idioma()]['IntentarDeNuevo'] }}
+    </button>
+
+    <p class="debug-text" *ngIf="isDesktop">
+      {{ diccionario[idioma()]['Usalasflechasdeltecladoparamoverte'] }}
+    </p>
+  </div>
+
+  <div #gameArea class="game-board" [style.opacity]="isPlaying ? '1' : '0.3'">
+    
+    <div class="game-item goal"
+         [style.left.px]="goal.x"
+         [style.top.px]="goal.y"
+         [style.width.px]="goal.width"
+         [style.height.px]="goal.height">
+         🍽️
+    </div>
+
+    <div *ngFor="let obs of obstacles" 
+         class="game-item obstacle"
+         [style.left.px]="obs.x"
+         [style.top.px]="obs.y"
+         [style.width.px]="obs.width"
+         [style.height.px]="obs.height">
+         {{ obs.icon }}
+    </div>
+
+    <div class="game-item player"
+         [style.left.px]="player.x"
+         [style.top.px]="player.y"
+         [style.width.px]="player.width"
+         [style.height.px]="player.height">
+         🤵
+         <div class="tray">🍕</div>
+    </div>
+
+  </div>
+</div>

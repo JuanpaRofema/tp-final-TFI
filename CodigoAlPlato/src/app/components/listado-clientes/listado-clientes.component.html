@@ -1,0 +1,58 @@
+<div *ngIf="isLoading" class="spinner-overlay">
+  <div class="spinner-container">
+    <img src="assets/icono.png" class="spinning-logo">
+    <p>{{ diccionario[idioma()]['CargandoClientes'] }}</p>
+  </div>
+</div>
+
+<div class="container">
+  
+  <h1 class="title">{{ diccionario[idioma()]['SOLICITUDESDEACCESO'] }}</h1>
+
+  <div class="cards-list" *ngIf="clientes.length > 0; else noClients">
+    
+    <div class="client-card" *ngFor="let cliente of clientes">
+      
+      <div class="card-header">
+        <div class="user-info">
+          <img [src]="cliente.foto" class="avatar" alt="Foto">
+          <div class="text-info">
+            <h3>{{ cliente.nombre }} {{ cliente.apellido }}</h3>
+            <p class="dni">{{ diccionario[idioma()]['DNI'] }} {{ cliente.dni }}</p>
+          </div>
+        </div>
+        <span class="badge-pendiente">{{ diccionario[idioma()]['Pendiente'] }}</span>
+      </div>
+
+      <div class="card-body">
+        <div class="email-row">
+          <fa-icon [icon]="faEnvelope"></fa-icon> {{ cliente.email }}
+        </div>
+      </div>
+
+      <div class="card-actions">
+        <button class="btn-deny" (click)="cambiarEstadoAcceso(cliente, 'denegado')">
+          <fa-icon [icon]="faUserSlash"></fa-icon> {{ diccionario[idioma()]['DENEGAR'] }}
+        </button>
+        <button class="btn-accept" (click)="cambiarEstadoAcceso(cliente, 'permitido')">
+          <fa-icon [icon]="faUserCheck"></fa-icon> {{ diccionario[idioma()]['PERMITIR'] }}
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <ng-template #noClients>
+    <div class="empty-state">
+      <p>{{ diccionario[idioma()]['Nohaysolicitudespendientes'] }}</p>
+    </div>
+  </ng-template>
+
+</div>
+
+<div class="back-button">
+  <button routerLink="/home">
+    <fa-icon [icon]="faArrowLeft"></fa-icon>
+  </button>
+</div>

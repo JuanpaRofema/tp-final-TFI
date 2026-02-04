@@ -1,0 +1,378 @@
+
+/* ================= BARRA DE DIRECCIÓN (FIJA) ================= */
+.address-header {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 50px;
+  background-color: #333;
+  display: flex; align-items: center; padding: 0 15px;
+  
+  /* Z-INDEX ALTO pero menor que el del modal de producto (9999) */
+  z-index: 1000;
+  /* Sombra más fuerte para que se note que flota sobre el contenido */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.6); 
+  color: #fff;
+}
+
+.address-header .map-icon { font-size: 1.5rem; color: #d84f45; margin-right: 10px; }
+.address-header .address-info { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+.address-header .label { font-size: 0.7rem; color: #aaa; }
+.address-header .address-text { font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: bold; }
+.address-header .edit-label { color: #d84f45; font-size: 0.8rem; font-weight: bold; }
+
+/* ================= CUERPO PRINCIPAL ================= */
+.body-snap {
+  height: 100vh;
+  width: 100vw;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  
+  /* IMPORTANTE: Esto empuja todo el contenedor hacia abajo 
+     para que empiece JUSTO debajo de la barra negra */
+  padding-top: 60px; 
+  box-sizing: border-box;
+  margin-top: 50px;
+
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  background-color: transparent; 
+}
+/* ================= PÁGINAS DE SNAP (CÁLCULO MATEMÁTICO) ================= */
+.snap-page {
+  /* La página mide la pantalla MENOS la barra negra */
+  height: calc(100vh - 60px);
+  width: 100%;
+  
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.snap-page.first-page {
+  justify-content: flex-start;
+
+}
+.header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 20px; 
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
+
+.nav-icon-btn {
+  background: transparent;
+  border: 1px solid #d84f45;
+  color: #fff;
+  width: 35px; height: 35px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem;
+  margin-top: 5px;
+  padding: 0;
+}
+.nav-icon-btn:active { background: #d84f45; color: #000; }
+
+.main-title {
+  color: #d84f45;
+  font-weight: 800;
+  font-size: 1.6rem;
+  margin: 0;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 1px;
+  flex: 1;
+}
+
+/* ================= CONTENIDO Y CARDS ================= */
+.category-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+  padding-bottom: 20px;
+}
+
+.category-content h2 {
+  color: #fff;
+  margin-left: 20px;
+  font-size: 2rem;
+  border-left: 5px solid #d84f45;
+  padding-left: 15px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.cards-scroller {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  padding: 10px 0;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.cards-scroller::-webkit-scrollbar { display: none; }
+
+.food-card {
+  min-width: 90vw; max-width: 90vw;
+  margin: 0 5vw; /* Centrado */
+  scroll-snap-align: center;
+  margin-bottom: 40px;
+  scroll-snap-stop: always;
+  background: #222; border-radius: 25px;
+  overflow: hidden; border: 1px solid #333;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  display: flex; flex-direction: column;
+}
+
+/* ================= EL RESTO DE ESTILOS ================= */
+.card-image-conteiner { height: 220px; width: 100%; background: #000; position: relative; }
+.main-img { width: 100%; height: 100%; object-fit: cover; }
+.card-content { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+.card-content h3 { color: #d84f45; font-size: 1.6rem; margin: 0 0 5px 0; font-weight: bold; }
+.desc { color: #bbb; font-size: 1rem; margin-bottom: 15px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.meta-info { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+.time { color: #888; font-weight: bold; font-size: 1.1rem; }
+.price { color: #4caf50; font-size: 1.5rem; font-weight: bold; }
+
+.card-actions { background: #1a1a1a; padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #333; }
+.btn-qty { width: 50px; height: 50px; border-radius: 50%; border: none; font-size: 1.8rem; color: #fff; display: flex; align-items: center; justify-content: center; }
+.btn-qty.minus { background: #444; }
+.btn-qty.plus { background: #d84f45; }
+.qty-display { font-size: 1.8rem; font-weight: bold; color: #fff; }
+
+.cart-footer { position: fixed; bottom: 0; height: 55px; width: 100%; background: rgba(20, 20, 20, 0.98); border-top: 2px solid #d84f45; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; z-index: 500; }
+.cart-details .total-row { color: white; font-size: 1.2rem; }
+.cart-details .total-price { color: #4caf50; font-weight: bold; margin-left: 5px; font-size: 1.5rem; }
+.confirm-btn { background: linear-gradient(145deg, #d84f45, #b03a32); color: white; border: none; padding: 12px 30px; border-radius: 30px; font-weight: bold; font-size: 1.1rem; }
+.spacer-bottom { height: 100px; scroll-snap-align: end; }
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content-sensor {
+  width: 90%;
+  max-width: 400px;
+  background: #1a1a1a;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  color: white;
+  border: 1px solid #333;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  position: relative;
+}
+
+.big-image-container {
+  margin: 20px 0;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.big-img {
+  width: 100%;
+  height: 250px;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+/* Flechas de navegación */
+.nav-arrow {
+  position: absolute;
+  top: 40%; 
+  background: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 2rem;
+  line-height: 2rem;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 5px; /* Ajuste visual */
+}
+
+.nav-arrow.left { left: -10px; }
+.nav-arrow.right { right: -10px; }
+
+.modal-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+  
+  span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #555;
+    transition: background-color 0.3s;
+    
+    &.active {
+      background-color: #d84f45;
+      transform: scale(1.2);
+    }
+  }
+}
+
+.sensor-hint {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 5px;
+}
+
+.modal-details .price-big {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #d84f45;
+    margin: 10px 0;
+}
+
+.close-modal-btn {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.btn-add-modal {
+  width: 100%;
+  padding: 12px;
+  background: #d84f45;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 10px;
+
+  .btn-qty-modal {
+    background: #333;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    font-size: 1.2rem;
+  }
+  
+  .qty-modal {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.loading-bg {
+  /* Fondo gris mientras carga */
+  background-color: #2a2a2a; 
+  /* Centrar el contenido */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  min-height: 250px; /* Misma altura que la imagen */
+  position: relative;
+}
+
+/* Spinner CSS puro (sin imagenes externas) */
+.loading-bg::before {
+  content: "";
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-top-color: #d84f45; /* Tu color rojo */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  z-index: 0; /* Detrás de la imagen */
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.big-img {
+  width: 100%;
+  height: 250px;
+  object-fit: contain;
+  border-radius: 10px;
+  position: relative;
+  z-index: 1; /* La imagen tapa al spinner cuando carga */
+  background-color: transparent; /* Importante para que se vea el fondo si es PNG transp */
+}
+
+.mini-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.6);
+  color: white;
+  border: none;
+  font-size: 26px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.mini-arrow.left {
+  left: 6px;
+}
+
+.mini-arrow.right {
+  right: 6px;
+}
+
+.mini-arrow:active {
+  transform: translateY(-50%) scale(0.9);
+}
+
+
+.spinner-overlay {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.9);
+  display: flex; justify-content: center; align-items: center; z-index: 9999;
+}
+.spinner-container { display: flex; flex-direction: column; align-items: center; p { color: #fff; font-weight: bold; }}
+.spinning-logo { width: 80px; height: 80px; animation: spin 1.5s linear infinite; }
+@keyframes spin { 100% { transform: rotate(360deg); } }

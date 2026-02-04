@@ -1,0 +1,92 @@
+<div *ngIf="isLoading" class="spinner-overlay">
+  <div class="spinner-container">
+    <img src="assets/icono.png" class="spinning-logo">
+    <p>{{ diccionario[idioma()]['ActualizandoEstado'] }}</p>
+  </div>
+</div>
+
+<nav class="navbar" *ngIf="auth.usuarioIngresado">
+  <div class="navbar-left">
+    <img *ngIf="auth.usuarioIngresado.tipoCliente === 'cliente'" src="assets/iconos/profile_7310896.png" />
+    <img *ngIf="auth.usuarioIngresado.tipoCliente === 'anonimo'" src="assets/iconos/intruder_3584762.png" />
+  </div>
+  <div class="navbar-right">
+    <span class="user-name">{{ auth.usuarioIngresado.nombre }}</span>
+    <img [src]="auth.usuarioIngresado.foto" class="user-photo" />
+  </div>
+</nav>
+
+<div class="main-container">
+
+
+  <div class="status-card rejected" *ngIf="pasoActual === -1">
+    <div class="icon-header-rejected">
+      <fa-icon [icon]="faBan"></fa-icon>
+    </div>
+    <h2 class="rejected-title">{{ diccionario[idioma()]['PEDIDORECHAZADO'] }}</h2>
+    <div class="rejected-content">
+      <p>{{ diccionario[idioma()]['Elmozonopudoprocesartupedido'] }}</p>
+      <div class="reason-box">
+        <strong>{{ diccionario[idioma()]['Motivo'] }}:</strong>
+        <span>{{ motivoRechazo }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="status-card" *ngIf="pasoActual > 0">
+    <div class="icon-header">
+      <fa-icon [icon]="faCheck" *ngIf="pasoActual === 1"></fa-icon>
+      <fa-icon [icon]="faUtensils" *ngIf="pasoActual === 2" class="pulse"></fa-icon>
+      <fa-icon [icon]="faBell" *ngIf="pasoActual === 3" class="bounce"></fa-icon>
+      <fa-icon [icon]="faFlagCheckered" *ngIf="pasoActual === 4"></fa-icon>
+    </div>
+    
+    <h2>{{ mensajeEstado }}</h2>
+    
+    <div class="timeline">
+      <div class="step" [class.active]="pasoActual >= 1">
+        <div class="circle"><fa-icon [icon]="faCheck"></fa-icon></div>
+        <div class="line"></div>
+        <p>{{ diccionario[idioma()]['Enviado'] }}</p>
+      </div>
+      <div class="step" [class.active]="pasoActual >= 2">
+        <div class="circle"><fa-icon [icon]="faUtensils"></fa-icon></div>
+        <div class="line"></div>
+        <p>{{ diccionario[idioma()]['Cocinando'] }}</p>
+      </div>
+      <div class="step" [class.active]="pasoActual >= 3">
+        <div class="circle"><fa-icon [icon]="faBell"></fa-icon></div>
+        <div class="line"></div>
+        <p>{{ diccionario[idioma()]['Entregado'] }}</p>
+      </div>
+      <div class="step" [class.active]="pasoActual >= 4">
+        <div class="circle"><fa-icon [icon]="faFlagCheckered"></fa-icon></div>
+        <p>{{ diccionario[idioma()]['Disfrutando'] }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions-area" *ngIf="pasoActual > 0">
+    
+
+    <button class="action-btn scan" *ngIf="pasoActual === 3" (click)="starScan()">
+      <fa-icon [icon]="faUtensils"></fa-icon>
+      <span>{{ diccionario[idioma()]['ConfirmarRecepcion'] }}</span>
+    </button>
+
+    <button class="action-btn game" 
+      *ngIf="pasoActual >= 2 && pasoActual < 4 && auth.usuarioIngresado.tipoCliente === 'cliente'" 
+      routerLink="/juego">
+      <fa-icon [icon]="faGamepad"></fa-icon>
+      <span>{{ diccionario[idioma()]['Jugarmientrasespero'] }}</span>
+    </button>
+
+ 
+    <button class="action-btn survey" *ngIf="mostrarEncuesta" routerLink="/resultado-encuestas-cliente">
+      <fa-icon [icon]="faClipboardList"></fa-icon>
+      <span>{{ diccionario[idioma()]['Verencuestas'] }}</span>
+    </button>
+
+  </div>
+
+</div>

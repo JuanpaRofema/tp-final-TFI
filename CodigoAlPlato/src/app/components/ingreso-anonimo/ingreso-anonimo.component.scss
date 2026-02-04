@@ -1,0 +1,213 @@
+/* VARIABLES */
+$bg-dark: #121212;
+$card-bg: #2a2a2a;
+$primary: #d84f45;
+$text-light: #ffffff;
+
+:host {
+  --background: transparent;
+  background: transparent;
+  display: block;
+  min-height: 100vh;
+  color: $text-light;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+.navbar2 {
+  background-color: #0f0f0f;
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+.main-content {
+  min-height: calc(100vh - 100px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px 15px;
+  background-color: transparent;
+}
+
+/* CARD PRINCIPAL */
+.card-container {
+  width: 100%;
+  max-width: 420px;
+  background: $card-bg;
+  border-radius: 24px;
+  padding: 30px 25px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  margin-top: 50px;
+}
+
+/* CABECERA CON FOTO */
+.card-header-custom {
+  position: relative;
+  text-align: center;
+  margin-bottom: 30px;
+
+  .image-wrapper {
+    position: relative;
+    width: 110px;
+    height: 110px;
+    margin: 0 auto;
+    cursor: pointer;
+    transition: transform 0.2s;
+
+    &:hover, &:active {
+      transform: scale(1.05);
+    }
+
+    .profile-pic {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid $primary;
+      background: #333;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+    }
+
+    .camera-badge {
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      background: $primary;
+      color: white;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 3px solid $card-bg;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      font-size: 1rem;
+    }
+  }
+}
+
+.custom-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .custom-item {
+    --background: #181818;
+    --color: $text-light;
+    --highlight-color-focused: $primary;
+    --padding-start: 16px;
+    --border-radius: 14px;
+    margin-bottom: 0;
+    border: 1px solid transparent;
+    transition: all 0.3s;
+
+    &:has(ion-input:focus),
+    &:has(ion-input:valid) {
+      border-color: $primary;
+      box-shadow: 0 0 0 1px $primary;
+    }
+
+    ion-label {
+      color: #f7b267 !important;
+      font-weight: 600 !important;
+      font-size: 0.9rem !important;
+    }
+
+    ion-input {
+      --padding-top: 22px;
+      --padding-bottom: 8px;
+      font-size: 1.1rem;
+    }
+  }
+}
+
+.btn-register {
+  --ripple-color: rgba(255,255,255,0.3);
+  height: 56px;
+  margin: 20px auto 0;
+  display: block;
+  width: 100%;
+  max-width: 280px;
+  background: linear-gradient(90deg, #f7b267, $primary);
+  color: white;
+  border: none;
+  border-radius: 16px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 8px 20px rgba($primary, 0.4);
+  transition: all 0.3s;
+
+  &:active {
+    transform: translateY(2px);
+    box-shadow: 0 4px 10px rgba($primary, 0.3);
+  }
+
+  &:disabled {
+    background: #444;
+    box-shadow: none;
+    opacity: 0.6;
+  }
+}
+
+.back-button {
+  position: fixed;
+  bottom: 25px;
+  left: 25px;
+  z-index: 100;
+
+  button {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(30, 30, 30, 0.9);
+    backdrop-filter: blur(10px);
+    color: $primary;
+    border: 2px solid $primary;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+    font-size: 1.4rem;
+    transition: all 0.3s;
+
+    &:active {
+      transform: scale(0.92);
+    }
+  }
+}
+
+.spinner-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+
+  .spinner-container {
+    text-align: center;
+
+    .spinning-logo {
+      width: 90px;
+      height: 90px;
+      animation: spin 1.8s linear infinite;
+      filter: drop-shadow(0 0 20px $primary);
+    }
+
+    p {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      color: $primary;
+      font-weight: 600;
+    }
+  }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

@@ -1,0 +1,82 @@
+<nav class="navbar">
+  <div class="navbar-left">
+    @if (this.authService.usuarioIngresado.tipoCliente === "dueño"){
+    <img src="assets/iconos/man_11379344.png" alt="" />
+    }
+  </div>
+  <div class="navbar-right">
+    <span class="user-name">{{ this.authService.usuarioIngresado.nombre }}</span>
+    <img
+      src="{{ this.authService.usuarioIngresado.foto }}"
+      alt="Foto del usuario"
+      class="user-photo"
+    />
+</div>
+
+</nav>
+
+<div *ngIf="isLoading" class="spinner-overlay">
+  <div class="spinner-container">
+    <img src="assets/icono.png" class="spinning-logo">
+    <p>{{ diccionario[idioma()]['CreandoMesa'] }}</p>
+  </div>
+</div>
+
+<div class="main-content">
+  <div class="card-container">
+    
+    <div class="photo-header">
+      <div class="image-wrapper" (click)="tomarFoto()">
+        <img [src]="fotoUrl" class="table-pic" alt="Foto Mesa">
+        <div class="camera-badge">
+          <fa-icon [icon]="faCamera"></fa-icon>
+        </div>
+      </div>
+      <p class="hint-text">{{ diccionario[idioma()]['TocaAgregarFoto'] }}</p>
+    </div>
+
+    <form (ngSubmit)="crearMesa()" #formMesa="ngForm" class="custom-form">
+      
+      <div class="input-row">
+        <ion-item class="custom-item">
+          <ion-label position="floating">{{ diccionario[idioma()]['NumeroMesa'] }}</ion-label>
+          <ion-input type="number" name="numero" [(ngModel)]="nuevaMesa.numero" required></ion-input>
+        </ion-item>
+
+        <ion-item class="custom-item">
+          <ion-label position="floating">{{ diccionario[idioma()]['Comensales'] }}</ion-label>
+          <ion-input type="number" name="cantidadComensales" [(ngModel)]="nuevaMesa.cantidadComensales" required></ion-input>
+        </ion-item>
+      </div>
+
+      <ion-item class="custom-item">
+        <ion-label position="floating">{{ diccionario[idioma()]['TipoMesa'] }}</ion-label>
+        <ion-select name="tipo" [(ngModel)]="nuevaMesa.tipo" required>
+          <ion-select-option value="estandar">{{ diccionario[idioma()]['Estandar'] }}</ion-select-option>
+          <ion-select-option value="vip">{{ diccionario[idioma()]['VIP'] }}</ion-select-option>
+          <ion-select-option value="movilidad reducida">{{ diccionario[idioma()]['MovilidadReducida'] }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <button class="btn-register" type="submit" [disabled]="!formMesa.form.valid || !selectedImage">
+        {{ diccionario[idioma()]['RegistrarMesa'] }}
+      </button>
+
+    </form>
+
+  </div>
+</div>
+
+<div class="back-button">
+  <button (click)="moverAlHome()">
+    <fa-icon [icon]="faArrowLeft"></fa-icon>
+  </button>
+</div>
+
+<div #qrContainer style="position: absolute; left: -9999px; top: -9999px;">
+  <qrcode
+    [qrdata]="'mesa-' + (nuevaMesa.numero || '0')"
+    [width]="250"
+    [errorCorrectionLevel]="'M'">
+  </qrcode>
+</div>

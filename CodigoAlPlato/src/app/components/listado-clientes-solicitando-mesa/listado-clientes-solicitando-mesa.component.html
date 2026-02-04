@@ -1,0 +1,78 @@
+<div *ngIf="isLoading" class="spinner-overlay">
+  <div class="spinner-container">
+    <img src="assets/icono.png" class="spinning-logo">
+    <p>{{ diccionario[idioma()]['CargandoLista'] }}</p>
+  </div>
+</div>
+
+<div class="container">
+  
+  <h1 class="title">{{ diccionario[idioma()]['SOLICITUDESDEMESA'] }}</h1>
+
+  <div class="cards-list" *ngIf="clientes.length > 0; else noClients">
+    
+    <div class="client-card" *ngFor="let cliente of clientes">
+      
+      <div class="card-header">
+        <div class="user-info">
+          <img [src]="cliente.foto" class="avatar" alt="Foto">
+          <div class="text-info">
+            <h3>{{ cliente.nombre }} {{ cliente.apellido }}</h3>
+            <p class="status">{{ diccionario[idioma()]['Esperandomesa'] }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-actions">
+        <button class="btn-assign" (click)="prepararAsignacion(cliente)">
+          <fa-icon [icon]="faChair"></fa-icon> {{ diccionario[idioma()]['ASIGNARMESA'] }}
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <ng-template #noClients>
+    <div class="empty-state">
+      <fa-icon [icon]="faUtensils" size="4x" style="color: #555; margin-bottom: 15px;"></fa-icon>
+      <p>{{ diccionario[idioma()]['Nohayclientesesperandomesa'] }}</p>
+    </div>
+  </ng-template>
+
+</div>
+
+<div class="modal-overlay" *ngIf="mostrarMesasDisponibles" (click)="cerrarModalMesas()">
+  
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    
+    <div class="modal-header">
+      <h2>{{ diccionario[idioma()]['ElegirMesa'] }}</h2>
+      <p>{{ diccionario[idioma()]['Para'] }} {{ usuarioSeleccionado?.nombre }}</p>
+    </div>
+
+    <div class="tables-grid">
+      <div 
+        class="table-item" 
+        *ngFor="let mesa of mesas" 
+        [class.occupied]="mesa.estado === 'ocupada'"
+        (click)="mesa.estado !== 'ocupada' && asignarMesa(mesa)"
+      >
+        <span class="table-number">{{ mesa.numero }}</span>
+        <img src={{mesa.foto}} class="table-icon">
+        <span class="table-status">
+          {{ mesa.estado === 'ocupada' ? 'Ocupada' : 'Libre' }}
+        </span>
+      </div>
+    </div>
+
+    <button class="btn-close-modal" (click)="cerrarModalMesas()">{{ diccionario[idioma()]['Cancelar'] }}</button>
+  </div>
+
+</div>
+
+<div class="back-button">
+  <button (click)="volver()">
+    <fa-icon [icon]="faArrowLeft"></fa-icon>
+  </button>
+</div>
