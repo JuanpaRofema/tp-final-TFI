@@ -1,0 +1,74 @@
+<nav class="navbar">
+  <div class="navbar-left">
+    @if (this.auth.usuarioIngresado.tipoCliente === "mesero"){
+    <img src="assets/iconos/waiter_3462052.png" alt="" />
+    }
+  </div>
+  <div class="navbar-right">
+    <span class="user-name">{{ this.auth.usuarioIngresado.nombre }}</span>
+    <img
+      src="{{ this.auth.usuarioIngresado.foto }}"
+      alt="Foto del usuario"
+      class="user-photo"
+    />
+</div>
+</nav>
+
+<div *ngIf="isLoading" class="spinner-overlay">
+  <div class="spinner-container">
+    <img src="assets/icono.png" class="spinning-logo">
+    <p>{{ diccionario[idioma()]['BuscandoPedidosListos'] }}</p>
+  </div>
+</div>
+
+<div class="container">
+  
+  <h1 class="title">{{ diccionario[idioma()]['LISTOSPARAENTREGAR'] }}</h1>
+
+  <div class="cards-list" *ngIf="pedidos.length > 0; else noPedidos">
+    
+    <div class="order-card" *ngFor="let pedido of pedidos">
+      
+      <div class="card-header">
+        <div class="header-info">
+          <div class="mesa-badge">{{ diccionario[idioma()]['Mesa'] }} {{ pedido.mesa }}</div>
+          <div class="client-info">
+            <h3>{{ pedido.cliente }}</h3>
+            <span class="total-price">{{ diccionario[idioma()]['Total'] }} ${{ pedido.total }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <p class="section-title"><fa-icon [icon]="faUtensils"></fa-icon> {{ diccionario[idioma()]['Pedido'] }}</p>
+        <ul class="items-list">
+          <li *ngFor="let prod of pedido.productos">
+            <span class="qty">x{{ prod.cantidad }}</span>
+            <span class="name">{{ prod.name }}</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card-actions">
+        <button class="btn-deliver" (click)="confirmarEntrega(pedido)">
+          <fa-icon [icon]="faCheckCircle"></fa-icon> {{ diccionario[idioma()]['ENTREGARAMESA'] }}
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <ng-template #noPedidos>
+    <div class="empty-state">
+      <fa-icon [icon]="faClipboardList" size="4x" style="color: #555; margin-bottom: 15px;"></fa-icon>
+      <p>{{ diccionario[idioma()]['Nohaypedidoslistosparaentregar'] }}</p>
+    </div>
+  </ng-template>
+
+</div>
+
+<div class="back-button">
+  <button routerLink="/home">
+    <fa-icon [icon]="faArrowLeft"></fa-icon>
+  </button>
+</div>

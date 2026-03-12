@@ -1,0 +1,193 @@
+<div *ngIf="isLoading" class="spinner-overlay">
+  <div class="spinner-container">
+    <img src="assets/icono.png" class="spinning-logo">
+    <p>{{ diccionario[idioma()]['CargandoCarta'] }}</p>
+  </div>
+</div>
+
+<div class="address-header" (click)="abrirMapa()">
+    <fa-icon [icon]="faMapMarkerAlt" class="map-icon"></fa-icon>
+      <div class="address-info">
+        <span class="label">{{ diccionario[idioma()]['Enviara'] }}</span>
+        <span class="address-text">{{ direccionActual }}</span>
+      </div>
+    <span class="edit-label">{{ diccionario[idioma()]['CAMBIAR'] }}</span>
+</div>
+
+<div class="body-snap">
+
+  <div class="snap-page first-page">
+     
+     <div class="header-actions">
+        <button class="nav-icon-btn left" (click)="backHome()">
+          <fa-icon [icon]="faArrowLeft"></fa-icon>
+        </button>
+
+        <h1 class="main-title">{{ diccionario[idioma()]['NUESTRACARTA'] }}</h1>
+     </div>
+
+     <div class="category-content" *ngIf="productsComida.length > 0">
+        <h2>🍔 {{ diccionario[idioma()]['Comidas'] }}</h2>
+        <div class="cards-scroller">
+          <div class="food-card" *ngFor="let p of productsComida;" (click)="abrirModal(p)"> 
+            <div class="card-image-conteiner">
+               <button class="mini-arrow left"
+                *ngIf="p.image2"
+                (click)="$event.stopPropagation(); cambiarFotoCard(p, -1)">
+                ‹
+              </button>
+
+        <img [src]="p.fotoActiva === 2 ? p.image2 : (p.fotoActiva === 3 ? p.image3 : p.image1)"
+            class="main-img">
+
+        <button class="mini-arrow right"
+                *ngIf="p.image2"
+                (click)="$event.stopPropagation(); cambiarFotoCard(p, 1)">
+          ›
+        </button>
+                <div class="dots">
+                    <span [class.active]="p.fotoActiva === 1"></span>
+                    <span [class.active]="p.fotoActiva === 2" *ngIf="p.image2"></span>
+                    <span [class.active]="p.fotoActiva === 3" *ngIf="p.image3"></span>
+                </div>
+            </div>
+            <div class="card-content">
+              <h3>{{ p.name }}</h3>
+              <p class="desc">{{ p.description }}</p>
+              <div class="meta-info">
+                <span class="time">⏱ {{ p.tiempoEstimado }}'</span>
+                <span class="price">${{ p.precio }}</span>
+              </div>
+            </div>
+            <div class="card-actions">
+              <button class="btn-qty minus" (click)="$event.stopPropagation(); modificarCantidad(p, -1)" [disabled]="p.cantidad === 0">-</button>
+              <span class="qty-display">{{ p.cantidad }}</span>
+              <button class="btn-qty plus" (click)="$event.stopPropagation(); modificarCantidad(p, 1)">+</button>
+            </div>
+          </div>
+        </div>
+     </div>
+  </div>
+
+
+  <div class="snap-page" *ngIf="productsBebida.length > 0">
+    <div class="category-content">
+      <h2>🥤 {{ diccionario[idioma()]['Bebidas'] }}</h2>
+      <div class="cards-scroller">
+        <div class="food-card" *ngFor="let p of productsBebida;" (click)="abrirModal(p)">
+          <div class="card-image-conteiner">
+              <button class="mini-arrow left"
+          *ngIf="p.image2"
+          (click)="$event.stopPropagation(); cambiarFotoCard(p, -1)">
+          ‹
+        </button>
+
+        <img [src]="p.fotoActiva === 2 ? p.image2 : (p.fotoActiva === 3 ? p.image3 : p.image1)"
+            class="main-img">
+
+        <button class="mini-arrow right"
+                *ngIf="p.image2"
+                (click)="$event.stopPropagation(); cambiarFotoCard(p, 1)">
+          ›
+        </button>          </div>
+          <div class="card-content">
+            <h3>{{ p.name }}</h3>
+            <p class="desc">{{ p.description }}</p>
+            <div class="meta-info">
+              <span class="time">⏱ {{ p.tiempoEstimado }}'</span>
+              <span class="price">${{ p.precio }}</span>
+            </div>
+          </div>
+          <div class="card-actions">
+            <button class="btn-qty minus" (click)="$event.stopPropagation(); modificarCantidad(p, -1)" [disabled]="p.cantidad === 0">-</button>
+            <span class="qty-display">{{ p.cantidad }}</span>
+            <button class="btn-qty plus" (click)="$event.stopPropagation(); modificarCantidad(p, 1)">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="snap-page" *ngIf="productsPostres.length > 0">
+    <div class="category-content">
+      <h2>🥞 {{ diccionario[idioma()]['Postres'] }}</h2>
+      <div class="cards-scroller">
+        <div class="food-card" *ngFor="let p of productsPostres;" (click)="abrirModal(p)">
+          <div class="card-image-conteiner">
+              <button class="mini-arrow left"
+          *ngIf="p.image2"
+          (click)="$event.stopPropagation(); cambiarFotoCard(p, -1)">
+          ‹
+        </button>
+
+        <img [src]="p.fotoActiva === 2 ? p.image2 : (p.fotoActiva === 3 ? p.image3 : p.image1)"
+            class="main-img">
+
+        <button class="mini-arrow right"
+                *ngIf="p.image2"
+                (click)="$event.stopPropagation(); cambiarFotoCard(p, 1)">
+          ›
+        </button>          </div>
+          <div class="card-content">
+            <h3>{{ p.name }}</h3>
+            <p class="desc">{{ p.description }}</p>
+            <div class="meta-info">
+              <span class="time">⏱ {{ p.tiempoEstimado }}'</span>
+              <span class="price">${{ p.precio }}</span>
+            </div>
+          </div>
+          <div class="card-actions">
+            <button class="btn-qty minus" (click)="$event.stopPropagation(); modificarCantidad(p, -1)" [disabled]="p.cantidad === 0">-</button>
+            <span class="qty-display">{{ p.cantidad }}</span>
+            <button class="btn-qty plus" (click)="$event.stopPropagation(); modificarCantidad(p, 1)">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="spacer-bottom"></div>
+
+</div>
+
+<div class="cart-footer" *ngIf="totalPrecio > 0">
+  <div class="cart-details">
+    <div class="total-row">
+      <span>{{ diccionario[idioma()]['Total'] }}</span>
+      <span class="total-price">${{ totalPrecio }}</span>
+    </div>
+    <div class="time-row">
+      <small>{{ diccionario[idioma()]['Esperamáx'] }} <strong>{{ tiempoEstimado }} {{ diccionario[idioma()]['min'] }}</strong></small>
+    </div>
+  </div>
+  <button class="confirm-btn" (click)="guardarPedido()">
+    {{ diccionario[idioma()]['CONFIRMARPEDIDO'] }}
+  </button>
+</div>
+
+<div class="modal-overlay" *ngIf="isModalOpen && productoDestacado">
+  <div class="modal-content-sensor">
+    <button class="close-modal-btn" (click)="cerrarModal()">
+      <fa-icon [icon]="faArrowLeft"></fa-icon> {{ diccionario[idioma()]['Volver'] }}
+    </button>
+    <h2 class="modal-title">{{ productoDestacado.name }}</h2>
+    <div class="big-image-container loading-bg">
+      <button class="nav-arrow left" *ngIf="productoDestacado.image2" (click)="cambiarFoto(-1)">‹</button>
+      <img [src]="productoDestacado.image1" 
+           class="big-img animate-img"
+           [style.display]="fotoActualIndex === 1 ? 'block' : 'none'"
+           (click)="productoDestacado.image2 && cambiarFoto(1)">
+      <button class="nav-arrow right" *ngIf="productoDestacado.image2" (click)="cambiarFoto(1)">›</button>
+      </div>
+    <div class="modal-details">
+       <p>{{ productoDestacado.description }}</p>
+       <div class="price-big">${{ productoDestacado.precio }}</div>
+       <div class="modal-actions">
+          <button class="btn-qty-modal" (click)="modificarCantidad(productoDestacado, -1)" [disabled]="productoDestacado.cantidad === 0">-</button>
+          <span class="qty-modal">{{ productoDestacado.cantidad }}</span>
+          <button class="btn-qty-modal" (click)="modificarCantidad(productoDestacado, 1)">+</button>
+       </div>
+       <button class="btn-add-modal" (click)="cerrarModal()">Listo</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<div *ngIf="isLoading" class="spinner-overlay">
+  <div class="spinner-container">
+    <img src="assets/icono.png" class="spinning-logo">
+    <p>{{ diccionario[idioma()]['CargandoComandas'] }}</p>
+  </div>
+</div>
+
+<div class="container">
+  <h1 class="title">{{ diccionario[idioma()]['BarraDelivery'] }}</h1>
+
+  <div class="cards-list" *ngIf="pedidos.length > 0; else noPedidos">
+    
+    <div class="order-card" *ngFor="let p of pedidos">
+      
+      <div class="card-header">
+        <div class="header-info">
+            <h3>{{ diccionario[idioma()]['Cliente'] }}: {{ p.cliente }}</h3>
+            <span class="time-badge">
+                <fa-icon [icon]="faClock"></fa-icon> {{ p.fecha | date:'shortTime' }}
+            </span>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <p class="section-title"><fa-icon [icon]="faGlassMartiniAlt"></fa-icon> {{ diccionario[idioma()]['APreparar'] }}</p>
+        <ul class="items-list">
+            <ng-container *ngFor="let prod of p.productos">
+                <li *ngIf="prod.tipoProducto === 'bebida'">
+                    <span class="qty">x{{ prod.cantidad }}</span>
+                    <span class="name">{{ prod.name }}</span>
+                </li>
+            </ng-container>
+        </ul>
+      </div>
+
+      <div class="card-actions">
+        <button class="btn-finish" (click)="finalizarPedido(p)">
+            <fa-icon [icon]="faCheckCircle"></fa-icon> {{ diccionario[idioma()]['MarcarListo'] }}
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <ng-template #noPedidos>
+    <div class="empty-state">
+        <p>{{ diccionario[idioma()]['NoHayBebidas'] }}</p>
+    </div>
+  </ng-template>
+
+</div>
+
+<div class="back-button">
+  <button routerLink="/home">
+    <fa-icon [icon]="faArrowLeft"></fa-icon>
+  </button>
+</div>

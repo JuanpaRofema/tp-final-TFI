@@ -1,0 +1,71 @@
+<div class="body">
+  <div class="button-container" id="snapContainer">
+  <div class="card-opcion">
+    <H2>{{ diccionario[idioma()]['ComoCalificariasLaAtencion'] }}</H2>
+    <div class="pieContainer">
+      <canvas id="myPieChart"></canvas>
+    </div>
+  </div>
+
+  <div class="card-opcion">
+    <H2>{{ diccionario[idioma()]['ComoCalificariasElSabor'] }}</H2>
+    <div class="pieContainer">
+      <canvas id="myPieChart2"></canvas>
+    </div>
+  </div>
+  <div class="card-opcion">
+    <H2>{{ diccionario[idioma()]['LaComidaEstabaCaliente'] }}</H2>
+    <div class="pieContainer">
+      <canvas id="myPieChart3"></canvas>
+    </div>
+  </div>
+  <div class="card-opcion">
+    <H2>{{ diccionario[idioma()]['LasPorcionesFueronAdecuadas'] }}</H2>
+    <div class="pieContainer">
+      <canvas id="myPieChart4"></canvas>
+    </div>
+  </div>
+  <div class="card-opcion form-small">
+    <H2>{{ diccionario[idioma()]['LaPresentacionFueBuena'] }}</H2>
+    <div class="pieContainer">
+      <canvas id="myPieChart5"></canvas>
+    </div>
+  </div>
+  <div class="card-opcion">
+    <H2>{{ diccionario[idioma()]['TiposDeMenuPrefiere'] }}</H2>
+    <div class="pieContainer">
+      <canvas id="myPieChart6"></canvas>
+    </div>
+  </div>
+  <div class="card-opcion">
+    <H2>{{ diccionario[idioma()]['TiempoEsperadoPorLaComida'] }}</H2>
+    <div class="pieContainer">
+      <canvas id="myPieChart7"></canvas>
+    </div>
+</div>
+  <div class="snap-section comentarios">
+  <H2>{{ diccionario[idioma()]['COMENTARIOS'] }}</H2>
+
+  <ul class="comment-list">
+    @for (com of comentarios; track $index) {
+      @if (com !== ""){
+        <li class="comment-item">{{ com }}</li>
+      }
+    }
+  </ul>
+</div>
+
+  <div class="back-button">
+    <button (click)="volver()">
+      <fa-icon [icon]="faArrowLeft"></fa-icon>
+    </button>
+  </div>
+</div>
+
+
+<div *ngIf="isLoading" class="spinner-overlay">
+  <div class="spinner-container">
+    <img src="assets/icono.png" class="spinning-logo">
+    <p>{{ diccionario[idioma()]['CargandoCarta'] }}</p>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<button class="floating-btn" (click)="abrirModal()">
+  <fa-icon [icon]="faReceipt" class="icon-main"></fa-icon>
+  <span class="pulse-dot"></span> </button>
+
+<div *ngIf="mostrarModal" class="modal-overlay fadeIn" (click)="cerrarModal()">
+  
+  <div class="modal-card slideUp" (click)="detenerPropagacion($event)">
+    
+    <button class="btn-close" (click)="cerrarModal()">✕</button>
+
+    <div class="modal-header">
+      <h3>{{ diccionario[idioma()]['TuPedido'] }}</h3>
+      <div class="status-badge">{{ diccionario[idioma()]['EnPreparación'] }}</div>
+    </div>
+
+    <div class="modal-body" *ngIf="pedidoActual">
+      
+      <div class="info-row time">
+        <fa-icon [icon]="faClock"></fa-icon>
+        <span>{{ diccionario[idioma()]['Esperaestimada'] }} <strong>{{ pedidoActual.tiempoEstimado || '?' }} {{ diccionario[idioma()]['min'] }}</strong></span>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="products-list">
+        <p class="list-title"><fa-icon [icon]="faUtensils"></fa-icon> {{ diccionario[idioma()]['Detalle'] }}</p>
+        <ul>
+          <li *ngFor="let prod of pedidoActual.productos">
+            <span class="qty">{{ prod.cantidad }}{{ diccionario[idioma()]['x'] }}</span>
+            <span class="name">{{ prod.name }}</span>
+            <span class="price">${{ prod.precio * prod.cantidad }}</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="total-row">
+        <span>{{ diccionario[idioma()]['TOTAL'] }}</span>
+        <span class="total-amount">${{ pedidoActual.total }}</span>
+      </div>
+
+    </div>
+  </div>
+
+</div>

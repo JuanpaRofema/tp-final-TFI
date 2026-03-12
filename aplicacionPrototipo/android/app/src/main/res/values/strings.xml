@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">aplicacion-prototipo</string>
+    <string name="title_activity_main">aplicacion-prototipo</string>
+    <string name="package_name">com.prototipo.com</string>
+    <string name="custom_url_scheme">com.prototipo.com</string>
+</resources>

@@ -1,0 +1,257 @@
+/* VARIABLES */
+$bg-color: transparent;
+$card-bg: #1e1e1e;
+$card-border: #333;
+$primary-green: #e6542f;
+$dark-green: #e25b43;
+$text-light: #ffffff;
+$text-dim: #aaaaaa;
+
+/* CONTENEDOR PRINCIPAL */
+.container {
+  padding: 20px;
+  padding-bottom: 100px; /* Espacio para el botón volver */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* TÍTULO */
+.title {
+  color: $primary-green;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 15px;
+  font-family: 'Segoe UI', sans-serif; /* Fuente más limpia */
+}
+
+/* LISTA DE TARJETAS */
+.cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* TARJETA DE PAGO */
+.payment-card {
+  background-color: $card-bg;
+  border-radius: 15px;
+  overflow: hidden; /* Para que la cabecera respete los bordes */
+  border: 1px solid $card-border;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+  animation: slideIn 0.4s ease-out;
+
+  /* CABECERA */
+  .card-header {
+    background: linear-gradient(135deg, #2a2a2a, #222);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #444;
+
+    .info-main {
+      h3 {
+        margin: 0;
+        color: $primary-green;
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .client-name {
+        color: $text-dim;
+        font-size: 0.9rem;
+      }
+    }
+
+    .total-badge {
+      background-color: $primary-green;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 1.2rem;
+      box-shadow: 0 2px 10px rgba(76, 175, 80, 0.3);
+    }
+  }
+
+  /* CUERPO */
+  .card-body {
+    padding: 20px;
+
+    .items-container {
+      margin-bottom: 15px;
+      
+      .section-title {
+        color: #888;
+        font-size: 0.85rem;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        max-height: 150px; /* Si la lista es muy larga, hace scroll interno */
+        overflow-y: auto;
+
+        li {
+          display: flex;
+          justify-content: space-between;
+          padding: 5px 0;
+          border-bottom: 1px dashed #333;
+          color: #ddd;
+          font-size: 0.95rem;
+
+          &:last-child { border-bottom: none; }
+
+          .qty { color: $primary-green; font-weight: bold; width: 30px; }
+          .prod-name { flex: 1; }
+          .prod-price { font-weight: bold; }
+        }
+      }
+    }
+
+    .divider {
+      height: 1px;
+      background-color: #333;
+      margin: 10px 0;
+    }
+
+    .money-breakdown {
+      .row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 5px;
+        color: #aaa;
+        font-size: 0.9rem;
+
+        &.tip-row {
+          color: #fff;
+          font-weight: bold;
+        }
+
+        .discount-label { color: #d84f45; }
+        .discount-val { color: #d84f45; font-weight: bold; }
+      }
+    }
+  }
+
+  /* ACCIONES */
+  .card-actions {
+    padding: 15px;
+    background-color: #151515;
+    
+    .btn-confirm {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(90deg, $primary-green, $dark-green);
+      color: white;
+      font-size: 1.1rem;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+      transition: transform 0.2s;
+
+      &:active {
+        transform: scale(0.98);
+      }
+    }
+  }
+}
+
+/* ESTADO VACÍO */
+.empty-state {
+  text-align: center;
+  color: #555;
+  margin-top: 50px;
+  
+  fa-icon { margin-bottom: 15px; color: #333; }
+  p { font-size: 1.2rem; }
+}
+
+/* BOTÓN VOLVER */
+.back-button {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 100;
+
+  button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #333;
+    color: $primary-green;
+    border: 2px solid $primary-green;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    font-size: 1.2rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+}
+
+/* SPINNER */
+.spinner-overlay {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.9);
+  display: flex; justify-content: center; align-items: center; z-index: 9999;
+  
+  .spinner-container {
+    display: flex; flex-direction: column; align-items: center;
+    p { color: #fff; font-weight: bold; margin-top: 15px; }
+  }
+  .spinning-logo { width: 80px; height: 80px; animation: spin 1.5s linear infinite; }
+}
+
+@keyframes spin { 100% { transform: rotate(360deg); } }
+@keyframes slideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+
+.navbar {
+  display: flex;
+  // position: absolute;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+}
+
+/* Área izquierda de la navbar */
+.navbar-left img {
+  width: 60px;
+  color: white;
+}
+
+/* Área derecha de la navbar */
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.user-name {
+  margin-right: 20px;
+  font-weight: bold;
+  color: #d84f45;
+  font-size: large;
+}
+
+/* Foto del usuario */
+.user-photo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%; /* Hace la imagen circular */
+}

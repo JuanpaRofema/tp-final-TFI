@@ -1,0 +1,134 @@
+<div class="container">
+  <div class="screen">
+    <div class="screen__content">
+      <form class="login" [formGroup]="formInicioSesion">
+        
+        <div class="login__field">
+          <fa-icon [icon]="['fas', 'user']" class="login__icon"></fa-icon>
+          <input
+            type="email"
+            class="login__input"
+            [placeholder]="diccionario[idioma()]['placeholder_correo']"
+            name="email"
+            formControlName="email"
+          />
+          @if (mailError){
+          <div class="error-message">
+            <p>{{ diccionario[idioma()]['error_mail_vacio'] }}</p>
+          </div>
+          }
+        </div>
+
+        <div class="login__field">
+          <fa-icon [icon]="['fas', 'lock']" class="login__icon"></fa-icon>
+          <input
+            type="password"
+            class="login__input"
+            [placeholder]="diccionario[idioma()]['placeholder_contrasena']"
+            name="contrasena"
+            formControlName="contrasena"
+          />
+          @if (contrasenaError){
+          <div class="error-message">
+            <p>{{ diccionario[idioma()]['error_pass_vacia'] }}</p>
+          </div>
+          }
+        </div>
+        
+        <button class="button login__submit" (click)="this.IniciarSesion()">
+          <span class="button__text">{{ diccionario[idioma()]['btn_ingresar'] }}</span>
+          <fa-icon
+            [icon]="['fas', 'chevron-right']"
+            class="button__icon"
+          ></fa-icon>
+        </button>
+      
+        <button class="button login__submit" (click)="this.ingresarCliente()">
+          <span class="button__text">{{ diccionario[idioma()]['btn_crear_cliente'] }}</span>
+          <fa-icon
+            [icon]="['fas', 'chevron-right']"
+            class="button__icon"
+          ></fa-icon>
+        </button>
+        
+        <button 
+          type="button"
+          (click)="googleSignIn()"
+          class="button google__submit"
+        >
+          <svg class="w-5 h-5 mr-3" viewBox="0 0 48 48">
+            <path fill="#FFC107" d="M43.61 20.083H42V20H24v8h11.346c-1.173 3.147-3.693 5.733-7.073 7.073v3.746h5.087c2.956-2.73 5.163-6.522 6.32-10.87z"></path>
+            <path fill="#FF3D00" d="M24 44c5.235 0 9.875-1.782 13.195-4.82L32.12 35.4c-1.928 1.43-4.34 2.2-6.62 2.2c-5.89 0-10.87-3.99-12.63-9.5H6.28v3.87c3.308 6.51 10.02 11.05 17.72 11.05z"></path>
+            <path fill="#4CAF50" d="M11.37 28.5c-.24-.715-.37-1.46-.37-2.225s.13-1.51.37-2.225V20.18H6.28c-.46 1.09-.72 2.254-.72 3.485s.26 2.395.72 3.485l5.09 3.87z"></path>
+            <path fill="#1976D2" d="M24 10.8c3.15 0 5.92.93 8.13 2.8l4.4-4.4C33.86 5.86 29.23 4 24 4c-7.7 0-14.41 4.54-17.72 11.05l5.09 3.87c1.76-5.51 6.74-9.5 12.63-9.5z"></path>
+          </svg>
+          <span class="button__text">{{ diccionario[idioma()]['btn_google'] }}</span>
+        </button>
+
+        @if (usuarioNoEncontrado){
+        <div class="error-message">
+          <p>{{ diccionario[idioma()]['error_usuario_no_encontrado'] }}</p>
+        </div>
+        }
+
+        <div class="small-button-container">
+          <div class="column">
+            <div class="button-group">
+              <button type="button" class="small-button" (click)="IniciarRichtofen()">
+                <img src="assets/iconos/man_11379344.png" alt="" />
+              </button>
+              <button type="button" class="small-button" (click)="IniciarNikolai()">
+                <img src="assets/iconos/graphic-designer_1596960.png" alt="" />
+              </button>
+              <button type="button" class="small-button" (click)="IniciarJuan()">
+                <img src="assets/iconos/delivery.png" alt="" />
+              </button>
+            </div>
+          </div>
+
+          <div class="column">
+            <div class="button-group">
+              <button type="button" class="small-button" (click)="IniciarDempsey()">
+                <img src="assets/iconos/chef_2702326.png" alt="" />
+              </button>
+              <button type="button" class="small-button" (click)="IniciarTakeo()">
+                <img src="assets/iconos/bartender_3474515.png" alt="" />
+              </button>
+            </div>
+          </div>
+
+          <div class="column">
+            <div class="button-group">
+              <button type="button" class="small-button" (click)="IniciarParker()">
+                <img src="assets/iconos/waiter_3462052.png" alt="" />
+              </button>
+              <button type="button" class="small-button" (click)="IniciarStacy()">
+                <img src="assets/iconos/consultant_3473755.png" alt="" />
+              </button>
+            </div>
+          </div>
+
+          <div class="column">
+            <div class="button-group">
+              <button type="button" class="small-button" (click)="IniciarWatson()">
+                <img src="assets/iconos/intruder_3584762.png" alt="" />
+              </button>
+              <button type="button" class="small-button" (click)="IniciarMorales()">
+                <img src="assets/iconos/profile_7310896.png" alt="" />
+              </button>
+              <button type="button" class="small-button" (click)="CambiarIdioma()">
+                <img src="assets/iconos/profile_7310897.png" alt="" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="screen__background">
+      <span class="screen__background__shape screen__background__shape4"></span>
+      <span class="screen__background__shape screen__background__shape3"></span>
+      <span class="screen__background__shape screen__background__shape2"></span>
+      <span class="screen__background__shape screen__background__shape1"></span>
+    </div>
+  </div>
+</div>

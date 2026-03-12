@@ -1,0 +1,177 @@
+/* RESET DE CAJA PARA TODO EL ARCHIVO */
+* {
+    box-sizing: border-box;
+}
+
+.menu-container {
+    width: 100%;
+    height: 100vh;
+    margin: 0 auto;
+    font-family: 'Playfair Display', serif;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Evita scroll lateral en la raíz */
+}
+
+/* CAJA 1: Cabecera (10vh) */
+.menu-fixed-header {
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #eee;
+    background: #fff;
+    z-index: 10;
+}
+
+.menu-fixed-header h1 {
+    font-size: 1.8rem;
+    color: #1a1a1a;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0;
+}
+
+/* CAJA 2: El área de scroll (90vh) */
+.lista-productos-unica {
+    height: 90vh;
+    overflow-y: scroll;
+    scroll-snap-type: y proximity; /* ACTIVAMOS IMÁN */
+    scroll-behavior: smooth;
+}
+
+/* CADA ESTACIÓN DEL IMÁN */
+.item-snap {
+    scroll-snap-align: center;
+    height: 90vh; /* MISMA ALTURA QUE EL PADRE */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* LA CARTA DE PRODUCTO (Diseño original) */
+.product-card {
+    width: 100%;
+    max-width: 350px; /* Tamaño ideal para celular */
+    background: #fff;
+    border: 1px solid #f0f0f0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.product-image-placeholder {
+    width: 100%;
+    height: 180px;
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #bbb;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.product-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-info h3 {
+    font-size: 1.3rem;
+    margin: 0 0 8px 0;
+    color: #222;
+}
+
+.product-info p {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.4;
+    margin-bottom: 15px;
+    height: 40px; /* Mantiene uniformidad */
+}
+
+.price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #1a1a1a;
+    margin-bottom: 15px;
+}
+
+.btn-add {
+    background-color: #1a1a1a;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    transition: 0.3s;
+}
+
+.btn-add:hover {
+    background-color: #c0392b;
+}
+
+/* FOOTER DENTRO DEL SCROLL */
+.menu-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.cambiar-idioma {
+    background: #e67e22;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 25px;
+    border: none;
+    font-weight: bold;
+}
+
+.btn-back {
+    text-decoration: none;
+    color: #777;
+}
+.lista-productos-unica {
+    height: 90vh;
+    overflow-y: scroll;
+    
+    /* Mantenemos mandatory pero con ayudas */
+    scroll-snap-type: y mandatory; 
+    
+    /* 1. Esto suaviza el "salto". Si el dedo se mueve, 
+       el imán espera un poco más para actuar */
+    scroll-behavior: smooth;
+
+    /* 2. CREA EL MARGEN DE MANIOBRA:
+       Esto hace que el imán no te tire hacia arriba tan rápido.
+       Probá con 10vh o 20vh hasta que sientas que "suelta" la carta fácil. */
+    scroll-padding-top: 10vh; 
+}
+
+.item-snap {
+
+    scroll-snap-align: center;
+
+    /* 4. PARADA OBLIGATORIA:
+       Fuerza al navegador a reconocer que el usuario quiere ir a la siguiente. */
+    scroll-snap-stop: always;
+
+    height: 90vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.product-img {
+  width: 100%;
+  height: 200px;      
+  object-fit: cover;  
+  border-radius: 10px 10px 0 0; 
+  display: block;
+}

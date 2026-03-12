@@ -1,0 +1,52 @@
+<div class="intro-container">
+  <header class="hero-section">
+    <div class="hero-overlay">
+      <h1>{{ diccionario[idioma_actual()]["bienvenido"] }}</h1>
+      <p class="tagline">{{ diccionario[idioma_actual()]["experiencia"] }}</p>
+    </div>
+  </header>
+
+  <section class="about-section">
+    <h2>{{ diccionario[idioma_actual()]["pasion"] }}</h2>
+    <p>{{ diccionario[idioma_actual()]["prototipo"] }}</p>
+  </section>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <span class="icon">🥗</span>
+      <h3>{{ diccionario[idioma_actual()]["ingredientes"] }}</h3>
+      <p>{{ diccionario[idioma_actual()]["trabajamos"] }}</p>
+    </div>
+    <div class="feature-card">
+      <span class="icon">🔥</span>
+      <h3>{{ diccionario[idioma_actual()]["cocina"] }}</h3>
+      <p>{{ diccionario[idioma_actual()]["ahumado"] }}</p>
+    </div>
+    <div class="feature-card">
+      <span class="icon">🍷</span>
+      <h3>{{ diccionario[idioma_actual()]["vinos"] }}</h3>
+      <p>{{ diccionario[idioma_actual()]["seleccion"] }}</p>
+    </div>
+  </div>
+
+  <div class="status-panel">
+    <h3>{{ diccionario[idioma_actual()]["bienvenido"] }}</h3> 
+    </div>
+
+  <footer class="action-footer">
+    <div class="btn-group">
+      <button (click)="abrirMapaEnModal()" class="btn-primary">
+        {{ diccionario[idioma_actual()]["idioma"] }}
+      </button>
+
+
+      <button (click)="HabilitarGeolocalizador()" class="btn-secondary">
+        {{ diccionario[idioma_actual()]["obtenerIdioma"] }}
+      </button>
+    </div>
+    
+    <a routerLink="/productos" class="link-menu">
+      {{ diccionario[idioma_actual()]["carta"] }} <span>→</span>
+    </a>
+  </footer>
+</div>

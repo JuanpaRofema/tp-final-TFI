@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "715192916995",
+    "project_id": "la-comanda-pps",
+    "storage_bucket": "la-comanda-pps.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:715192916995:android:19f96c107057e377df8236",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "715192916995-adumh848qqj965dmgmfk6h9istnnliu9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.ionic.starter",
+            "certificate_hash": "4cd842386778d6149e41b1e116dc27a72bf1741a"
+          }
+        },
+        {
+          "client_id": "715192916995-d51mm43jn608ul829o7hprd74ejvlqf7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD04NSjM8YDERQOi3y3Mqp93TZu-JjHXOo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "715192916995-d51mm43jn608ul829o7hprd74ejvlqf7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

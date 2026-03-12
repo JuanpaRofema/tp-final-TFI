@@ -1,0 +1,122 @@
+<nav class="navbar">
+  <div class="navbar-left">
+      @if (this.authService.usuarioIngresado.tipoCliente === "dueño"){
+      <img src="assets/iconos/man_11379344.png" alt="" />
+      } 
+    </div>
+    <div class="navbar-right">
+      <span class="user-name">{{ this.authService.usuarioIngresado.nombre }}</span>
+      <img
+        src="{{ this.authService.usuarioIngresado.foto }}"
+        alt="Foto del usuario"
+        class="user-photo"
+      />
+  </div>
+</nav>
+
+<div *ngIf="isLoading" class="spinner-overlay">
+  <div class="spinner-container">
+    <img src="assets/icono.png" class="spinning-logo">
+    <p>{{ diccionario[idioma()]['Procesando'] }}</p>
+  </div>
+</div>
+
+<div class="main-content">
+  <div class="card-container">
+    
+    <div class="card-header-custom">
+      
+      <button class="scan-mini-btn" (click)="starScan()">
+        <fa-icon [icon]="faQrcode"></fa-icon>
+      </button>
+
+      <div class="image-wrapper" (click)="tomarFoto()">
+        <img [src]="fotoUrl" class="profile-pic" alt="Foto Empleado">
+        <div class="camera-badge">
+          <fa-icon [icon]="faCamera"></fa-icon>
+        </div>
+      </div>
+    </div>
+
+    <form [formGroup]="clienteForm" (ngSubmit)="onSubmit()" class="custom-form">
+      
+      <div class="input-row">
+        <ion-item class="custom-item">
+          <ion-label position="floating">{{ diccionario[idioma()]['Nombre'] }}</ion-label>
+          <ion-input type="text" formControlName="nombre"></ion-input>
+        </ion-item>
+
+        <ion-item class="custom-item">
+          <ion-label position="floating">{{ diccionario[idioma()]['Apellido'] }}</ion-label>
+          <ion-input type="text" formControlName="apellido"></ion-input>
+        </ion-item>
+      </div>
+
+      <div class="input-row">
+        <ion-item class="custom-item">
+          <ion-label position="floating">{{ diccionario[idioma()]['DNI'] }}</ion-label>
+          <ion-input type="text" formControlName="dni" (ionInput)="formatearDocumento($event)" maxlength="11"></ion-input>
+        </ion-item>
+
+        <ion-item class="custom-item">
+          <ion-label position="floating">{{ diccionario[idioma()]['CUIL'] }}</ion-label>
+          <ion-input type="text" formControlName="cuil" (ionInput)="formatearCuil($event)" maxlength="15"></ion-input>
+        </ion-item>
+      </div>
+
+      <ion-item class="custom-item">
+        <ion-label position="floating">{{ diccionario[idioma()]['Correo Electrónico'] }}</ion-label>
+        <ion-input type="email" formControlName="email"></ion-input>
+      </ion-item>
+
+      <div class="input-row">
+        <ion-item class="custom-item">
+          <ion-label position="floating">{{ diccionario[idioma()]['Contraseña'] }}</ion-label>
+          <ion-input type="password" formControlName="contraseña"></ion-input>
+        </ion-item>
+
+        <ion-item class="custom-item">
+          <ion-label position="floating">{{ diccionario[idioma()]['Repetir'] }}</ion-label>
+          <ion-input type="password" formControlName="repetir_contraseña"></ion-input>
+        </ion-item>
+      </div>
+      
+      <div class="error-msg" *ngIf="clienteForm.hasError('passwordsMismatch') && clienteForm.get('repetir_contraseña')?.touched">
+        {{ diccionario[idioma()]['errorContrasenas'] }}
+      </div>
+
+      <div class="input-row">
+        
+        <ion-item class="custom-item">
+          <ion-label position="floating">{{ diccionario[idioma()]['Rol'] }}</ion-label>
+          <ion-select formControlName="tipoEmpleado" (ionChange)="onTipoEmpleadoChange($event)">
+            <ion-select-option value="cocinero">{{ diccionario[idioma()]['CocineroBar'] }}</ion-select-option> 
+            <ion-select-option value="mesero">{{ diccionario[idioma()]['Mesero'] }}</ion-select-option>
+            <ion-select-option value="maitre">{{ diccionario[idioma()]['Maitre'] }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item class="custom-item" *ngIf="mostrarPerfil">
+          <ion-label position="floating">{{ diccionario[idioma()]['Especialidad'] }}</ion-label>
+          <ion-select formControlName="perfil">
+            <ion-select-option value="chef">{{ diccionario[idioma()]['Chef'] }}</ion-select-option>
+            <ion-select-option value="bartender">{{ diccionario[idioma()]['Bartender'] }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+      </div>
+
+      <button class="btn-register" type="submit" [disabled]="!clienteForm.valid">
+        {{ diccionario[idioma()]['RegistrarEmpleado'] }}
+      </button>
+
+    </form>
+
+  </div>
+</div>
+
+<div class="back-button">
+  <button (click)="moverAlHome()">
+    <fa-icon [icon]="faArrowLeft"></fa-icon>
+  </button>
+</div>

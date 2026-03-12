@@ -1,0 +1,167 @@
+.home {
+  display: flex;
+  height: 100vh;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.franquicia {
+  width: 45%;
+  height: 75%;
+  font-size: 2em;
+}
+
+.dc {
+  background-color: blue;
+}
+
+.marvel {
+  background-color: red;
+}
+
+.logout-button {
+  position: absolute;     /* Posiciona el botón de "Salir" en la parte superior */
+  top: 0;
+  width: 100%;            /* Haz que ocupe todo el ancho */
+  z-index: 1;             /* Asegúrate de que el botón esté encima de los demás elementos */
+  border-radius: 0;       /* Elimina los bordes redondeados */
+  height: 60px;           /* Ajusta la altura del botón si es necesario */
+}
+
+
+.scoreboard-button {
+  position: absolute; /* Posiciona el botón de forma absoluta */
+  bottom: 20px; /* Ajusta la distancia desde el fondo */
+  left: 20px; /* Ajusta la distancia desde la izquierda */
+  width: 40px; /* Tamaño del botón */
+  height: 40px; /* Tamaño del botón */
+  --border-radius: 50%; /* Hace que el botón sea redondo */
+  --background: rgba(255, 255, 255, 0.7); /* Color de fondo semitransparente (opcional) */
+  --color: #ff0000; /* Color del icono (puedes cambiarlo) */
+}
+
+.navbar {
+  display: flex;
+  // position: absolute;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+}
+
+/* Área izquierda de la navbar */
+.navbar-left img {
+  width: 60px;
+  color: white;
+}
+
+/* Área derecha de la navbar */
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+/* Nombre del usuario */
+.user-name {
+  margin-right: 20px;
+  font-weight: bold;
+  color: #d84f45;
+  font-size: large;
+}
+
+/* Foto del usuario */
+.user-photo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%; /* Hace la imagen circular */
+}
+
+/* Contenedor para centrar y alinear los botones */
+.button-container {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: baseline;
+  height: 100vh; /* Altura total de la pantalla */
+  padding: 1rem;
+  gap: 1rem; /* Espacio entre los botones */
+  // margin-bottom: 50px;
+}
+
+/* Estilos generales para los botones */
+.custom-button {
+  width: 95%;
+  height: 48%; /* Altura para que sean casi cuadrados */
+  background-color: #d84f45; /* Color de fondo */
+  color: #d84f45;
+  border: none;
+  padding: 60px 30px;
+  border-radius: 15px; /* Bordes redondeados */
+  font-size: 1.5rem; /* Tamaño de texto */
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease; /* Animación en hover */
+}
+
+/* Aumenta el tamaño cuando solo hay un botón visible */
+.custom-button:only-of-type {
+  height: 100%;
+}
+
+/* Efecto hover */
+.custom-button:hover {
+  transform: scale(1.05); /* Ligeramente más grande en hover */
+  background-color: #db746d; /* Cambia el color en hover */
+}
+
+.back-button {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+
+.back-button2 {
+  position: fixed;
+  bottom: 20px;
+  left: 300px;
+  z-index: 1000;
+}
+.back-button2 button {
+  text-align: center;
+  background-color: #202020;
+  color: #d84f45;
+  border: none;
+  padding: 20px;
+  border-radius: 50px;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.back-button2 button:active {
+  background-color: #000;
+}
+
+.back-button button {
+  text-align: center;
+  background-color: #202020;
+  color: #d84f45;
+  border: none;
+  padding: 20px;
+  border-radius: 50px;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.back-button button:active {
+  background-color: #000;
+}

@@ -1,0 +1,243 @@
+@if (this.auth.usuarioIngresado !== null){
+<nav class="navbar">
+  <div class="navbar-left">
+    @if (this.auth.usuarioIngresado.tipoCliente === 'dueño'){
+    <img src="assets/iconos/man_11379344.png" alt="" />
+    } @else if (this.auth.usuarioIngresado.tipoCliente === "cliente"){
+    <img src="assets/iconos/profile_7310896.png" alt="" />
+    } @else if (this.auth.usuarioIngresado.tipoCliente === "anonimo"){
+    <img src="assets/iconos/intruder_3584762.png" alt="" />
+    } @else if (this.auth.usuarioIngresado.tipoCliente === "chef"){
+    <img src="assets/iconos/chef_2702326.png" alt="" />
+    } @else if (this.auth.usuarioIngresado.tipoCliente === "supervisor"){
+    <img src="assets/iconos/graphic-designer_1596960.png" alt="" />
+    } @else if (this.auth.usuarioIngresado.tipoCliente === "bartender"){
+    <img src="assets/iconos/bartender_3474515.png" alt="" />
+    } @else if (this.auth.usuarioIngresado.tipoCliente === "mesero"){
+    <img src="assets/iconos/waiter_3462052.png" alt="" />
+    } @else if (this.auth.usuarioIngresado.tipoCliente === "maitre"){
+    <img src="assets/iconos/consultant_3473755.png" alt="" />
+    }
+    @else if (this.auth.usuarioIngresado.tipoCliente === "delivery"){
+    <img src="assets/iconos/delivery-icono.png" alt="" />
+    }
+    
+  </div>
+  <div class="navbar-right">
+    <span class="user-name">{{ this.auth.usuarioIngresado.nombre }}</span>
+    <img
+      src="{{ this.auth.usuarioIngresado.foto }}"
+      alt="Foto del usuario"
+      class="user-photo"
+    />
+  </div>
+</nav>
+}
+
+<div *ngIf="isLoading" class="spinner-overlay">
+  <div class="spinner-container">
+    <img src="assets/icono.png" class="spinning-logo">
+    <p>{{ diccionario[idioma()]['Cargando'] }}</p>
+  </div>
+</div>
+
+<div class="pantalla">
+
+  <div class="button-container" id="snapContainer">
+
+  @if (this.auth.usuarioIngresado.tipoCliente === "dueño" || this.auth.usuarioIngresado.tipoCliente === "supervisor") {
+
+    <div class="card-opcion">
+      <button class="custom-button" [routerLink]="['/agregar-empleado']">
+        <img src="assets/alta-empleado.png" alt="" />
+      </button>
+      <a [routerLink]="['/agregar-empleado']">{{ diccionario[idioma()]['Agregarempleado'] }}</a>
+    </div>
+
+    <div class="card-opcion">
+      <button class="custom-button" [routerLink]="['/alta-cliente']">
+        <img src="assets/iconos/alta_cliente.png" alt="" />
+      </button>
+      <a [routerLink]="['/alta-cliente']">{{ diccionario[idioma()]['Agregarcliente'] }}</a>
+    </div>
+
+    <div class="card-opcion">
+      <button class="custom-button" [routerLink]="['/listado-clientes']">
+        <img src="assets/iconos/listado_clientes.png" alt="" />
+      </button>
+      <a [routerLink]="['/listado-clientes']">{{ diccionario[idioma()]['Aceptarclientes'] }}</a>
+    </div>
+
+    <div class="card-opcion">
+      <button class="custom-button" [routerLink]="['/alta-mesa']">
+        <img src="assets/iconos/dinner-table.png" alt="" />
+      </button>
+      <a [routerLink]="['/alta-mesa']">{{ diccionario[idioma()]['Crearmesa'] }}</a>
+    </div>
+
+    <div class="card-opcion">
+      <button class="custom-button" [routerLink]="['/listado-confirmar-reserva']">
+        <img class="custom-icon" src="assets/iconos/reloj.png" alt="" />
+      </button>
+      <a [routerLink]="['/listado-confirmar-reserva']">{{ diccionario[idioma()]['Aceptarreservas'] }}</a>
+    </div>
+
+    <div class="card-opcion">
+      <button class="custom-button" [routerLink]="['/confirmar-delivery']">
+        <img src="assets/iconos/confirmar-delivery.png" alt="" />
+      </button>
+      <a [routerLink]="['/confirmar-delivery']">{{ diccionario[idioma()]['Delivery'] }}</a>
+    </div>
+
+  } 
+  
+ @else if (this.auth.usuarioIngresado.tipoCliente === "cliente"){
+
+  <div class="card-opcion">
+    <button class="custom-button" (click)="starScan()">
+      <img src="assets/iconos/dinner-table.png" alt="" />
+    </button>
+    <a (click)="starScan()">{{ diccionario[idioma()]['Pedirmesa'] }}</a>
+  </div>
+
+  <div class="card-opcion">
+    <button class="custom-button" [routerLink]="['/reserva-mesa']">
+      <img class="custom-icon" src="assets/iconos/reloj.png" alt="" />
+    </button>
+    <a [routerLink]="['/reserva-mesa']">{{ diccionario[idioma()]['Reservarmesa'] }}</a>
+  </div>
+
+  <div class="card-opcion">
+    <button class="custom-button" [routerLink]="['/delivery']">
+      <img class="custom-icon" src="assets/iconos/delivery.png" alt="" />
+    </button>
+    <a [routerLink]="['/delivery']">{{ diccionario[idioma()]['Pedirdelivery'] }}</a>
+  </div>
+  
+  } @else if (this.auth.usuarioIngresado.tipoCliente === "anonimo"){
+    <div class="card-opcion">
+      <button class="custom-button" (click)="starScan()">
+        <img src="assets/iconos/dinner-table.png" alt="" />
+      </button>
+      <a (click)="starScan()">{{ diccionario[idioma()]['Pedirmesa'] }}</a>
+    </div>
+
+  } @else if (this.auth.usuarioIngresado.tipoCliente === "maitre"){
+
+    <div class="card-opcion">
+      <button
+        class="custom-button"
+        [routerLink]="['/listado-clientes-solicitando-mesa']"
+      >
+        <img src="assets/iconos/listado_clientes.png" alt="" />
+      </button>
+  <a [routerLink]="['/listado-clientes-solicitando-mesa']">{{ diccionario[idioma()]['Asignarmesa'] }}</a>
+  </div>
+
+  } @else if (this.auth.usuarioIngresado.tipoCliente === "mesero"){
+    <div class="card-opcion">
+  <button (click)="starScan()" class="custom-button">
+    <img src="assets/iconos/chat.png" alt="" />
+  </button>
+  <a (click)="starScan()">{{ diccionario[idioma()]['Chatconclientes'] }}</a>
+  </div>
+
+  <div class="card-opcion">
+  <button [routerLink]="['/confirmar-pedidos']" class="custom-button">
+    <img src="assets/iconos/confirmar-pedid.png" alt="" />
+  </button>
+  <a [routerLink]="['/confirmar-pedidos']">{{ diccionario[idioma()]['Aceptarpedidos'] }}</a>
+  </div>
+
+  <div class="card-opcion">
+  <button
+    [routerLink]="['/listado-productos-pendientes-mesero']"
+    class="custom-button"
+  >
+    <img src="assets/iconos/productos-pendientes.png" alt="" />
+  </button>
+  <a [routerLink]="['/listado-productos-pendientes-mesero']">{{ diccionario[idioma()]['Entregarpedidos'] }}</a>
+  </div>
+
+  <div class="card-opcion">
+  <button [routerLink]="['/confirmar-pago']" class="custom-button">
+    <img
+      src="assets/8c4830cc7ef89614f2d5a0aa46904c2d-trazo-de-cuenta-de-usuario-de-icono-de-tableta.png"
+      alt=""
+    />
+  </button>
+  <a [routerLink]="['/confirmar-pago']">{{ diccionario[idioma()]['Cobros'] }}</a>
+  </div>
+
+  } @else if (this.auth.usuarioIngresado.tipoCliente === "chef"){
+
+   <div class="card-opcion"> 
+  <button [routerLink]="['/cocina']" class="custom-button">
+    <img src="assets/iconos/comidas.png" alt="" />
+  </button>
+  <a [routerLink]="['/cocina']">{{ diccionario[idioma()]['Avisarcomidalista'] }}</a>
+  </div>
+
+   <div class="card-opcion">
+  <button [routerLink]="['/cocina-delivery']" class="custom-button">
+    <img src="assets/iconos/comida-delivery.png" alt="" />
+  </button>
+  <a [routerLink]="['/cocina-delivery']">{{ diccionario[idioma()]['Comidadelivery'] }}</a>
+  </div>
+
+   <div class="card-opcion">
+  <button class="custom-button" [routerLink]="['/alta-comida']">
+    <img src="assets/iconos/dinner-table.png" alt="" />
+  </button>
+  <a [routerLink]="['/alta-comida']">{{ diccionario[idioma()]['Crearcomida'] }}</a>
+  </div>
+  
+  } @else if (this.auth.usuarioIngresado.tipoCliente === "bartender"){
+
+  <div class="card-opcion">
+  <button [routerLink]="['/bar']" class="custom-button">
+    <img src="assets/iconos/bebidas.png" alt="" />
+  </button>
+  <a [routerLink]="['/bar']">{{ diccionario[idioma()]['Avisarbebidalista'] }}</a>
+  </div>
+
+  <div class="card-opcion">
+  <button [routerLink]="['/bar-delivery']" class="custom-button">
+    <img src="assets/iconos/bebida.delivery.png" alt="" />
+  </button>
+  <a [routerLink]="['/bar-delivery']">{{ diccionario[idioma()]['Bebidadelivery'] }}</a>
+  </div>
+
+   <div class="card-opcion">
+  <button class="custom-button" [routerLink]="['/alta-bebida']">
+    <img src="assets/iconos/dinner-table.png" alt="" />
+  </button>
+  <a [routerLink]="['/alta-bebida']">{{ diccionario[idioma()]['Crearbebida'] }}</a>
+  </div>
+  
+  } @else if (this.auth.usuarioIngresado.tipoCliente === "delivery"){
+
+    <div class="card-opcion">
+  <button [routerLink]="['/listado-delivery']" class="custom-button">
+    <img src="assets/iconos/listado_clientes.png" alt="" />
+  </button>
+  <a [routerLink]="['/listado-delivery']">{{ diccionario[idioma()]['Envíospendientes'] }}</a>
+  </div>
+
+   <div class="card-opcion">
+  
+  <button [routerLink]="['/confirmar-pago']" class="custom-button">
+    <img
+      src="assets/8c4830cc7ef89614f2d5a0aa46904c2d-trazo-de-cuenta-de-usuario-de-icono-de-tableta.png"
+      alt=""
+    />
+  </button>
+  <a [routerLink]="['/confirmar-pago']">{{ diccionario[idioma()]['Cobros'] }}</a>
+  </div>
+}
+
+  <div class="back-button">
+    <button (click)="cerrarSesion()">
+      <fa-icon [icon]="faRightFromBracket"></fa-icon>
+    </button>
+  </div>

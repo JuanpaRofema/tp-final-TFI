@@ -1,0 +1,164 @@
+/* Estilos generales de la navbar */
+.navbar {
+  display: flex;
+  // position: absolute;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+}
+
+/* Área izquierda de la navbar */
+.navbar-left img {
+  width: 60px;
+  color: white;
+}
+
+/* Área derecha de la navbar */
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+/* Nombre del usuario */
+.user-name {
+  margin-right: 20px;
+  font-weight: bold;
+  color: #bf813f;
+  font-size: large;
+}
+
+/* Foto del usuario */
+.user-photo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%; /* Hace la imagen circular */
+}
+
+/* Contenedor para centrar y alinear los botones */
+.pantalla {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  overflow: hidden; /* importante */
+}
+
+.button-container {
+  flex: 1;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: auto;
+  padding-top: 80px;             /* ACÁ controlás qué tan arriba quedan */
+}
+
+
+.button-container::-webkit-scrollbar {
+  display: none;
+}
+
+.button-container::-webkit-scrollbar {
+  display: none;
+}
+
+#snapContainer {
+  height: calc(100vh - 70px);
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+
+  scroll-behavior: smooth;
+
+  overscroll-behavior: contain;
+  scroll-padding-top: 0px;
+}
+
+/* Cada tarjeta */
+.card-opcion {
+  height: calc(100vh - 70px);
+  scroll-snap-align: start;
+  scroll-snap-stop: always; 
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+
+
+.custom-button {
+  width: 85vw;
+  max-width: 420px;
+  height: 420px; /* cuadrado grande y vistoso */
+  background: linear-gradient(145deg, #d84f45, #c03e35);
+  border: none;
+  border-radius: 28px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  box-shadow: 
+    0 15px 30px rgba(0,0,0,0.6),
+    inset 0 0 20px rgba(255,255,255,0.1);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.custom-button img {
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.7));
+}
+
+.custom-button:hover,
+.custom-button:active {
+  transform: translateY(-10px) scale(1.03);
+  background: linear-gradient(145deg, #e05a50, #d84f45);
+  box-shadow: 0 20px 40px rgba(216, 79, 69, 0.5);
+}
+
+/* Títulos debajo de cada botón */
+.card-opcion h2, a {
+  margin: 0;
+  padding: 16px 32px;
+  font-size: 1.4rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 1.5px;
+  color: #d84f45;
+  background: rgba(30, 30, 30, 0.9);
+  border: 2px solid #d84f45;
+  border-radius: 16px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+  animation: aparecerTitulo 0.5s ease-out;
+}
+
+.back-button {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+
+.back-button button {
+  text-align: center;
+  background-color: #202020;
+  color: #f7b267;
+  border: none;
+  padding: 20px;
+  border-radius: 50px;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+.back-button button:active {
+  background-color: #000;
+}

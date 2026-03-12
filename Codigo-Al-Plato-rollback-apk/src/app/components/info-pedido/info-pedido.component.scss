@@ -1,0 +1,135 @@
+:host {
+  position: absolute; /* Saca al componente del flujo normal */
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  z-index: 9999; /* Asegura que esté arriba de todo */
+}
+
+/* Botón Flotante */
+.floating-btn {
+  position: fixed;
+  top: 90px;
+  right: 20px;
+  width: 65px;
+  height: 65px;
+  background-color: #202020;
+  border-radius: 50%;
+  border: none;
+  color: linear-gradient(135deg, #d84f45, #b71c1c); 
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(216, 79, 69, 0.4);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  z-index: 10000; /* Más arriba que el host */
+
+  &:active {
+    transform: scale(0.9);
+  }
+
+  .pulse-dot {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 10px;
+    height: 10px;
+    background-color: #4caf50; /* Verde activo */
+    border-radius: 50%;
+    border: 2px solid #d84f45;
+    animation: pulse 1.5s infinite;
+  }
+}
+
+/* Modal Overlay (Fondo Oscuro) */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px); /* Efecto borroso bonito */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10001;
+}
+
+/* Tarjeta del Modal */
+.modal-card {
+  background-color: #1e1e1e;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 20px;
+  padding: 25px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  border: 1px solid #333;
+  color: #fff;
+
+  .btn-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 1.5rem;
+    cursor: pointer;
+    &:hover { color: #fff; }
+  }
+
+  .modal-header {
+    text-align: center;
+    margin-bottom: 20px;
+    
+    h3 { margin: 0; font-size: 1.5rem; color: #d84f45; font-weight: bold; }
+    .status-badge { 
+      display: inline-block; margin-top: 5px; padding: 4px 12px; 
+      background: rgba(216, 79, 69, 0.2); color: #d84f45; 
+      border-radius: 15px; font-size: 0.8rem; font-weight: bold;
+    }
+  }
+
+  .modal-body {
+    .info-row {
+      display: flex; align-items: center; gap: 10px; color: #ccc; font-size: 1rem;
+      fa-icon { color: #f7b267; }
+      strong { color: #fff; }
+    }
+
+    .divider { height: 1px; background: #333; margin: 15px 0; }
+
+    .products-list {
+      .list-title { color: #888; font-size: 0.9rem; margin-bottom: 10px; text-transform: uppercase; }
+      ul {
+        list-style: none; padding: 0; margin: 0;
+        li {
+          display: flex; justify-content: space-between; padding: 5px 0;
+          font-size: 1rem;
+          .qty { color: #d84f45; font-weight: bold; width: 30px; }
+          .name { flex: 1; color: #ddd; }
+          .price { font-weight: bold; }
+        }
+      }
+    }
+
+    .total-row {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 1.2rem;
+      .total-amount { color: #4caf50; font-weight: bold; font-size: 1.5rem; }
+    }
+  }
+}
+
+/* Animaciones */
+.fadeIn { animation: fadeIn 0.3s forwards; }
+.slideUp { animation: slideUp 0.3s forwards; }
+
+@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }

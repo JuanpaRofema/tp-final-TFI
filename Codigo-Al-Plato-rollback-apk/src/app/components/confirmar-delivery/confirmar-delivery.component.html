@@ -1,0 +1,94 @@
+<div *ngIf="isLoading" class="spinner-overlay">
+  <div class="spinner-container">
+    <img src="assets/icono.png" class="spinning-logo">
+    <p>{{ diccionario[idioma()]['Procesando'] }}</p>
+  </div>
+</div>
+
+<div class="container">
+  
+  <h1 class="title">{{ diccionario[idioma()]['NUEVOSPEDIDOS'] }}</h1>
+  
+  <div class="cards-list" *ngIf="pedidosPendientes.length > 0; else noPendientes">
+    <div class="delivery-card" *ngFor="let p of pedidosPendientes">
+        
+        <div class="card-header">
+            <div class="user-info">
+                <img [src]="p.foto" class="avatar">
+                <div>
+                    <h3>{{ p.cliente }}</h3>
+                    <span class="time-badge">
+                        <fa-icon [icon]="faClock"></fa-icon> {{ p.fecha | date:'shortTime' }}
+                    </span>
+                </div>
+            </div>
+            <div class="price-tag">${{ p.total }}</div>
+        </div>
+
+        <div class="card-body">
+            <div class="address-row">
+                <fa-icon [icon]="faMapMarkerAlt" class="icon-map"></fa-icon>
+                <p>{{ p.direccion }}</p>
+            </div>
+            <div class="items-list">
+                <ul>
+                    <li *ngFor="let prod of p.productos">
+                        <strong>x{{ prod.cantidad }}</strong> {{ prod.name }}
+                    </li>
+                </ul>
+            </div>
+            <div class="wait-time">Est: <strong>{{ p.tiempoEstimado }} {{ diccionario[idioma()]['min'] }}</strong></div>
+        </div>
+
+        <div class="card-actions">
+            <button class="btn-reject" (click)="rechazarPedido(p)">{{ diccionario[idioma()]['RECHAZAR'] }}</button>
+            <button class="btn-accept" (click)="aceptarPedido(p)">{{ diccionario[idioma()]['ACEPTAR'] }}</button>
+        </div>
+
+    </div>
+  </div>
+  
+  <ng-template #noPendientes>
+    <div class="empty-state"><p>{{ diccionario[idioma()]['Nohaypedidosnuevos'] }}</p></div>
+  </ng-template>
+
+
+  <h1 class="title listos">LISTOS PARA REPARTIR</h1>
+
+  <div class="cards-list" *ngIf="pedidosListos.length > 0; else noListos">
+    <div class="delivery-card ready" *ngFor="let p of pedidosListos">
+      
+      <div class="card-header">
+        <div class="user-info">
+          <img [src]="p.foto" class="avatar">
+          <div>
+            <h3>{{ p.cliente }}</h3>
+            <span class="status-badge">✅ {{ diccionario[idioma()]['CocinaTerminó'] }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <p class="address"><fa-icon [icon]="faMapMarkerAlt"></fa-icon> {{ p.direccion }}</p>
+      </div>
+
+      <div class="card-actions">
+        <button class="btn-deliver" (click)="entregarAlDelivery(p)">
+            <fa-icon [icon]="faMotorcycle"></fa-icon> {{ diccionario[idioma()]['ENTREGARADELIVERY'] }}
+        </button>
+      </div>
+
+    </div>
+  </div>
+  
+  <ng-template #noListos>
+    <div class="empty-state"><p>{{ diccionario[idioma()]['Nadalistoparaentregaraún'] }}</p></div>
+  </ng-template>
+
+</div>
+
+<div class="back-button">
+    <button routerLink="/home">
+      <fa-icon [icon]="faArrowLeft"></fa-icon>
+    </button>
+</div>

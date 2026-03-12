@@ -1,0 +1,50 @@
+<div class="body">
+  <div class="chat-container">
+    
+    <div class="chat-header">
+      <button class="back-button" (click)="volver()">
+        <fa-icon [icon]="faArrowLeft"></fa-icon>
+      </button>
+      <div class="header-info">
+          <h2>{{ diccionario[idioma()]['Mesa'] }} {{ numeroMesa }}</h2> 
+          <small>{{ diccionario[idioma()]['ChatPersonal'] }}</small>
+      </div>
+    </div>
+
+    <div class="chat-body" #chatBody>
+      @for (mensaje of mensajes; track mensaje.fecha) { 
+        
+        @if (mensaje.verificarUsuario(this.auth.usuarioIngresado?.email)){
+          <div class="message sent">
+            <div class="bubble">
+                <p>{{ mensaje.contenido }}</p>
+                <span class="time">{{ mensaje.fecha | date:'shortTime' }}</span>
+            </div>
+          </div>
+        } 
+        @else {
+          <div class="message received">
+            <div class="bubble">
+                <small class="sender-name">{{ mensaje.nombre }}</small>
+                <p>{{ mensaje.contenido }}</p>
+                <span class="time">{{ mensaje.fecha | date:'shortTime' }}</span>
+            </div>
+          </div>
+        } 
+      }
+    </div>
+
+    <div class="chat-footer">
+      <input
+        [(ngModel)]="mensajeInput"
+        (keyup.enter)="EnviarMensaje()"
+        type="text"
+        [placeholder]="diccionario[idioma()]['EscribeMensaje']"
+        class="input-message"
+      />
+      <button (click)="EnviarMensaje()" class="send-btn">
+        <fa-icon [icon]="faPaperPlane"></fa-icon>
+      </button>
+    </div>
+  </div>
+</div>

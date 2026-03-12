@@ -1,0 +1,63 @@
+<div *ngIf="isLoading" class="spinner-overlay">
+  <div class="spinner-container">
+    <img src="assets/icono.png" class="spinning-logo">
+    <p>{{ diccionario[idioma()]['BuscandoEnvíos'] }}</p>
+  </div>
+</div>
+
+<div class="container">
+  <h1 class="title">{{ diccionario[idioma()]['ENVÍOSPENDIENTES'] }}</h1>
+
+  <div class="cards-list" *ngIf="pedidos.length > 0; else noPedidos">
+    
+    <div class="delivery-card" *ngFor="let p of pedidos">
+      
+      <div class="card-header">
+        <div class="address-info">
+            <fa-icon [icon]="faMapMarkerAlt" class="icon-map"></fa-icon>
+            <h3>{{ p.direccion }}</h3>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="client-row">
+            <fa-icon [icon]="faUser"></fa-icon>
+            <span>{{ p.cliente }}</span>
+        </div>
+        
+        <div class="items-summary">
+            <fa-icon [icon]="faBoxOpen"></fa-icon>
+            <p>
+                <span *ngFor="let prod of p.productos; let last = last">
+                    {{ prod.cantidad }}x {{ prod.name }}<span *ngIf="!last">, </span>
+                </span>
+            </p>
+        </div>
+
+        <div class="total-row">
+            {{ diccionario[idioma()]['Acobrar'] }} <strong>${{ p.total }}</strong>
+        </div>
+      </div>
+
+      <div class="card-actions">
+        <button class="btn-take" (click)="tomarPedido(p)">
+            <fa-icon [icon]="faCheckCircle"></fa-icon> {{ diccionario[idioma()]['TOMARPEDIDO'] }}
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <ng-template #noPedidos>
+    <div class="empty-state">
+        <p>{{ diccionario[idioma()]['Nohaypedidosparaentregarporahora'] }}</p>
+    </div>
+  </ng-template>
+
+</div>
+
+<div class="back-button">
+  <button (click)="volver()">
+    <fa-icon [icon]="faArrowLeft"></fa-icon>
+  </button>
+</div>

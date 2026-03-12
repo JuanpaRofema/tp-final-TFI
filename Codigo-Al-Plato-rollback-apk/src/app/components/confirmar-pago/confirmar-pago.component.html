@@ -1,0 +1,106 @@
+<nav class="navbar">
+  <div class="navbar-left">
+    @if (this.auth.usuarioIngresado.tipoCliente === "mesero"){
+    <img src="assets/iconos/waiter_3462052.png" alt="" />
+    }@else if (this.auth.usuarioIngresado.tipoCliente === 'delivery') {
+      <img src="assets/iconos/delivery-icono.png" alt="" />
+    }
+  </div>
+  <div class="navbar-right">
+    <span class="user-name">{{ this.auth.usuarioIngresado.nombre }}</span>
+    <img
+      src="{{ this.auth.usuarioIngresado.foto }}"
+      alt="Foto del usuario"
+      class="user-photo"
+    />
+</div>
+</nav>
+
+<div *ngIf="isLoading" class="spinner-overlay">
+  <div class="spinner-container">
+    <img src="assets/icono.png" class="spinning-logo">
+    <p>{{ diccionario[idioma()]['ProcesandoPago'] }}</p>
+  </div>
+</div>
+
+<div class="container">
+  
+  <h1 class="title">{{ diccionario[idioma()]['CAJACOBROS'] }}</h1>
+
+  <div class="cards-list" *ngIf="cuentas && cuentas.length > 0; else noCuentas">
+    
+    <div class="payment-card" *ngFor="let cuenta of cuentas">
+      
+      <div class="card-header">
+        <div class="info-main">
+          <h3 *ngIf="cuenta.mesa">
+            <fa-icon [icon]="faUtensils"></fa-icon> {{ diccionario[idioma()]['Mesa'] }} {{ cuenta.mesa }}
+          </h3>
+          <h3 *ngIf="!cuenta.mesa">
+            <fa-icon [icon]="faMotorcycle"></fa-icon> {{ diccionario[idioma()]['Delivery'] }}
+          </h3>
+          
+          <span class="client-name">{{ cuenta.cliente }}</span>
+        </div>
+        
+        <div class="total-badge">
+          {{ cuenta.total | currency }}
+        </div>
+      </div>
+
+      <div class="card-body">
+        
+        <div class="items-container">
+          <p class="section-title">{{ diccionario[idioma()]['Consumo'] }}</p>
+          <ul>
+            <li *ngFor="let prod of cuenta.productos">
+              <span class="qty">{{ prod.cantidad }}x</span>
+              <span class="prod-name">{{ prod.name }}</span>
+              <span class="prod-price">{{ (prod.precio * prod.cantidad) | currency }}</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="money-breakdown">
+          <div class="row">
+            <span>{{ diccionario[idioma()]['Subtotal'] }}</span>
+            <span>{{ cuenta.subTotal | currency }}</span>
+          </div>
+          <div class="row" *ngIf="cuenta.descuento > 0">
+            <span class="discount-label">{{ diccionario[idioma()]['Descuento'] }}</span>
+            <span class="discount-val">- {{ cuenta.descuento | currency }}</span>
+          </div>
+          <div class="row tip-row">
+            <span>{{ diccionario[idioma()]['Propina'] }}</span>
+            <span>{{ cuenta.propina || 0 | currency }}</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="card-actions">
+        <button class="btn-confirm" (click)="mostrarDetalle(cuenta); confirmarCuenta()">
+          <fa-icon [icon]="faCheckCircle"></fa-icon> {{ diccionario[idioma()]['CONFIRMARCOBRO'] }}
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <ng-template #noCuentas>
+    <div class="empty-state">
+      <fa-icon [icon]="faWallet" size="4x"></fa-icon>
+      <p>{{ diccionario[idioma()]['Nohaycobrospendientes'] }}</p>
+    </div>
+  </ng-template>
+
+</div>
+
+<div class="back-button">
+  <button routerLink="/home">
+    <fa-icon [icon]="faArrowLeft"></fa-icon>
+  </button>
+</div>

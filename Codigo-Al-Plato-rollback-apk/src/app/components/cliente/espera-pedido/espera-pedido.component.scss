@@ -1,0 +1,118 @@
+/* VARIABLES */
+$bg-dark: #121212;
+$card-bg: #1e1e1e;
+$primary: #d84f45;
+$accent: #f7b267;
+$success: #4caf50;
+$text-light: #ffffff;
+$text-dim: #aaaaaa;
+$rejected-color: #ff5252;
+
+:host {
+  display: block;
+  min-height: 100vh;
+  background-color: transparent;
+}
+
+/* NAVBAR ORIGINAL */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+  .navbar-left img { width: 60px; }
+  .navbar-right {
+    display: flex; align-items: center;
+    .user-name { margin-right: 20px; font-weight: bold; color: #bf813f; font-size: large; }
+    .user-photo { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; }
+  }
+}
+
+.main-container {
+  padding: 20px;
+  padding-bottom: 80px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* TARJETA ESTADO */
+.status-card {
+  background: $card-bg;
+  border-radius: 20px;
+  padding: 25px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+  margin-bottom: 30px;
+  border: 1px solid #333;
+  animation: slideUp 0.5s ease-out;
+
+  .icon-header {
+    font-size: 3rem; color: $primary; margin-bottom: 10px;
+    .pulse { animation: pulse 1.5s infinite; }
+    .bounce { animation: bounce 2s infinite; }
+  }
+
+  h2 { color: $text-light; margin-bottom: 30px; font-size: 1.3rem; }
+
+  .timeline {
+    display: flex; flex-direction: column; align-items: flex-start; margin-left: 20px;
+    .step {
+      display: flex; align-items: flex-start; position: relative; padding-bottom: 30px; width: 100%;
+      &:last-child { padding-bottom: 0; .line { display: none; } }
+      .circle {
+        width: 35px; height: 35px; background-color: #333; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center; color: #666; z-index: 2; transition: all 0.3s;
+        flex-shrink: 0;
+      }
+      .line {
+        position: absolute; left: 17px; top: 35px; bottom: 0; width: 2px; background-color: #333; z-index: 1; transition: background 0.3s;
+      }
+      p { margin: 0 0 0 15px; margin-top: 7px; font-size: 1rem; color: #666; transition: color 0.3s; }
+      &.active {
+        .circle { background-color: $success; color: white; box-shadow: 0 0 10px rgba($success, 0.4); }
+        .line { background-color: $success; }
+        p { color: $text-light; font-weight: bold; }
+      }
+    }
+  }
+}
+
+/* TARJETA RECHAZADA */
+.status-card.rejected {
+  border: 2px solid $rejected-color;
+  background: radial-gradient(circle at center, #2a1515, #1e1e1e);
+  .icon-header-rejected { font-size: 4rem; color: $rejected-color; margin-bottom: 15px; animation: shake 0.5s; }
+  .rejected-title { color: $rejected-color; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
+  .rejected-content { color: #ddd; font-size: 1.1rem; margin-bottom: 25px; 
+    .reason-box { margin-top: 15px; background: rgba(255, 82, 82, 0.1); padding: 10px; border-radius: 10px; border: 1px dashed $rejected-color; strong { color: $rejected-color; display: block; margin-bottom: 5px; } span { font-style: italic; color: #fff; } }
+  }
+  .rejected-btn { width: 100%; padding: 15px; border-radius: 10px; border: none; background: $rejected-color; color: white; font-weight: bold; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(255, 82, 82, 0.3); cursor: pointer; &:active { transform: scale(0.98); } }
+}
+
+.actions-area {
+  display: flex; flex-direction: column; gap: 15px;
+  .action-btn {
+    width: 100%; padding: 18px; border: none; border-radius: 15px;
+    font-size: 1.1rem; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px;
+    cursor: pointer; transition: transform 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    &:active { transform: scale(0.98); }
+    &.scan { background: linear-gradient(90deg, $accent, #FF9800); color: white; }
+    &.game { background-color: #333; color: $accent; border: 1px solid #444; }
+    &.survey { background: linear-gradient(90deg, #2196F3, #1976D2); color: white; }
+  }
+}
+
+.spinner-overlay {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.9);
+  display: flex; justify-content: center; align-items: center; z-index: 9999;
+  .spinner-container { display: flex; flex-direction: column; align-items: center; p { color: #fff; margin-top: 15px; font-weight: bold; }}
+  .spinning-logo { width: 80px; height: 80px; animation: spin 1.5s linear infinite; }
+}
+
+@keyframes spin { 100% { transform: rotate(360deg); } }
+@keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+@keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
+@keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes shake { 0%, 100% {transform: translateX(0);} 25% {transform: translateX(-5px);} 75% {transform: translateX(5px);} }

@@ -1,0 +1,183 @@
+/* VARIABLES */
+$bg-dark: #121212;
+$ticket-bg: #fff; /* Ticket blanco clásico o gris muy claro */
+$ticket-text: #222;
+$primary: #d84f45;
+$success: #4caf50;
+
+.container {
+  min-height: 100vh;
+  background-color: transparent;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* VISTA DE ESPERA */
+.waiting-view {
+  text-align: center;
+  color: #fff;
+  
+  .icon-pulse {
+    font-size: 4rem;
+    color: $primary;
+    margin-bottom: 20px;
+    animation: pulse 2s infinite;
+  }
+  
+  h2 { margin-bottom: 10px; font-size: 1.8rem; }
+  p { color: #ffffff; margin: 5px 0; }
+  .subtext { font-size: 0.9rem; margin-bottom: 30px; }
+
+  .btn-back {
+    background: transparent;
+    border: 1px solid #666;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 20px;
+  }
+}
+
+/* TICKET VIEW */
+.ticket-view {
+  width: 100%;
+  max-width: 400px;
+  animation: slideUp 0.5s ease-out;
+
+  .title { color: $primary; text-align: center; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px;}
+}
+
+/* TARJETA TICKET (ESTILO RECIBO) */
+.ticket-card {
+  background-color: $ticket-bg;
+  color: $ticket-text;
+  padding: 25px;
+  border-radius: 5px; /* Bordes poco redondeados como papel */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  position: relative;
+  
+  /* Efecto diente de sierra abajo (opcional, avanzado) */
+  &::after {
+    content: "";
+    position: absolute; bottom: -5px; left: 0; right: 0;
+    height: 5px;
+    background: radial-gradient(circle, transparent 70%, $bg-dark 75%) 0 0 / 10px 10px repeat-x;
+    transform: rotate(180deg);
+  }
+
+  .ticket-header {
+    text-align: center;
+    h3 { margin: 0; font-weight: 900; letter-spacing: 1px; }
+    p { margin: 2px 0; font-size: 0.8rem; color: #666; }
+    .date { margin-top: 5px; font-style: italic; }
+  }
+
+  .divider {
+    width: 100%; height: 1px; margin: 15px 0;
+    &.dashed { border-top: 2px dashed #ccc; }
+    &.solid { background-color: #000; height: 2px; }
+  }
+
+  .items-list {
+    margin: 15px 0; /* Un poco de aire arriba y abajo */
+
+    .item {
+      display: flex; 
+      justify-content: space-between;
+      align-items: center; /* Centra verticalmente la foto con el texto */
+      margin-bottom: 12px; /* Más espacio entre productos */
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: bold;
+      gap: 10px; /* Espacio entre los elementos */
+      
+      /* ESTILO DE LA FOTO */
+      .thumb-img {
+        width: 45px; 
+        height: 45px;
+        border-radius: 6px; /* Bordes un poco redondeados */
+        object-fit: cover; /* Para que no se deforme */
+        border: 1px solid #ddd; /* Marco sutil */
+        background-color: #eee;
+      }
+
+      .qty { 
+        width: 25px; 
+        color: #555;
+      }
+      
+      .name { 
+        flex: 1; /* Ocupa el espacio sobrante */
+        text-align: left; 
+        white-space: nowrap; /* Opcional: Corta texto largo con ... */
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      
+      .price { 
+        text-align: right; 
+        min-width: 60px; /* Asegura que los precios se alineen bien */
+      }
+    }
+  }
+
+  .totals {
+    .row {
+      display: flex; justify-content: space-between;
+      margin-bottom: 5px;
+      font-size: 0.95rem;
+      
+      &.discount { color: $primary; }
+      &.final { font-size: 1.3rem; font-weight: 900; margin-top: 10px; }
+    }
+
+    /* Fila de Propina Interactiva */
+    .row.tip {
+      background: #f0f0f0;
+      padding: 10px;
+      border-radius: 8px;
+      align-items: center;
+      cursor: pointer;
+      margin: 10px 0;
+      
+      .tip-label { 
+        display: flex; gap: 5px; align-items: center; 
+        font-weight: bold; color: #555;
+      }
+      
+      .added { color: $success; font-weight: bold; }
+    }
+  }
+}
+
+.btn-pay {
+  width: 100%;
+  margin-top: 25px;
+  background: linear-gradient(90deg, #4caf50, #2e7d32);
+  color: #fff;
+  border: none;
+  padding: 18px;
+  border-radius: 50px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: flex; justify-content: center; align-items: center; gap: 10px;
+  box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+}
+
+/* Spinner Overlay */
+.spinner-overlay {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.9);
+  display: flex; justify-content: center; align-items: center; z-index: 9999;
+  
+  .spinner-container {
+    display: flex; flex-direction: column; align-items: center;
+    p { color: #fff; margin-top: 15px; letter-spacing: 1px; }
+  }
+  .spinning-logo { width: 70px; height: 70px; animation: spin 1.5s linear infinite; }
+}
+
+@keyframes spin { 100% { transform: rotate(360deg); } }
+@keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+@keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }

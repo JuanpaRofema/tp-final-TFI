@@ -1,0 +1,81 @@
+<div *ngIf="isLoading" class="spinner-overlay">
+  <div class="spinner-container">
+    <img src="assets/icono.png" class="spinning-logo">
+    <p>{{ diccionario[idioma()]['VerificandoTurno'] }}</p>
+  </div>
+</div>
+
+@if (this.auth.usuarioIngresado !== null){
+<nav class="navbar">
+  <div class="navbar-left">
+    @if (this.auth.usuarioIngresado.tipoCliente === "cliente"){
+    <img src="assets/iconos/profile_7310896.png" alt="" />
+    } @else if (this.auth.usuarioIngresado.tipoCliente === "anonimo"){
+    <img src="assets/iconos/intruder_3584762.png" alt="" />
+    }
+  </div>
+  <div class="navbar-right">
+    <span class="user-name">{{ this.auth.usuarioIngresado.nombre }}</span>
+    <img
+      src="{{ this.auth.usuarioIngresado.foto }}"
+      alt="Foto del usuario"
+      class="user-photo"
+    />
+  </div>
+</nav>
+}
+
+<div class="main-container">
+
+  <div class="status-card">
+    <div class="icon-header">
+      <fa-icon [icon]="faClock" *ngIf="pasoActual === 1" class="pulse"></fa-icon>
+      <fa-icon [icon]="faChair" *ngIf="pasoActual === 2" class="bounce"></fa-icon>
+      <fa-icon [icon]="faUtensils" *ngIf="pasoActual === 3"></fa-icon>
+    </div>
+    
+    <h2>{{ mensajeEstado }}</h2>
+    
+    <div class="timeline">
+      
+      <div class="step" [class.active]="pasoActual >= 1">
+        <div class="circle"><fa-icon [icon]="faCheck"></fa-icon></div>
+        <div class="line"></div>
+        <p>{{ diccionario[idioma()]['EnListaEspera'] }}</p>
+      </div>
+
+      <div class="step" [class.active]="pasoActual >= 2">
+        <div class="circle"><fa-icon [icon]="faChair"></fa-icon></div>
+        <div class="line"></div>
+        <p>{{ diccionario[idioma()]['MesaAsignada'] }}</p>
+      </div>
+
+      <div class="step" [class.active]="pasoActual >= 3">
+        <div class="circle"><fa-icon [icon]="faQrcode"></fa-icon></div>
+        <p>{{ diccionario[idioma()]['ConfirmarQR'] }}</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="actions-area">
+    
+    <button class="action-btn scan" *ngIf="pasoActual === 2" (click)="starScan()">
+      <fa-icon [icon]="faQrcode"></fa-icon>
+      <span>{{ diccionario[idioma()]['EscanearQRMesa'] }}</span>
+    </button>
+
+    <button class="action-btn survey" (click)="verEncuestas()">
+      <fa-icon [icon]="faClipboardList"></fa-icon>
+      <span>{{ diccionario[idioma()]['VerEncuestas'] }}</span>
+    </button>
+
+  </div>
+
+</div>
+
+<div class="back-button">
+  <button (click)="volver()">
+    <fa-icon [icon]="faArrowLeft"></fa-icon>
+  </button>
+</div>

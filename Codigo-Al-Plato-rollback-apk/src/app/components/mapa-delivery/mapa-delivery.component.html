@@ -1,0 +1,73 @@
+<div *ngIf="isLoading" class="spinner-overlay">
+  <div class="spinner-container">
+    <img src="assets/icono.png" class="spinning-logo">
+    <p>{{ diccionario[idioma()]['Calculandoruta'] }}</p>
+  </div>
+</div>
+
+<div class="map-wrapper">
+  
+    <div id="map"></div>
+
+    <button class="btn-float back" (click)="volver()">
+    <fa-icon [icon]="faArrowLeft"></fa-icon>
+  </button>
+
+    <div class="active-route-card" [class.hidden]="mostrarSheet">
+    <div class="route-info">
+        <div class="icon-box">
+            <fa-icon [icon]="faMotorcycle"></fa-icon>
+        </div>
+        <div class="text">
+            <small>{{ diccionario[idioma()]['DestinoActual'] }}</small>
+            <h3>{{ clienteNombre || 'Cliente' }}</h3>
+            <p class="address"><fa-icon [icon]="faMapMarkerAlt"></fa-icon> {{ direccionCliente }}</p>
+        </div>
+    </div>
+    <div class="action-buttons">
+        <button class="btn-action chat" (click)="irAlChat()">
+            <fa-icon [icon]="faCommentDots"></fa-icon>
+            <span>{{ diccionario[idioma()]['Chat'] }}</span>
+        </button>
+        <button class="btn-action finish" (click)="toggleModalEntrega()">
+            <fa-icon [icon]="faFlagCheckered"></fa-icon>
+            <span>{{ diccionario[idioma()]['Finalizar'] }}</span>
+        </button>
+    </div>
+  </div>
+
+    <div class="delivery-sheet" [class.open]="mostrarSheet">
+    <div class="sheet-header" (click)="toggleModalEntrega()">
+        <div class="drag-handle"></div>
+    </div>
+    <div class="sheet-content">
+        <h2>{{ diccionario[idioma()]['ConfirmarEntrega'] }}</h2>
+        
+        <div class="orders-list" *ngIf="!pedidoSeleccionado">
+            <p class="hint">{{ diccionario[idioma()]['Seleccionaelpedidoaentregar'] }}</p>
+            <div class="mini-card" *ngFor="let p of pedidos" (click)="seleccionarParaEntregar(p)">
+                <div class="info">
+                    <h4>{{ p.cliente }}</h4>
+                    <span>{{ diccionario[idioma()]['Total'] }} ${{ p.total }}</span>
+                </div>
+                <fa-icon [icon]="faArrowLeft" style="transform: rotate(180deg); color: #fff"></fa-icon>
+            </div>
+        </div>
+
+        <div class="confirm-view" *ngIf="pedidoSeleccionado">
+            <div class="summary-box">
+                <fa-icon [icon]="faBoxOpen" class="big-icon"></fa-icon>
+                <h3>{{ pedidoSeleccionado.cliente }}</h3>
+                <p class="total">{{ diccionario[idioma()]['Total'] }} <span>${{ pedidoSeleccionado.total }}</span></p>
+                <ul class="products">
+                    <li *ngFor="let prod of pedidoSeleccionado.productos">
+                        <strong>{{ prod.cantidad }}x</strong> {{ prod.name }}
+                    </li>
+                </ul>
+            </div>
+            <button class="btn-confirm-final" (click)="entregarProducto()">{{ diccionario[idioma()]['ENTREGARPEDIDO'] }}</button>
+            <button class="btn-cancel" (click)="toggleModalEntrega()">{{ diccionario[idioma()]['Cancelar'] }}</button>
+        </div>
+    </div>
+  </div>
+</div>

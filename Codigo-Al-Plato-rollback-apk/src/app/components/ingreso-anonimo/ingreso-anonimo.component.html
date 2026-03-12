@@ -1,0 +1,48 @@
+<div class="navbar2">
+  <p class="nav-item">
+    <img src="assets/iconos/hat_blanquito.png" alt="" width="60px" />
+  </p>
+</div>
+
+<div *ngIf="isLoading" class="spinner-overlay">
+  <div class="spinner-container">
+    <img src="assets/icono.png" class="spinning-logo">
+    <p>{{ diccionario[idioma()]['Cargando'] }}</p>
+  </div>
+</div>
+
+<div class="main-content">
+  <div class="card-container">
+    
+    <div class="card-header-custom">
+      <div class="image-wrapper" (click)="tomarFoto()">
+        <img [src]="fotoUrl" class="profile-pic" alt="Foto Cliente">
+        <div class="camera-badge">
+          <fa-icon [icon]="faCamera"></fa-icon>
+        </div>
+      </div>
+    </div>
+
+    <form [formGroup]="anonimoForm" (ngSubmit)="subirAnonimo()">
+      <div class="input-row">
+        
+        <ion-item class="custom-item">
+          <ion-label position="floating">{{ diccionario[idioma()]['Nombre'] }}</ion-label>
+          <ion-input type="text" formControlName="nombre"></ion-input>
+        </ion-item>
+
+        <button class="btn-register" type="submit" [disabled]="!anonimoForm.valid">
+          {{ diccionario[idioma()]['IniciarAnónimo'] }}
+        </button>
+
+      </div>
+    </form>
+
+  </div>
+</div>
+
+<div class="back-button">
+  <button (click)="moverAlLogin()">
+    <fa-icon [icon]="faArrowLeft"></fa-icon>
+  </button>
+</div>
