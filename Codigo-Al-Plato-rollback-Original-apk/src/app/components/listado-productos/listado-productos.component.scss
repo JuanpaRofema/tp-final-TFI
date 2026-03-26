@@ -1,0 +1,292 @@
+/* ================= ESTRUCTURA PRINCIPAL ================= */
+.body-snap {
+  height: 100vh;
+  width: 100vw;
+  overflow-y: scroll; 
+  overflow-x: hidden;
+  scroll-snap-type: y mandatory; 
+  scroll-behavior: smooth;
+  background-color: transparent; 
+  padding: 0;
+  margin: 0;
+}
+
+.mini-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.6);
+  color: white;
+  border: none;
+  font-size: 26px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.mini-arrow.left {
+  left: 6px;
+}
+
+.mini-arrow.right {
+  right: 6px;
+}
+
+.mini-arrow:active {
+  transform: translateY(-50%) scale(0.9);
+}
+
+/* ================= LA CLAVE: PÁGINAS DE SNAP ================= */
+.snap-page {
+  /* Cada "página" mide exactamente el alto del celular */
+  height: 100vh; 
+  width: 100%;
+  
+  /* Se ancla al inicio */
+  scroll-snap-align: start; 
+  scroll-snap-stop: always; 
+
+  /* Flexbox para centrar el contenido verticalmente */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+/* ================= AJUSTES SOLO PARA LA PRIMERA PÁGINA ================= */
+.snap-page.first-page {
+  /* En la primera página, el contenido va de arriba a abajo */
+  justify-content: flex-start; 
+}
+
+/* ================= HEADER (Dentro de Page 1) ================= */
+.header-actions {
+  display: flex;
+  justify-content: space-between; /* Distribuye: Inicio - Centro - Final */
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  padding: 15px 20px;
+  margin-top: 20px;
+  box-sizing: border-box;
+}
+
+.main-title {
+  color: #d84f45;
+  font-weight: 800;
+  font-size: 2rem;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.chat-icon-btn {
+  background: transparent;
+  border: 1px solid #d84f45;
+  color: #fff;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 1.2rem;
+}
+
+/* ================= CONTENIDO DE CATEGORÍA ================= */
+.category-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* Ocupa el espacio restante en la primera página */
+  flex: 1; 
+  padding-bottom: 20px;
+}
+
+.category-content h2 {
+  color: #fff;
+  margin-left: 20px;
+  font-size: 2rem;
+  border-left: 5px solid #d84f45;
+  padding-left: 15px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+/* ================= CARDS SCROLLER (Horizontal) ================= */
+.cards-scroller {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  padding: 10px 0;
+  scroll-snap-type: x mandatory; 
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+.cards-scroller::-webkit-scrollbar { display: none; }
+
+/* ================= TARJETA DE COMIDA ================= */
+.food-card {
+  min-width: 90vw; 
+  max-width: 90vw;
+  margin: 0 5vw; /* Centrado perfecto (5% izq + 90% card + 5% der) */
+  
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  
+  background: #222;
+  border-radius: 25px;
+  overflow: hidden;
+  border: 1px solid #333;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  
+  display: flex;
+  flex-direction: column;
+}
+
+/* RESTO DEL CSS (Imágenes, botones, footer) SE MANTIENE IGUAL */
+.card-image-conteiner { height: 220px; width: 100%; background: #000; position: relative; }
+.main-img { width: 100%; height: 100%; object-fit: cover; }
+.card-content { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+.card-content h3 { color: #d84f45; font-size: 1.6rem; margin: 0 0 5px 0; font-weight: bold; }
+.desc { color: #bbb; font-size: 1rem; margin-bottom: 15px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.meta-info { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+.time { color: #888; font-weight: bold; font-size: 1.1rem; }
+.price { color: #4caf50; font-size: 1.5rem; font-weight: bold; }
+
+.card-actions { background: #1a1a1a; padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #333; }
+.btn-qty { width: 50px; height: 50px; border-radius: 50%; border: none; font-size: 1.8rem; color: #fff; display: flex; align-items: center; justify-content: center; }
+.btn-qty.minus { background: #444; }
+.btn-qty.plus { background: #d84f45; box-shadow: 0 4px 10px rgba(216, 79, 69, 0.4); }
+.qty-display { font-size: 1.8rem; font-weight: bold; color: #fff; }
+
+.cart-footer { position: fixed; bottom: 0; left: 0; width: 100%; height: 55px; background: rgba(20, 20, 20, 0.98); border-top: 2px solid #d84f45; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; z-index: 500; }
+.cart-details .total-row { color: white; font-size: 1.2rem; }
+.cart-details .total-price { color: #4caf50; font-weight: bold; margin-left: 5px; font-size: 1.5rem; }
+.cart-details .time-row { color: #aaa; font-size: 0.9rem; }
+.confirm-btn { background: linear-gradient(145deg, #d84f45, #b03a32); color: white; border: none; padding: 12px 30px; border-radius: 30px; font-weight: bold; font-size: 1.1rem; }
+.back-button { position: fixed; top: 15px; left: 15px; z-index: 600; }
+.back-button button { width: 50px; height: 50px; border-radius: 50%; background: rgba(0,0,0,0.6); border: 2px solid #d84f45; color: #d84f45; font-size: 1.2rem; backdrop-filter: blur(4px); }
+.spacer-bottom { height: 100px; scroll-snap-align: end; }
+/* Spinner */
+
+.spinner-overlay {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.9);
+  display: flex; justify-content: center; align-items: center; z-index: 9999;
+}
+.spinner-container { display: flex; flex-direction: column; align-items: center; p { color: #fff; font-weight: bold; }}
+.spinning-logo { width: 80px; height: 80px; animation: spin 1.5s linear infinite; }
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+/* Modal */
+.modal-overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.95); z-index: 2000;
+  display: flex; justify-content: center; align-items: center;
+}
+.modal-content-sensor {
+  width: 90%;
+  max-width: 400px;
+  height: 650px; 
+  background: #1a1a1a;
+  border: 1px solid #444;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  color: white;
+  
+  /* Flexbox para distribuir el espacio interno */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Distribuye elementos arriba y abajo */
+  
+  position: relative; /* IMPORTANTE para que el botón sepa dónde ubicarse */
+}
+.modal-title { color: #d84f45; text-transform: uppercase; margin-top: 30px; }
+.big-img { width: 100%; height: 200px; object-fit: contain; }
+.modal-actions { display: flex; justify-content: center; gap: 20px; align-items: center; margin: 15px 0; }
+.btn-qty-modal { width: 40px; height: 40px; border-radius: 50%; background: #333; color: white; border: none; font-size: 1.2rem; }
+.btn-add-modal { width: 100%; padding: 15px; background: #d84f45; border: none; border-radius: 10px; color: white; font-weight: bold; font-size: 1.1rem; }
+
+
+.nav-icon-btn {
+  background: transparent;
+  border: 1px solid #d84f45; /* Borde sutil rojo */
+  color: #fff;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%; /* Redondos */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: all 0.2s;
+  padding: 0; /* Reseteo padding */
+}
+
+.nav-icon-btn:active {
+  background: #d84f45;
+  color: #000;
+}
+
+/* El título al medio */
+.main-title {
+  color: #d84f45;
+  font-weight: 800;
+  font-size: 1.6rem; /* Un pelín más chico para que entre bien */
+  margin: 0;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 1px;
+  flex: 1; /* Ocupa el espacio disponible para centrarse */
+}
+
+/* Ajustes finos si quieres diferenciar izquierda/derecha */
+.nav-icon-btn.right {
+  width: auto; padding: 0 15px; border-radius: 20px;
+}
+
+
+.nav-arrow {
+  position: absolute;
+  top: 36%;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 2rem;
+  line-height: 2rem;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 5px; /* Ajuste visual */
+}
+
+.nav-arrow.left {  left: 20px; }
+.nav-arrow.right { right: 20px; }
+
+.close-modal-btn {
+  position: absolute;
+  top: 20px;  /* Pegado al borde superior (ajusta según tu gusto) */
+  left: 20px; /* Pegado al borde izquierdo */
+  background: none;
+  border: none;
+  color: #fff; /* O usa #d84f45 si quieres que resalte */
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10;
+}
+.modal-details p {
+  height: 70px; /* Altura fija para el texto */
+  overflow-y: auto; /* Si el texto es muy largo, aparece scroll solo en el texto */
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+  color: #ccc;
+  /* Estilo opcional para el scrollbar finito */
+  scrollbar-width: thin; 
+}

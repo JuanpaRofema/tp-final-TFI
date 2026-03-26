@@ -165,10 +165,11 @@ else if (this.pasoActual === 4) {
           const notif = res[0];
 
           if (!notif.recibida && this.mostrarNotificacion) {
-
+            let res = this.cambioIdioma.modificarLasPush(notif)
+            //console.log("HERMANO, LO QUE LAS PUSH TIENEN ES ESTO, TITULO: ", notif.titulo, "EL CONTENIDO: ", notif.cuerpo)
             this.pushService.send(
-              notif.titulo,
-              notif.cuerpo,
+              res[0],
+              res[1],
               '/listado-productos',
               true,
               '',

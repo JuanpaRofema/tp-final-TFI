@@ -63,11 +63,11 @@
 </section>
 <section class="opciones">
   @if(estadoJuego) {
-  <button class="button-19" (click)="mayorQue()">Mas alta</button>
-  <button class="button-19" (click)="menorQue()">Mas baja</button>
+  <button class="button-19" (click)="mayorQue()">{{diccionario[idioma()]["Masalta"]}}</button>
+  <button class="button-19" (click)="menorQue()">{{diccionario[idioma()]["Masbaja"]}}</button>
   }
   @else {
-  <button class="button-19" (click)="comenzarAJugar()">Comenzar</button>
+  <button class="button-19" (click)="comenzarAJugar()">{{diccionario[idioma()]["Comenzar"]}}</button>
 
   }
 

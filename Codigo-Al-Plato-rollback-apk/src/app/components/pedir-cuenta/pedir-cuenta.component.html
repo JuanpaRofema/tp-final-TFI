@@ -68,13 +68,14 @@
           <span>{{ diccionario[idioma()]['TOTAL'] }}</span>
           <span class="big-price">{{ sacarTotal() | currency }}</span>
         </div>
-      </div>
-    </div>
-
     <button class="btn-pay" (click)="guardarCuenta()">
       <fa-icon [icon]="faCheckCircle"></fa-icon>
       {{ diccionario[idioma()]['PAGARAHORA'] }}
     </button>
+      </div>
+    </div>
+
+
 
   </div>
 

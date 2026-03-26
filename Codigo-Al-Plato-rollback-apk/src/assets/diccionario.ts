@@ -165,42 +165,35 @@ export const DICCIONARIO: any = {
 
     // --- MENÚ ESPAÑOL ---
     menu_comida: [
-      { nombre: 'Ravioles de ricota', descripcion: 'Ravioles rellenos de ricota con salsa a elección.' },
-      { nombre: 'Omelette', descripcion: 'Clásico omelette de huevo con queso y jamón.' },
-      { nombre: 'Milanesa', descripcion: 'Milanesa de carne empanizada, acompañada de papas fritas o ensalada a elección.' },
-      { nombre: 'Entraña', descripcion: 'Corte de entraña asado a la parrilla, servido con chimichurri y papas rústicas.' },
-      { nombre: 'Hamburguesa', descripcion: 'Hamburguesa con queso cheddar, lechuga, tomate y salsa especial en pan de sésamo.' },
-      { nombre: 'Ensalada Saludable', descripcion: 'Mix de hojas verdes, tomate, zanahoria y huevo.' },
-      { nombre: 'Tomate Relleno', descripcion: 'Tomate relleno con ensalada de arroz y atún.' },
-      { nombre: 'Pollo al Horno', descripcion: 'Presa de pollo al horno con guarnición.' },
-      { nombre: 'Pescado Blanco', descripcion: 'Filet de pescado blanco a la plancha con limón.' },
-      { nombre: 'Suprema', descripcion: 'Suprema de pollo rebozada con guarnición.' },
-      { nombre: 'Panchos', descripcion: 'Panchos clásicos con aderezos a gusto.' }
+      { nombre: 'Ravioles de ricota', descripcion: 'Ravioles rellenos de ricota con salsa a elección.', id: "09EZzxiqo1q57F7Otlms" },
+      { nombre: 'Omelette', descripcion: 'Clásico omelette de huevo con queso y jamón.', id: "5wvHwgO9wuy29VonzWls" },
+      { nombre: 'Milanesa', descripcion: 'Milanesa de carne empanizada, acompañada de papas fritas o ensalada a elección.', id: "GhnGX6dFdWnCNcsIFkJT" },
+      { nombre: 'Entraña', descripcion: 'Corte de entraña asado a la parrilla, servido con chimichurri y papas rústicas.', id: "KJoe8SiVokkUWeCVfnFy" },
+      { nombre: 'Hamburguesa', descripcion: 'Hamburguesa con queso cheddar, lechuga, tomate y salsa especial en pan de sésamo.', id: "bbrRMHvqX1l9NOT3rvIC" },
+      { nombre: 'Estofado de Pollo', descripcion: 'un guiso hecho con pollo . fricasé . trozos de pollo u otra carne guisados en salsa', id: "qbco3jmmUiLHcLrqSOz2" },
+
     ],
     menu_bebida: [
-      { nombre: 'Café', descripcion: 'Café negro amargo o con azúcar.' },
-      { nombre: 'Daikiri', descripcion: 'Cóctel tropical a base de ron, limón y azúcar, refrescante y dulce.' },
-      { nombre: 'Refresco de cola', descripcion: 'Refresco de cola clásico, ideal para acompañar cualquier comida.' },
-      { nombre: 'Coca Cola', descripcion: 'Bebida gaseosa bien fría para refrescar y acompañar cualquier plato.' },
-      { nombre: 'Agua saborizada', descripcion: 'Agua saborizada de frutas.' },
-      { nombre: 'Vino Tinto', descripcion: 'Copa de vino tinto de la casa.' },
-      { nombre: 'Cerveza Patagonia', descripcion: 'Cerveza artesanal de cuerpo medio, con notas frutales y un suave toque de amargor.' },
-      { nombre: 'Cerveza Heineken', descripcion: 'Cerveza lager premium rubia.' },
-      { nombre: 'Agua Mineral', descripcion: 'Agua mineral natural sin gas.' },
-      { nombre: 'Vino Blanco', descripcion: 'Copa de vino blanco dulce.' },
-      { nombre: 'Agua Tónica', descripcion: 'Agua tónica carbonatada.' }
+      { nombre: 'Daikiri', descripcion: 'Cóctel tropical a base de ron, limón y azúcar, refrescante y dulce.', id: "D1ihmWu2KXKSolD3ad3w" },
+      { nombre: 'Refresco de cola', descripcion: 'Refresco de cola clásico, ideal para acompañar cualquier comida.', id: "FLTKNQ0TcshoXPH1Rr4l" },
+      { nombre: 'Pepesi', descripcion: 'Bebida gaseosa bien fría para refrescar y acompañar cualquier plato.', id: "NfyhLhae8RrWxo4159pk" },
+      { nombre: 'Agua', descripcion: 'Agua natural sin gas', id: "dFdPAuHhO38cnvwaBw5C" },
+      { nombre: 'Vino Tinto', descripcion: 'Copa de vino tinto de la casa.', id: "eJKdWPoiaMVXjnkfM2Kq" },
+      { nombre: 'Cerveza Patagonia', descripcion: 'Cerveza artesanal de cuerpo medio, con notas frutales y un suave toque de amargor.', id: "XPi7UNXME5AcCpQo16xQ" },
+      { nombre: 'Cerveza Heineken', descripcion: 'Cerveza lager premium rubia.', id: "YHgTMiVOxzxaKy2eBKfx" },
+
     ],
     menu_postre: [
-      { nombre: 'Flan Casero', descripcion: 'Flan de huevo con caramelo y dulce de leche.' },
-      { nombre: 'Torta de Queso', descripcion: 'La tarta de queso es conocida por su sabor rico y cremoso y su textura suave.' },
-      { nombre: 'Helado', descripcion: 'Helado artesanal disponible en varios sabores como vainilla, chocolate y fresa.' },
-      { nombre: 'Brownie con helado', descripcion: 'Brownie de dulce de leche acompañado con una bocha de helado de crema.' },
-      { nombre: 'Chocotorta', descripcion: 'Postre argentino de galletas de chocolate y crema de dulce de leche.' }
+      { nombre: 'Flan Casero', descripcion: 'Flan de huevo con caramelo y dulce de leche.', id: "1YHcSLyWph4PrgBmlr1S" },
+      { nombre: 'Torta de Queso', descripcion: 'La tarta de queso es conocida por su sabor rico y cremoso y su textura suave.', id: "RBWCdanCVi2MHAD9KswW" },
+      { nombre: 'Helado', descripcion: 'Helado artesanal disponible en varios sabores como vainilla, chocolate y fresa.', id: "t88CDv5y0pUzWCgGYIjy" },
+      { nombre: 'Brownie con helado', descripcion: 'Brownie de dulce de leche acompañado con una bocha de helado de crema.', id: "xA9EuV3gTkqbc8JEqJh2" },
+      { nombre: 'Chocotorta', descripcion: 'Postre argentino de galletas de chocolate y crema de dulce de leche.', id: "zRgghMowW98CaNXea9g8" }
     ],
     //las de iniciar sesion los swal fire
     "titulo_config_idioma": "Configuración de Idioma",
-    "btn_elegir_idioma": "elegir idioma",
-    "btn_idioma_geo": "obtener idioma geolocalizado",
+    "btn_elegir_idioma": "Elegir idioma",
+    "btn_idioma_geo": "Obtener idioma geolocalizado",
     "btn_cerrar": "Cerrar",
     "titulo_perfil_chef": "Perfil de Chef",
     "btn_aceptar": "Aceptar",
@@ -246,7 +239,13 @@ export const DICCIONARIO: any = {
     Segundos: 'segundos.',
     PerdistePalabra: 'Perdiste. La palabra era:',
     PedidoListoTitulo: 'El pedido está listo',
-LlevarPedidoMesa: 'Ya puede llevar el pedido a la mesa',
+    LlevarPedidoMesa: 'Ya puede llevar el pedido a la mesa',
+    Enviado: 'Enviado',
+    Cocinando: 'Cocinando',
+    Disfrutando: 'Disfrutando',
+    votos: 'votos',
+    'gluten-free': 'Libre de gluten',
+    IntentarDeNuevo: "IntentarDeNuevo"
 
   },
 
@@ -416,41 +415,32 @@ LlevarPedidoMesa: 'Ya puede llevar el pedido a la mesa',
 
     // --- MENÚ INGLÉS ---
     menu_comida: [
-      { nombre: 'Ricotta Ravioli', descripcion: 'Ravioli stuffed with ricotta with sauce of choice.' },
-      { nombre: 'Omelette', descripcion: 'Classic egg omelette with cheese and ham.' },
-      { nombre: 'Breaded Cutlet (Milanesa)', descripcion: 'Breaded meat cutlet, served with fries or salad of choice.' },
-      { nombre: 'Skirt Steak (Entraña)', descripcion: 'Grilled skirt steak cut, served with chimichurri and rustic potatoes.' },
-      { nombre: 'Burger', descripcion: 'Burger with cheddar cheese, lettuce, tomato and special sauce on sesame bun.' },
-      { nombre: 'Healthy Salad', descripcion: 'Mix of green leaves, tomato, carrot and egg.' },
-      { nombre: 'Stuffed Tomato', descripcion: 'Tomato stuffed with rice and tuna salad.' },
-      { nombre: 'Baked Chicken', descripcion: 'Baked chicken piece with garnish.' },
-      { nombre: 'White Fish', descripcion: 'Grilled white fish fillet with lemon.' },
-      { nombre: 'Supreme Chicken', descripcion: 'Breaded chicken breast with garnish.' },
-      { nombre: 'Hot Dogs', descripcion: 'Classic hot dogs with toppings to taste.' }
+      { nombre: 'Ricotta Ravioli', descripcion: 'Ravioli stuffed with ricotta with sauce of choice.', id: "09EZzxiqo1q57F7Otlms" },
+      { nombre: 'Omelet', descripcion: 'Classic egg omelet with cheese and ham.', id: "5wvHwgO9wuy29VonzWls" },
+      { nombre: 'Milanesa', descripcion: 'Breaded meat, served with French fries or salad of choice.', id: "GhnGX6dFdWnCNcsIFkJT" },
+      { nombre: 'Skirt Steak', descripcion: 'Grilled skirt steak, served with chimichurri and rustic potatoes.', id: "KJoe8SiVokkUWeCVfnFy" },
+      { nombre: 'Hamburger', descripcion: 'Burger with cheddar cheese, lettuce, tomato, and special sauce on a sesame bun.', id: "bbrRMHvqX1l9NOT3rvIC" },
+      { nombre: 'Chicken Stew', descripcion: 'A stew made with chicken pieces cooked in sauce.', id: "qbco3jmmUiLHcLrqSOz2" }
     ],
     menu_bebida: [
-      { nombre: 'Coffee', descripcion: 'Black coffee, bitter or with sugar.' },
-      { nombre: 'Daiquiri', descripcion: 'Tropical cocktail with rum, lemon and sugar, refreshing and sweet.' },
-      { nombre: 'Cola Soda', descripcion: 'Classic cola soda, ideal to accompany any meal.' },
-      { nombre: 'Coca Cola', descripcion: 'Cold soda drink to refresh and accompany any dish.' },
-      { nombre: 'Flavored Water', descripcion: 'Fruit flavored water.' },
-      { nombre: 'Red Wine', descripcion: 'Glass of house red wine.' },
-      { nombre: 'Patagonia Beer', descripcion: 'Craft beer, medium body, fruity notes and a soft touch of bitterness.' },
-      { nombre: 'Heineken Beer', descripcion: 'Premium lager blonde beer.' },
-      { nombre: 'Mineral Water', descripcion: 'Natural still mineral water.' },
-      { nombre: 'White Wine', descripcion: 'Glass of sweet white wine.' },
-      { nombre: 'Tonic Water', descripcion: 'Carbonated tonic water.' }
+      { nombre: 'Daiquiri', descripcion: 'Tropical cocktail with rum, lime, and sugar, refreshing and sweet.', id: "D1ihmWu2KXKSolD3ad3w" },
+      { nombre: 'Cola Soda', descripcion: 'Classic cola soda, ideal to accompany any meal.', id: "FLTKNQ0TcshoXPH1Rr4l" },
+      { nombre: 'Pepsi', descripcion: 'Cold soda to refresh and accompany any dish.', id: "NfyhLhae8RrWxo4159pk" },
+      { nombre: 'Water', descripcion: 'Natural still water.', id: "dFdPAuHhO38cnvwaBw5C" },
+      { nombre: 'Red Wine', descripcion: 'Glass of house red wine.', id: "eJKdWPoiaMVXjnkfM2Kq" },
+      { nombre: 'Patagonia Beer', descripcion: 'Medium-bodied craft beer with fruity notes and a soft touch of bitterness.', id: "XPi7UNXME5AcCpQo16xQ" },
+      { nombre: 'Heineken Beer', descripcion: 'Premium blonde lager beer.', id: "YHgTMiVOxzxaKy2eBKfx" }
     ],
     menu_postre: [
-      { nombre: 'Homemade Flan', descripcion: 'Egg flan with caramel and dulce de leche.' },
-      { nombre: 'Cheesecake', descripcion: 'Cheesecake is known for its rich creamy taste and smooth texture.' },
-      { nombre: 'Ice Cream', descripcion: 'Artisanal ice cream available in flavors like vanilla, chocolate and strawberry.' },
-      { nombre: 'Brownie with Ice Cream', descripcion: 'Dulce de leche brownie accompanied with a scoop of cream ice cream.' },
-      { nombre: 'Chocotorta', descripcion: 'Argentine dessert with chocolate cookies and dulce de leche cream.' }
+      { nombre: 'Homemade Flan', descripcion: 'Egg custard with caramel and dulce de leche.', id: "1YHcSLyWph4PrgBmlr1S" },
+      { nombre: 'Cheesecake', descripcion: 'Known for its rich, creamy flavor and smooth texture.', id: "RBWCdanCVi2MHAD9KswW" },
+      { nombre: 'Ice Cream', descripcion: 'Artisanal ice cream available in various flavors like vanilla, chocolate, and strawberry.', id: "t88CDv5y0pUzWCgGYIjy" },
+      { nombre: 'Brownie with Ice Cream', descripcion: 'Dulce de leche brownie served with a scoop of cream ice cream.', id: "xA9EuV3gTkqbc8JEqJh2" },
+      { nombre: 'Chocotorta', descripcion: 'Argentine dessert made of chocolate cookies and dulce de leche cream.', id: "zRgghMowW98CaNXea9g8" }
     ],
     titulo_config_idioma: "Language Configuration",
-    btn_elegir_idioma: "choose language",
-    btn_idioma_geo: "get geolocated language",
+    btn_elegir_idioma: "Choose language",
+    btn_idioma_geo: "Get geolocated language",
     btn_cerrar: "Close",
     titulo_perfil_chef: "Chef Profile",
     btn_aceptar: "Accept",
@@ -494,8 +484,13 @@ LlevarPedidoMesa: 'Ya puede llevar el pedido a la mesa',
     Segundos: 'seconds.',
     PerdistePalabra: 'You lost. The word was:',
     PedidoListoTitulo: 'The order is ready',
-LlevarPedidoMesa: 'You can now take the order to the table'
-
+    LlevarPedidoMesa: 'You can now take the order to the table',
+    Enviado: 'Sent',
+    Cocinando: 'Cooking',
+    Disfrutando: 'Enjoying',
+    votos: 'votes',
+    'gluten-free': 'Gluten Free',
+    IntentarDeNuevo: "Try Again"
 
   },
   pt: {
@@ -664,41 +659,32 @@ LlevarPedidoMesa: 'You can now take the order to the table'
 
     // --- MENÚ PORTUGUÉS ---
     menu_comida: [
-      { nombre: 'Ravioli de Ricota', descripcion: 'Ravioli recheado de ricota com molho à escolha.' },
-      { nombre: 'Omelete', descripcion: 'Omelete clássico de ovo com queijo e presunto.' },
-      { nombre: 'Milanesa', descripcion: 'Bife à milanesa, acompanhado de batatas fritas ou salada à escolha.' },
-      { nombre: 'Fraldinha (Entraña)', descripcion: 'Corte de fraldinha grelhada, servida com chimichurri e batatas rústicas.' },
-      { nombre: 'Hambúrguer', descripcion: 'Hambúrguer com queijo cheddar, alface, tomate e molho especial no pão de gergelim.' },
-      { nombre: 'Salada Saudável', descripcion: 'Mix de folhas verdes, tomate, cenoura e ovo.' },
-      { nombre: 'Tomate Recheado', descripcion: 'Tomate recheado com salada de arroz e atum.' },
-      { nombre: 'Frango Assado', descripcion: 'Pedaço de frango assado com acompanhamento.' },
-      { nombre: 'Peixe Branco', descripcion: 'Filé de peixe branco grelhado com limão.' },
-      { nombre: 'Suprema de Frango', descripcion: 'Peito de frango empanado com acompanhamento.' },
-      { nombre: 'Cachorro-quente', descripcion: 'Cachorros-quentes clássicos com molhos a gosto.' }
+      { nombre: 'Ravioli de ricota', descripcion: 'Ravioli recheado com ricota com molho à escolha.', id: "09EZzxiqo1q57F7Otlms" },
+      { nombre: 'Omelete', descripcion: 'Omelete de ovo clássica com queijo e presunto.', id: "5wvHwgO9wuy29VonzWls" },
+      { nombre: 'Milanesa', descripcion: 'Carne empanada acompanhada de batatas fritas ou salada à escolha.', id: "GhnGX6dFdWnCNcsIFkJT" },
+      { nombre: 'Entranha', descripcion: 'Corte de carne grelhado, servido com chimichurri e batatas rústicas.', id: "KJoe8SiVokkUWeCVfnFy" },
+      { nombre: 'Hambúrguer', descripcion: 'Hambúrguer com queijo cheddar, alface, tomate e molho especial.', id: "bbrRMHvqX1l9NOT3rvIC" },
+      { nombre: 'Ensopado de Frango', descripcion: 'Um guisado feito com pedaços de frango cozidos no molho.', id: "qbco3jmmUiLHcLrqSOz2" }
     ],
     menu_bebida: [
-      { nombre: 'Café', descripcion: 'Café preto amargo ou com açúcar.' },
-      { nombre: 'Daiquiri', descripcion: 'Coquetel tropical à base de rum, limão e açúcar, refrescante e doce.' },
-      { nombre: 'Refrigerante de cola', descripcion: 'Refrigerante de cola clássico, ideal para acompanhar qualquer refeição.' },
-      { nombre: 'Coca Cola', descripcion: 'Bebida gasosa bem gelada para refrescar e acompanhar qualquer prato.' },
-      { nombre: 'Água Saborizada', descripcion: 'Água saborizada de frutas.' },
-      { nombre: 'Vinho Tinto', descripcion: 'Taça de vinho tinto da casa.' },
-      { nombre: 'Cerveja Patagonia', descripcion: 'Cerveja artesanal de corpo médio, com notas frutadas e um suave toque de amargor.' },
-      { nombre: 'Cerveja Heineken', descripcion: 'Cerveja lager premium loira.' },
-      { nombre: 'Água Mineral', descripcion: 'Água mineral natural sem gás.' },
-      { nombre: 'Vinho Branco', descripcion: 'Taça de vinho branco doce.' },
-      { nombre: 'Água Tônica', descripcion: 'Água tônica gaseificada.' }
+      { nombre: 'Daquiri', descripcion: 'Coquetel tropical à base de rum, limão e açúcar, refrescante e doce.', id: "D1ihmWu2KXKSolD3ad3w" },
+      { nombre: 'Refrigerante de cola', descripcion: 'Refrigerante de cola clássico, ideal para acompanhar qualquer refeição.', id: "FLTKNQ0TcshoXPH1Rr4l" },
+      { nombre: 'Pepsi', descripcion: 'Refrigerante gelado para refrescar e acompanhar qualquer prato.', id: "NfyhLhae8RrWxo4159pk" },
+      { nombre: 'Água', descripcion: 'Água natural sem gás.', id: "dFdPAuHhO38cnvwaBw5C" },
+      { nombre: 'Vinho Tinto', descripcion: 'Taça de vinho tinto da casa.', id: "eJKdWPoiaMVXjnkfM2Kq" },
+      { nombre: 'Cerveja Patagonia', descripcion: 'Cerveja artesanal de corpo médio com notas frutais.', id: "XPi7UNXME5AcCpQo16xQ" },
+      { nombre: 'Cerveja Heineken', descripcion: 'Cerveja lager premium loira.', id: "YHgTMiVOxzxaKy2eBKfx" }
     ],
     menu_postre: [
-      { nombre: 'Pudim Caseiro', descripcion: 'Pudim de ovo com caramelo e doce de leite.' },
-      { nombre: 'Cheesecake', descripcion: 'A cheesecake é conhecida pelo seu sabor rico e cremoso e textura suave.' },
-      { nombre: 'Sorvete', descripcion: 'Sorvete artesanal disponível em sabores como baunilha, chocolate e morango.' },
-      { nombre: 'Brownie com Sorvete', descripcion: 'Brownie de doce de leite acompanhado com uma bola de sorvete de creme.' },
-      { nombre: 'Chocotorta', descripcion: 'Sobremesa argentina de biscoitos de chocolate e creme de doce de leite.' }
+      { nombre: 'Pudim Caseiro', descripcion: 'Pudim de ovo com caramelo e doce de leite.', id: "1YHcSLyWph4PrgBmlr1S" },
+      { nombre: 'Cheesecake', descripcion: 'Conhecida por seu sabor rico e cremoso e textura suave.', id: "RBWCdanCVi2MHAD9KswW" },
+      { nombre: 'Sorvete', descripcion: 'Sorvete artesanal disponível em vários sabores como baunilha e chocolate.', id: "t88CDv5y0pUzWCgGYIjy" },
+      { nombre: 'Brownie com sorvete', descripcion: 'Brownie de doce de leite com uma bola de sorvete de creme.', id: "xA9EuV3gTkqbc8JEqJh2" },
+      { nombre: 'Chocotorta', descripcion: 'Sobremesa argentina de biscoitos de chocolate e creme de doce de leite.', id: "zRgghMowW98CaNXea9g8" }
     ],
     titulo_config_idioma: "Configuração de Idioma",
-    btn_elegir_idioma: "escolher idioma",
-    btn_idioma_geo: "obter idioma geolocalizado",
+    btn_elegir_idioma: "Escolher idioma",
+    btn_idioma_geo: "Obter idioma geolocalizado",
     btn_cerrar: "Fechar",
     titulo_perfil_chef: "Perfil de Chef",
     btn_aceptar: "Aceitar",
@@ -747,12 +733,14 @@ LlevarPedidoMesa: 'You can now take the order to the table'
     Segundos: 'segundos.',
     PerdistePalabra: 'Você perdeu. A palavra era:',
     PedidoListoTitulo: 'O pedido está pronto',
-LlevarPedidoMesa: 'Já pode levar o pedido para a mesa'
-
+    LlevarPedidoMesa: 'Já pode levar o pedido para a mesa',
+    Enviado: 'Enviado',
+    Cocinando: 'Cozinhando',
+    Disfrutando: 'Aproveitando',
+    votos: 'votos',
+    'gluten-free': 'Sem glúten',
+    IntentarDeNuevo: 'Tentar novamente',
   },
-
-
-
   ru: {
     // --- GENERAL ---
     Procesando: 'Обработка...', Guardando: 'Сохранение...', Aceptar: 'Принять', Error: 'Ошибка', Nombre: 'Имя', Apellido: 'Фамилия', DNI: 'ID', CUIL: 'ИНН', Correo: 'Эл. почта', Contraseña: 'Пароль', FotoUsuario: 'Фото пользователя',
@@ -919,37 +907,28 @@ LlevarPedidoMesa: 'Já pode levar o pedido para a mesa'
 
     // --- MENÚ RUSO ---
     menu_comida: [
-      { nombre: 'Равиоли с рикоттой', descripcion: 'Равиоли, фаршированные рикоттой, с соусом на выбор.' },
-      { nombre: 'Омлет', descripcion: 'Классический яичный омлет с сыром и ветчиной.' },
-      { nombre: 'Миланеса', descripcion: 'Шницель из мяса в панировке, подается с картофелем фри или салатом на выбор.' },
-      { nombre: 'Стейк Энтрания', descripcion: 'Стейк из диафрагмы на гриле, подается с чимичурри и картофелем по-деревенски.' },
-      { nombre: 'Гамбургер', descripcion: 'Гамбургер с сыром чеддер, салатом, помидором и специальным соусом на булочке с кунжутом.' },
-      { nombre: 'Полезный салат', descripcion: 'Микс зеленых листьев, помидоров, моркови и яйца.' },
-      { nombre: 'Фаршированный помидор', descripcion: 'Помидор, фаршированный салатом из риса и тунца.' },
-      { nombre: 'Запеченная курица', descripcion: 'Кусок курицы, запеченный в духовке с гарниром.' },
-      { nombre: 'Белая рыба', descripcion: 'Филе белой рыбы на гриле с лимоном.' },
-      { nombre: 'Куриная грудка (Супрема)', descripcion: 'Куриная грудка в панировке с гарниром.' },
-      { nombre: 'Хот-доги', descripcion: 'Классические хот-доги с добавками по вкусу.' }
+      { nombre: 'Равиоли с рикоттой', descripcion: 'Равиоли с начинкой из рикотты и соусом на выбор.', id: "09EZzxiqo1q57F7Otlms" },
+      { nombre: 'Омлет', descripcion: 'Классический омлет с сыром и ветчиной.', id: "5wvHwgO9wuy29VonzWls" },
+      { nombre: 'Миланеса', descripcion: 'Панированное мясо с картофелем фри или салатом на выбор.', id: "GhnGX6dFdWnCNcsIFkJT" },
+      { nombre: 'Стейк Мачете', descripcion: 'Стейк из говяжьей пашины на гриле с чимичурри.', id: "KJoe8SiVokkUWeCVfnFy" },
+      { nombre: 'Гамбургер', descripcion: 'Бургер с чеддером, салатом, помидором и соусом.', id: "bbrRMHvqX1l9NOT3rvIC" },
+      { nombre: 'Тушеная курица', descripcion: 'Кусочки курицы, тушенные в соусе.', id: "qbco3jmmUiLHcLrqSOz2" }
     ],
     menu_bebida: [
-      { nombre: 'Кофе', descripcion: 'Черный кофе, горький или с сахаром.' },
-      { nombre: 'Дайкири', descripcion: 'Тропический коктейль с ромом, лимоном и сахаром, освежающий и сладкий.' },
-      { nombre: 'Кола', descripcion: 'Классическая кола, идеально подходит к любой еде.' },
-      { nombre: 'Кока-Кола', descripcion: 'Холодный газированный напиток, чтобы освежиться и дополнить любое блюдо.' },
-      { nombre: 'Вода с вкусом', descripcion: 'Вода с фруктовым вкусом.' },
-      { nombre: 'Красное вино', descripcion: 'Бокал домашнего красного вина.' },
-      { nombre: 'Пиво Patagonia', descripcion: 'Крафтовое пиво среднего тела, с фруктовыми нотками и легкой горчинкой.' },
-      { nombre: 'Пиво Heineken', descripcion: 'Светлое пиво премиум-класса.' },
-      { nombre: 'Минеральная вода', descripcion: 'Натуральная минеральная вода без газа.' },
-      { nombre: 'Белое вино', descripcion: 'Бокал сладкого белого вина.' },
-      { nombre: 'Тоник', descripcion: 'Газированная вода с хинином.' }
+      { nombre: 'Дайкири', descripcion: 'Тропический коктейль на основе рома, лайма и сахара.', id: "D1ihmWu2KXKSolD3ad3w" },
+      { nombre: 'Кола', descripcion: 'Классическая кола для любого блюда.', id: "FLTKNQ0TcshoXPH1Rr4l" },
+      { nombre: 'Пепси', descripcion: 'Холодная газировка для освежения.', id: "NfyhLhae8RrWxo4159pk" },
+      { nombre: 'Вода', descripcion: 'Натуральная негазированная вода.', id: "dFdPAuHhO38cnvwaBw5C" },
+      { nombre: 'Красное вино', descripcion: 'Бокал красного домашнего вина.', id: "eJKdWPoiaMVXjnkfM2Kq" },
+      { nombre: 'Пиво Patagonia', descripcion: 'Крафтовое пиво с фруктовыми нотками и мягкой горчинкой.', id: "XPi7UNXME5AcCpQo16xQ" },
+      { nombre: 'Пиво Heineken', descripcion: 'Светлый лагер премиум-класса.', id: "YHgTMiVOxzxaKy2eBKfx" }
     ],
     menu_postre: [
-      { nombre: 'Домашний флан', descripcion: 'Яичный флан с карамелью и вареной сгущенкой.' },
-      { nombre: 'Чизкейк', descripcion: 'Чизкейк известен своим богатым сливочным вкусом и нежной текстурой.' },
-      { nombre: 'Мороженое', descripcion: 'Ремесленное мороженое, вкусы: ваниль, шоколад и клубника.' },
-      { nombre: 'Брауни с мороженым', descripcion: 'Брауни с вареной сгущенкой и шариком сливочного мороженого.' },
-      { nombre: 'Чокоторта', descripcion: 'Аргентинский десерт из шоколадного печенья и крема из вареной сгущенки.' }
+      { nombre: 'Домашний флан', descripcion: 'Яичный пудинг с карамелью и вареной сгущенкой.', id: "1YHcSLyWph4PrgBmlr1S" },
+      { nombre: 'Чизкейк', descripcion: 'Сливочный десерт с нежной текстурой.', id: "RBWCdanCVi2MHAD9KswW" },
+      { nombre: 'Мороженое', descripcion: 'Крафтовое мороженое в ассортименте.', id: "t88CDv5y0pUzWCgGYIjy" },
+      { nombre: 'Брауни с мороженым', descripcion: 'Теплый брауни с шариком сливочного мороженого.', id: "xA9EuV3gTkqbc8JEqJh2" },
+      { nombre: 'Чокоторта', descripcion: 'Аргентинский десерт из шоколадного печенья и крема.', id: "zRgghMowW98CaNXea9g8" }
     ],
     titulo_config_idioma: "Настройка языка",
     btn_elegir_idioma: "выбрать язык",
@@ -999,7 +978,13 @@ LlevarPedidoMesa: 'Já pode levar o pedido para a mesa'
     Segundos: 'секунд.',
     PerdistePalabra: 'Вы проиграли. Слово было:',
     PedidoListoTitulo: 'Заказ готов',
-LlevarPedidoMesa: 'Теперь вы можете нести заказ к столу'
+    LlevarPedidoMesa: 'Теперь вы можете нести заказ к столу',
+    Enviado: 'Отправлено',
+    Cocinando: 'Готовится',
+    Disfrutando: 'Наслаждайтесь',
+    votos: 'голоса',
+    'gluten-free': 'Без глютена',
+    IntentarDeNuevo: 'Попробовать снова',
   },
   de: {
     // --- GENERAL ---
@@ -1027,7 +1012,7 @@ LlevarPedidoMesa: 'Теперь вы можете нести заказ к ст�
 
     Actualizandoestado: 'Status aktualisieren... ', Motivodelrechazo: 'Ablehnungsgrund:', Volverallistadoproducto: 'Zurück zur Liste', PedidoEnviado: 'Bestellung gesendet', EnPreparación: 'In Zubereitung', EnCamino: 'Unterwegs', Entregado: 'Geliefert', ChatconRepartidor: 'Chat mit Lieferant', PedirCuenta: 'Rechnung bitten', encuesta: 'Umfrage', Aburridodeesperar: 'Gelangweilt vom Warten?', Jugarunrato: 'Ein bisschen spielen',
 
-    CargandoComandas2: 'Lade Bestellungen...', COCINASALÓN: 'KÜCHE - SAAL', Mesa1: 'Tisch', APreparar1: 'Zubereiten:', FINALIZAR: 'BEENDEN', Nohaypedidospendientesencocina: 'Keine ausstehenden Bestellungen in Küche.', MARCARCOMOLISTO: 'ALS FERTIG MARKIEREN',
+    CargandoComandas2: 'Lade Bestellungen...', COCINASALÓN: 'KÜCHE - SAAL', Mesa1: 'Tisch', APreparar1: 'Zubereiten:', FINALIZAR: 'BEENDEN', Nohaypedidospendientesencocina: "Küche leer", MARCARCOMOLISTO: 'ALS FERTIG MARKIEREN',
 
     NUEVOSPEDIDOS: 'NEUE BESTELLUNGEN', min: 'Min', RECHAZAR: 'ABLEHNEN', ACEPTAR: 'AKZEPTIEREN', Nohaypedidosnuevos: 'Keine neuen Bestellungen.', CocinaTerminó: 'Küche fertig', ENTREGARADELIVERY: 'AN LIEFERUNG ÜBERGEBEN', Nadalistoparaentregaraún: 'Noch nichts lieferbereit.',
 
@@ -1167,41 +1152,32 @@ LlevarPedidoMesa: 'Теперь вы можете нести заказ к ст�
 
     // --- MENÚ ALEMÁN ---
     menu_comida: [
-      { nombre: 'Ricotta-Ravioli', descripcion: 'Ravioli gefüllt mit Ricotta mit Soße nach Wahl.' },
-      { nombre: 'Omelett', descripcion: 'Klassisches Eieromelett mit Käse und Schinken.' },
-      { nombre: 'Schnitzel (Milanesa)', descripcion: 'Paniertes Fleischschnitzel, serviert mit Pommes frites oder Salat nach Wahl.' },
-      { nombre: 'Skirt Steak (Entraña)', descripcion: 'Gegrilltes Skirt Steak, serviert mit Chimichurri und rustikalen Kartoffeln.' },
-      { nombre: 'Hamburger', descripcion: 'Hamburger mit Cheddar-Käse, Salat, Tomate und Spezialsoße im Sesambrot.' },
-      { nombre: 'Gesunder Salat', descripcion: 'Mix aus grünen Blättern, Tomate, Karotte und Ei.' },
-      { nombre: 'Gefüllte Tomate', descripcion: 'Tomate gefüllt mit Reis-Thunfisch-Salat.' },
-      { nombre: 'Brathähnchen', descripcion: 'Im Ofen gebackenes Hähnchenstück mit Beilage.' },
-      { nombre: 'Weißfisch', descripcion: 'Gegrilltes Weißfischfilet mit Zitrone.' },
-      { nombre: 'Hähnchenbrust (Suprema)', descripcion: 'Panierte Hähnchenbrust mit Beilage.' },
-      { nombre: 'Hot Dogs', descripcion: 'Klassische Hot Dogs mit Toppings nach Geschmack.' }
+      { nombre: 'Ricotta-Ravioli', descripcion: 'Ravioli mit Ricotta-Füllung und Sauce nach Wahl.', id: "09EZzxiqo1q57F7Otlms" },
+      { nombre: 'Omelett', descripcion: 'Klassisches Omelett mit Käse und Schinken.', id: "5wvHwgO9wuy29VonzWls" },
+      { nombre: 'Milanesa', descripcion: 'Paniertes Fleisch mit Pommes oder Salat nach Wahl.', id: "GhnGX6dFdWnCNcsIFkJT" },
+      { nombre: 'Entraña', descripcion: 'Gegrilltes Kronfleisch serviert mit Chimichurri.', id: "KJoe8SiVokkUWeCVfnFy" },
+      { nombre: 'Hamburger', descripcion: 'Burger mit Cheddar, Salat, Tomate und Spezialsauce.', id: "bbrRMHvqX1l9NOT3rvIC" },
+      { nombre: 'Hühnereintopf', descripcion: 'In Sauce geschmorte Hähnchenstücke.', id: "qbco3jmmUiLHcLrqSOz2" }
     ],
     menu_bebida: [
-      { nombre: 'Kaffee', descripcion: 'Schwarzer Kaffee, bitter oder mit Zucker.' },
-      { nombre: 'Daiquiri', descripcion: 'Tropischer Cocktail mit Rum, Zitrone und Zucker, erfrischend und süß.' },
-      { nombre: 'Cola', descripcion: 'Klassische Cola, ideal zu jedem Essen.' },
-      { nombre: 'Coca Cola', descripcion: 'Kaltes Erfrischungsgetränk zu jedem Gericht.' },
-      { nombre: 'Wasser mit Geschmack', descripcion: 'Wasser mit Fruchtgeschmack.' },
-      { nombre: 'Rotwein', descripcion: 'Glas Hausrotwein.' },
-      { nombre: 'Patagonia Bier', descripcion: 'Craft Beer, mittlerer Körper, fruchtige Noten und ein Hauch Bitterkeit.' },
-      { nombre: 'Heineken Bier', descripcion: 'Premium Lagerbier hell.' },
-      { nombre: 'Mineralwasser', descripcion: 'Natürliches stilles Mineralwasser.' },
-      { nombre: 'Weißwein', descripcion: 'Glas süßer Weißwein.' },
-      { nombre: 'Tonic Water', descripcion: 'Kohlensäurehaltiges Tonic Water.' }
+      { nombre: 'Daiquiri', descripcion: 'Tropischer Cocktail aus Rum, Limette und Zucker.', id: "D1ihmWu2KXKSolD3ad3w" },
+      { nombre: 'Cola', descripcion: 'Klassische Cola zu jeder Mahlzeit.', id: "FLTKNQ0TcshoXPH1Rr4l" },
+      { nombre: 'Pepsi', descripcion: 'Kaltes Erfrischungsgetränk.', id: "NfyhLhae8RrWxo4159pk" },
+      { nombre: 'Wasser', descripcion: 'Natürliches stilles Wasser.', id: "dFdPAuHhO38cnvwaBw5C" },
+      { nombre: 'Rotwein', descripcion: 'Ein Glas Rotwein des Hauses.', id: "eJKdWPoiaMVXjnkfM2Kq" },
+      { nombre: 'Patagonia Bier', descripcion: 'Handwerkliches Bier mit fruchtigen Noten.', id: "XPi7UNXME5AcCpQo16xQ" },
+      { nombre: 'Heineken Bier', descripcion: 'Premium helles Lagerbier.', id: "YHgTMiVOxzxaKy2eBKfx" }
     ],
     menu_postre: [
-      { nombre: 'Hausgemachter Flan', descripcion: 'Eierflan mit Karamell und Dulce de Leche.' },
-      { nombre: 'Käsekuchen', descripcion: 'Käsekuchen ist bekannt für seinen reichen cremigen Geschmack und weiche Textur.' },
-      { nombre: 'Eis', descripcion: 'Handwerkliches Eis, Geschmacksrichtungen: Vanille, Schokolade und Erdbeere.' },
-      { nombre: 'Brownie mit Eis', descripcion: 'Brownie mit Dulce de Leche und einer Kugel Sahneeis.' },
-      { nombre: 'Chocotorta', descripcion: 'Argentinisches Dessert aus Schokokeksen und Dulce de Leche Creme.' }
+      { nombre: 'Hausgemachter Flan', descripcion: 'Eierpudding mit Karamell und Milchkaramell.', id: "1YHcSLyWph4PrgBmlr1S" },
+      { nombre: 'Käsekuchen', descripcion: 'Bekannt für seinen reichen Geschmack und cremige Textur.', id: "RBWCdanCVi2MHAD9KswW" },
+      { nombre: 'Eis', descripcion: 'Handgemachtes Eis in verschiedenen Sorten.', id: "t88CDv5y0pUzWCgGYIjy" },
+      { nombre: 'Brownie mit Eis', descripcion: 'Brownie serviert mit einer Kugel Sahneeis.', id: "xA9EuV3gTkqbc8JEqJh2" },
+      { nombre: 'Chocotorta', descripcion: 'Argentinisches Dessert aus Keksen und Milchkaramell.', id: "zRgghMowW98CaNXea9g8" }
     ],
     titulo_config_idioma: "Sprachkonfiguration",
     btn_elegir_idioma: "Sprache wählen",
-    btn_idioma_geo: "geolokalisierte Sprache abrufen",
+    btn_idioma_geo: "Geolokalisierte Sprache abrufen",
     btn_cerrar: "Schließen",
     titulo_perfil_chef: "Küchenchef-Profil",
     btn_aceptar: "Akzeptieren",
@@ -1247,11 +1223,17 @@ LlevarPedidoMesa: 'Теперь вы можете нести заказ к ст�
     Segundos: 'Sekunden durchgehalten.',
     PerdistePalabra: 'Du hast verloren. Das Wort war:',
     PedidoListoTitulo: 'Die Bestellung ist fertig',
-LlevarPedidoMesa: 'Sie können die Bestellung nun an den Tisch bringen'
+    LlevarPedidoMesa: 'Sie können die Bestellung nun an den Tisch bringen',
+    Enviado: 'Gesendet',
+    Cocinando: 'Kochen',
+    Disfrutando: 'Genießen',
+    votos: 'Stimmen',
+    'gluten-free': 'Glutenfrei',
+    IntentarDeNuevo: 'Erneut versuchen',
   },
   fr: {
     // --- GENERAL ---
-    Procesando: 'Traitement...', Guardando: 'Enregistrement...', Aceptar: 'Accepter', Error: 'Erreur', Nombre: 'Nom', Apellido: 'Prénom', DNI: 'ID', CUIL: 'N° Fisc', Correo: 'E-mail', Contraseña: 'Mot de passe', FotoUsuario: 'Photo utilisateur',
+    Procesando: 'Traitement...', Guardando: 'Enregistrement...', Aceptar: 'Accepter', Error: 'Erreur', Nombre: 'Nom', Apellido: 'Prénom', DNI: "Pièce d'identité", CUIL: 'N° Fisc', Correo: 'E-mail', Contraseña: 'Mot de passe', FotoUsuario: 'Photo utilisateur',
     // --- LOGIN ---
     Ingresar: 'Entrer', 'Crear Cliente': 'Créer Client', 'Iniciar sesión con Google': 'Connexion Google', mailError: 'E-mail invalide', contrasenaError: 'Mot de passe trop court', usuarioNoEncontrado: 'Utilisateur non trouvé',
     // --- REGISTRO ---
@@ -1415,41 +1397,32 @@ LlevarPedidoMesa: 'Sie können die Bestellung nun an den Tisch bringen'
 
     // --- MENÚ FRANCÉS ---
     menu_comida: [
-      { nombre: 'Raviolis à la ricotta', descripcion: 'Raviolis farcis à la ricotta avec sauce au choix.' },
-      { nombre: 'Omelette', descripcion: 'Omelette classique aux œufs, fromage et jambon.' },
-      { nombre: 'Escalope panée (Milanesa)', descripcion: 'Escalope de viande panée, servie avec frites ou salade au choix.' },
-      { nombre: 'Bavette (Entraña)', descripcion: 'Coupe de bavette grillée, servie avec chimichurri et pommes de terre rustiques.' },
-      { nombre: 'Hamburger', descripcion: 'Hamburger avec cheddar, laitue, tomate et sauce spéciale sur pain sésame.' },
-      { nombre: 'Salade Santé', descripcion: 'Mélange de feuilles vertes, tomate, carotte et œuf.' },
-      { nombre: 'Tomate Farcie', descripcion: 'Tomate farcie avec salade de riz et thon.' },
-      { nombre: 'Poulet Rôti', descripcion: 'Morceau de poulet rôti au four avec garniture.' },
-      { nombre: 'Poisson Blanc', descripcion: 'Filet de poisson blanc grillé avec citron.' },
-      { nombre: 'Suprême de Poulet', descripcion: 'Blanc de poulet pané avec garniture.' },
-      { nombre: 'Hot Dogs', descripcion: 'Hot-dogs classiques avec garnitures au goût.' }
+      { nombre: 'Raviolis à la ricotta', descripcion: 'Raviolis farcis à la ricotta avec sauce au choix.', id: "09EZzxiqo1q57F7Otlms" },
+      { nombre: 'Omelette', descripcion: 'Omelette classique au fromage et jambon.', id: "5wvHwgO9wuy29VonzWls" },
+      { nombre: 'Milanesa', descripcion: 'Viande panée servie avec frites ou salade au choix.', id: "GhnGX6dFdWnCNcsIFkJT" },
+      { nombre: 'Entraña', descripcion: 'Hampe de bœuf grillée servie avec chimichurri.', id: "KJoe8SiVokkUWeCVfnFy" },
+      { nombre: 'Hamburger', descripcion: 'Burger avec cheddar, laitue, tomate et sauce spéciale.', id: "bbrRMHvqX1l9NOT3rvIC" },
+      { nombre: 'Ragoût de poulet', descripcion: 'Poulet mijoté dans sa sauce.', id: "qbco3jmmUiLHcLrqSOz2" }
     ],
     menu_bebida: [
-      { nombre: 'Café', descripcion: 'Café noir amer ou avec sucre.' },
-      { nombre: 'Daiquiri', descripcion: 'Cocktail tropical rhum, citron et sucre, rafraîchissant et doux.' },
-      { nombre: 'Soda Cola', descripcion: 'Soda cola classique, idéal pour accompagner tout repas.' },
-      { nombre: 'Coca Cola', descripcion: 'Boisson gazeuse bien froide pour rafraîchir et accompagner tout plat.' },
-      { nombre: 'Eau Aromatisée', descripcion: 'Eau aromatisée aux fruits.' },
-      { nombre: 'Vin Rouge', descripcion: 'Verre de vin rouge maison.' },
-      { nombre: 'Bière Patagonia', descripcion: 'Bière artisanale corps moyen, notes fruitées et touche d\'amertume.' },
-      { nombre: 'Bière Heineken', descripcion: 'Bière lager premium blonde.' },
-      { nombre: 'Eau Minérale', descripcion: 'Eau minérale naturelle plate.' },
-      { nombre: 'Vin Blanc', descripcion: 'Verre de vin blanc doux.' },
-      { nombre: 'Eau Tonique', descripcion: 'Eau tonique gazeuse.' }
+      { nombre: 'Daïquiri', descripcion: 'Cocktail tropical à base de rhum, citron vert et sucre.', id: "D1ihmWu2KXKSolD3ad3w" },
+      { nombre: 'Soda au cola', descripcion: 'Soda classique, idéal pour accompagner tout repas.', id: "FLTKNQ0TcshoXPH1Rr4l" },
+      { nombre: 'Pepsi', descripcion: 'Soda frais pour se rafraîchir.', id: "NfyhLhae8RrWxo4159pk" },
+      { nombre: 'Eau', descripcion: 'Eau plate naturelle.', id: "dFdPAuHhO38cnvwaBw5C" },
+      { nombre: 'Vin Rouge', descripcion: 'Verre de vin rouge de la maison.', id: "eJKdWPoiaMVXjnkfM2Kq" },
+      { nombre: 'Bière Patagonia', descripcion: 'Bière artisanale aux notes fruitées.', id: "XPi7UNXME5AcCpQo16xQ" },
+      { nombre: 'Bière Heineken', descripcion: 'Bière blonde lager premium.', id: "YHgTMiVOxzxaKy2eBKfx" }
     ],
     menu_postre: [
-      { nombre: 'Flan Maison', descripcion: 'Flan aux œufs avec caramel et confiture de lait (dulce de leche).' },
-      { nombre: 'Cheesecake', descripcion: 'Le cheesecake est connu pour son goût riche et crémeux et sa texture douce.' },
-      { nombre: 'Glace', descripcion: 'Glace artisanale disponible en vanille, chocolat et fraise.' },
-      { nombre: 'Brownie à la glace', descripcion: 'Brownie au dulce de leche accompagné d\'une boule de glace crème.' },
-      { nombre: 'Chocotorta', descripcion: 'Dessert argentin aux biscuits chocolat et crème dulce de leche.' }
+      { nombre: 'Flan Maison', descripcion: 'Flan aux œufs avec caramel et confiture de lait.', id: "1YHcSLyWph4PrgBmlr1S" },
+      { nombre: 'Cheesecake', descripcion: 'Connu pour sa saveur riche et sa texture onctueuse.', id: "RBWCdanCVi2MHAD9KswW" },
+      { nombre: 'Glace', descripcion: 'Glace artisanale disponible en plusieurs saveurs.', id: "t88CDv5y0pUzWCgGYIjy" },
+      { nombre: 'Brownie avec glace', descripcion: 'Brownie accompagné d’une boule de glace vanille.', id: "xA9EuV3gTkqbc8JEqJh2" },
+      { nombre: 'Chocotorta', descripcion: 'Dessert argentin aux biscuits chocolat et crème de lait.', id: "zRgghMowW98CaNXea9g8" }
     ],
     titulo_config_idioma: "Configuration de la langue",
-    btn_elegir_idioma: "choisir la langue",
-    btn_idioma_geo: "obtenir la langue géolocalisée",
+    btn_elegir_idioma: "Choisir la langue",
+    btn_idioma_geo: "btenir la langue géolocalisée",
     btn_cerrar: "Fermer",
     titulo_perfil_chef: "Profil du Chef",
     btn_aceptar: "Accepter",
@@ -1495,6 +1468,12 @@ LlevarPedidoMesa: 'Sie können die Bestellung nun an den Tisch bringen'
     Segundos: 'secondes.',
     PerdistePalabra: 'Vous avez perdu. Le mot était :',
     PedidoListoTitulo: 'La commande est prête',
-LlevarPedidoMesa: 'Vous pouvez maintenant apporter la commande à table'
+    LlevarPedidoMesa: 'Vous pouvez maintenant apporter la commande à table',
+    Enviado: 'Envoyé',
+    Cocinando: 'En cuisine',
+    Disfrutando: 'Dégustation',
+    votos: 'votes',
+    'gluten-free': 'Sans gluten',
+    IntentarDeNuevo: 'Réessayer',
   }
 };

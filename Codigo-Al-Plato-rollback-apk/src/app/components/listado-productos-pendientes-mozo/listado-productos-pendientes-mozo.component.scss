@@ -7,27 +7,71 @@ $accent: #f7b267;
 $text-light: #ffffff;
 
 :host {
-  display: block;
-  min-height: 100vh;
+display: flex;
+  flex-direction: column;
+  height: 100vh; /* Cambiamos min-height por height fijo */
+  overflow: hidden; /* Evita que rebote la pantalla completa */
   background-color: transparent;
   font-family: 'Segoe UI', sans-serif;
 }
 
+/* NAVBAR RESPONSIVE */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px; // Reducido un poco para móviles
+  background-color: #333;
+  color: white;
+  min-height: 70px;
+
+  .navbar-left img {
+    width: 45px; // Un poco más chico para que no coma pantalla
+    height: auto;
+  }
+
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .user-name {
+      margin-right: 0;
+      font-weight: bold;
+      color: #d84f45;
+      font-size: 0.9rem; // Ajuste para que nombres largos no rompan todo
+      max-width: 120px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .user-photo {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: 2px solid $primary;
+    }
+  }
+}
+
+/* CONTENEDOR PRINCIPAL */
 .container {
-  padding: 20px;
+  padding: 15px; // Menos padding en los bordes para ganar espacio
   padding-bottom: 100px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
+  overflow-y: overlay;
 }
 
 .title {
   color: $primary;
   text-align: center;
   font-weight: bold;
-  font-size: 1.8rem;
-  margin-bottom: 15px;
+  font-size: 1.5rem; // Un toque más chico para móviles
+  margin-bottom: 10px;
   border-bottom: 1px solid #333;
   padding-bottom: 10px;
 }
@@ -36,137 +80,189 @@ $text-light: #ffffff;
 .cards-list {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
 }
 
-/* TARJETA DE PEDIDO */
+/* TARJETA DE PEDIDO MEJORADA */
 .order-card {
   background-color: $card-bg;
   border-radius: 15px;
   overflow: hidden;
   border: 1px solid #333;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
   animation: slideIn 0.4s ease-out;
 
   .card-header {
     background-color: #2a2a2a;
-    padding: 15px;
+    padding: 12px;
     border-bottom: 1px solid #333;
 
     .header-info {
       display: flex;
       align-items: center;
-      gap: 15px;
+      justify-content: space-between; // Reparte el espacio
+      width: 100%;
 
       .mesa-badge {
         background-color: $primary;
         color: white;
         font-weight: bold;
-        padding: 8px 12px;
-        border-radius: 10px;
-        font-size: 1rem;
+        padding: 6px 10px;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        flex-shrink: 0;
       }
 
       .client-info {
-        h3 { margin: 0; color: #fff; font-size: 1.1rem; }
-        .total-price { color: $success; font-weight: bold; font-size: 0.95rem; }
+        text-align: right;
+        h3 { 
+          margin: 0; 
+          color: #fff; 
+          font-size: 1rem;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 150px;
+        }
+        .total-price { color: $success; font-weight: bold; font-size: 0.85rem; }
       }
     }
   }
 
   .card-body {
-    padding: 15px 20px;
+    padding: 12px 15px;
     
     .section-title { 
-      color: $accent; font-weight: bold; margin-bottom: 10px; font-size: 1rem;
+      color: $accent; font-weight: bold; margin-bottom: 8px; font-size: 0.9rem;
       display: flex; align-items: center; gap: 8px;
     }
 
     .items-list {
       list-style: none; padding: 0; margin: 0;
       li {
-        display: flex; align-items: center; padding: 5px 0; border-bottom: 1px dashed #333;
+        display: flex; align-items: center; padding: 6px 0; border-bottom: 1px dashed #333;
+        font-size: 0.95rem;
         &:last-child { border-bottom: none; }
-        .qty { font-weight: bold; color: $accent; font-size: 1rem; width: 35px; }
-        .name { color: #ddd; font-size: 1rem; }
+        .qty { font-weight: bold; color: $accent; width: 30px; }
+        .name { color: #ddd; flex: 1; }
       }
     }
   }
 
   .card-actions {
-    padding: 15px; background-color: #181818;
+    padding: 12px; background-color: #181818;
 
     .btn-deliver {
-      width: 100%; padding: 15px; border-radius: 10px; border: none;
+      width: 100%; 
+      min-height: 50px; // Altura táctil mínima recomendada
+      border-radius: 10px; border: none;
       background: linear-gradient(90deg, $success, #2e7d32);
-      color: white; font-weight: bold; font-size: 1.1rem;
+      color: white; font-weight: bold; font-size: 1rem;
       display: flex; align-items: center; justify-content: center; gap: 10px;
-      cursor: pointer; transition: transform 0.1s;
-      box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
       
-      &:active { transform: scale(0.98); }
+      &:active { transform: scale(0.96); }
     }
   }
 }
 
-/* ESTADO VACÍO */
-.empty-state {
-  text-align: center; color: #666; margin-top: 50px; p { font-size: 1.2rem; }
-}
-
-/* BOTÓN VOLVER */
+/* BOTÓN VOLVER FLOTANTE */
 .back-button {
   position: fixed; bottom: 20px; left: 20px; z-index: 100;
   button {
-    width: 50px; height: 50px; border-radius: 50%; background: #333; color: $primary; 
-    border: 2px solid $primary; box-shadow: 0 4px 10px rgba(0,0,0,0.5); font-size: 1.2rem;
+    width: 55px; height: 55px; border-radius: 50%; background: #222; color: $primary; 
+    border: 2px solid $primary; box-shadow: 0 4px 15px rgba(0,0,0,0.6); font-size: 1.3rem;
     display: flex; align-items: center; justify-content: center;
   }
 }
 
-/* SPINNER */
+/* MEDIA QUERIES PARA PANTALLAS MUY CHICAS */
+@media (max-width: 360px) {
+  .title { font-size: 1.3rem; }
+  .navbar .user-name { display: none; } // Ocultamos nombre en mini-celulares para que no explote
+  .order-card .card-header .header-info .client-info h3 { max-width: 100px; }
+}
+
+/* SPINNER & ANIMATIONS */
 .spinner-overlay {
-  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.9);
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.92);
   display: flex; justify-content: center; align-items: center; z-index: 9999;
-  .spinner-container { display: flex; flex-direction: column; align-items: center; p { color: #fff; margin-top: 15px; font-weight: bold; }}
-  .spinning-logo { width: 80px; height: 80px; animation: spin 1.5s linear infinite; }
+  .spinner-container { 
+    text-align: center;
+    p { color: #fff; margin-top: 20px; font-weight: bold; padding: 0 20px; }
+  }
+  .spinning-logo { width: 70px; height: 70px; animation: spin 1.2s linear infinite; }
 }
 
 @keyframes spin { 100% { transform: rotate(360deg); } }
-@keyframes slideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes slideIn { from { transform: translateY(15px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
+.empty-state {
+  text-align: center; color: #777; margin-top: 60px; 
+  padding: 0 20px;
+  p { font-size: 1.1rem; line-height: 1.4; }
+}
+/* 1. EL HOST AHORA ES RÍGIDO (Toma el tamaño exacto de la pantalla) */
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Cambiamos min-height por height fijo */
+  overflow: hidden; /* Evita que rebote la pantalla completa */
+  background-color: transparent;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* 2. LA NAVBAR NO SE ACHICA */
 .navbar {
   display: flex;
-  // position: absolute;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+  padding: 10px 15px;
   background-color: #333;
   color: white;
+  min-height: 70px;
+  flex-shrink: 0; /* Agregamos esto para que el scroll no aplaste la barra superior */
+
+  /* ... (dejá el resto del código de la navbar igual) ... */
+  .navbar-left img {
+    width: 45px; 
+    height: auto;
+  }
+
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .user-name {
+      margin-right: 0;
+      font-weight: bold;
+      color: #d84f45;
+      font-size: 0.9rem; 
+      max-width: 120px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .user-photo {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: 2px solid $primary;
+    }
+  }
 }
 
-/* Área izquierda de la navbar */
-.navbar-left img {
-  width: 60px;
-  color: white;
-}
-
-/* Área derecha de la navbar */
-.navbar-right {
+/* 3. EL CONTENEDOR TOMA EL ESPACIO RESTANTE Y HACE SCROLL */
+.container {
+  flex: 1; /* Ocupa todo el espacio que sobra debajo de la navbar */
+  overflow-y: auto; /* MAGIA: Esto activa el scroll vertical */
+  padding: 15px;
+  padding-bottom: 100px; /* Súper necesario para que el botón de volver no tape la última card */
   display: flex;
-  align-items: center;
-}
-
-.user-name {
-  margin-right: 20px;
-  font-weight: bold;
-  color: #d84f45;
-  font-size: large;
-}
-
-/* Foto del usuario */
-.user-photo {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%; /* Hace la imagen circular */
+  flex-direction: column;
+  gap: 15px;
+  /* BORRAMOS EL min-height: 100vh de acá */
 }

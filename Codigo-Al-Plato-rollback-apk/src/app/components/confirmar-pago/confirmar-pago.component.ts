@@ -22,6 +22,7 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { DICCIONARIO } from 'src/assets/diccionario';
 import { CambioIdioma } from 'src/app/services/cambio-idioma';
+import { TraducirComidasPipe } from 'src/app/pipes/traducir-comidas.pipe';
 
 @Component({
   selector: 'app-confirmar-pago',
@@ -34,6 +35,7 @@ import { CambioIdioma } from 'src/app/services/cambio-idioma';
     IonicModule,
     FontAwesomeModule,
     RouterLink,
+    TraducirComidasPipe
   ],
 })
 export class ConfirmarPagoComponent {
@@ -90,6 +92,7 @@ export class ConfirmarPagoComponent {
     });
   }
   ngOnInit() {
+    console.clear()
     this.cambioIdioma.idiomaActual$.subscribe(data => this.idioma.set(data[0]))
   }
   mostrarDetalle(pedido: any): void {
@@ -125,22 +128,14 @@ export class ConfirmarPagoComponent {
         mensajeTitulo = this.diccionario[this.idioma()]['EntregaFinalizada'];
         mensajeCuerpo = this.diccionario[this.idioma()]['PagoDeliveryExito'];
 
-        await this.enviarNotificaciones(
-          ['dueño', 'supervisor', 'delivery'],
-          this.diccionario[this.idioma()]['CuentaConfirmada'],
-          this.diccionario[this.idioma()]['Eldeliveryhasidocobradoyfinalizado']
-        );
+        await this.enviarNotificaciones(['dueño', 'supervisor', 'delivery'], 'Cuenta Confirmada', 'El delivery ha sido cobrado y finalizado.');
 
       } else {
 
         mensajeTitulo = this.diccionario[this.idioma()]['MesaLiberada'];
         mensajeCuerpo = `${this.diccionario[this.idioma()]['Lamesa']} ${this.pedidoSeleccionado.mesa} ${this.diccionario[this.idioma()]['HaPagadoYLibre']}`;
 
-        await this.enviarNotificaciones(
-          ['dueño', 'supervisor', 'mesero'],
-          this.diccionario[this.idioma()]['CuentaConfirmada'],
-          `${this.diccionario[this.idioma()]['Lamesa']} ${this.pedidoSeleccionado.mesa} ${this.diccionario[this.idioma()]['cerrólacuenta']}`
-        );
+        await this.enviarNotificaciones(['dueño', 'supervisor', 'mesero'], 'Cuenta Confirmada', `La mesa ${this.pedidoSeleccionado.mesa} cerró la cuenta.`);
 
         this.liberarMesa(this.pedidoSeleccionado.cliente);
       }
@@ -490,8 +485,8 @@ export class ConfirmarPagoComponent {
             await this.sendEmail(this.pedidoSeleccionado.cliente, clienteEmail, pdfUrl);
           } else if (clienteTipo === 'anonimo') {
             await this.db.enviarNotificacion('anonimo', {
-              titulo: this.diccionario[this.idioma()]['FacturaDisponible'],
-              cuerpo: this.diccionario[this.idioma()]['Descargatufacturaaquí'],
+               titulo: 'Factura Disponible',
+               cuerpo: 'Descarga tu factura aquí.',
               pdfUrl: pdfUrl
             });
           }

@@ -44,7 +44,7 @@
         <ul class="items-list">
           <li *ngFor="let prod of pedido.productos">
             <span class="qty">x{{ prod.cantidad }}</span>
-            <span class="name">{{ prod.name }}</span>
+            <span class="name">{{ prod.name | traducirComidas }}</span>
           </li>
         </ul>
       </div>

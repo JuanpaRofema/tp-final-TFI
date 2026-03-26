@@ -61,6 +61,7 @@ export class EsperaMesaComponent implements OnInit, ViewDidLeave {
   ) { }
 
   ngOnInit() {
+    console.clear()
     this.cambioIdioma.idiomaActual$.subscribe(data => this.idioma.set(data[0]))
 
     this.isLoading = true;
@@ -142,12 +143,13 @@ export class EsperaMesaComponent implements OnInit, ViewDidLeave {
         const ultimaNotificacion: any = resultado[0];
 
         if (this.auth.usuarioIngresado.tipoCliente === 'cliente' && this.pasoActual !== -1) {
-          console.log(ultimaNotificacion);
+          //console.log(ultimaNotificacion);
           if (!ultimaNotificacion.recibida) {
-
+            let res = this.cambioIdioma.modificarLasPush(ultimaNotificacion)
+            //console.log("HERMANO, LO QUE LAS PUSH TIENEN ES ESTO, TITULO: ", ultimaNotificacion.titulo, "EL CONTENIDO: ", ultimaNotificacion.cuerpo)
             this.pushService.send(
-              ultimaNotificacion.titulo,
-              ultimaNotificacion.cuerpo,
+              res[0],
+              res[1],
               ''
             );
             this.db.actualizarNotificacion('cliente', ultimaNotificacion.id, { recibida: true });

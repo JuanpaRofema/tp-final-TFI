@@ -62,6 +62,7 @@ export class ReservaMesaComponent {
     console.log(this.auth.usuarioIngresado.nombre)
   }
   ngOnInit() {
+    console.clear()
     this.cambioIdioma.idiomaActual$.subscribe(data => this.idioma.set(data[0]))
   }
 
@@ -149,8 +150,8 @@ export class ReservaMesaComponent {
 
       await this.db.guardarObjeto(reserva, 'reserva');
       await this.db.enviarNotificacion('dueño', {
-        titulo: this.diccionario[this.idioma()]["CuentaConfirmada"],
-        cuerpo: `${this.auth.usuarioIngresado.nombre} ${this.diccionario[this.idioma()]['ReservaSolicitadaPara']} ${fechaReserva.toLocaleString()}`,
+       titulo: 'Cuenta confirmada',
+        cuerpo: `${this.auth.usuarioIngresado.nombre} pidió una reserva para el ${fechaReserva.toLocaleString()}`,
       });
 
 

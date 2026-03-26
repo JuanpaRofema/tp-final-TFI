@@ -9,13 +9,14 @@ import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 import { CambioIdioma } from 'src/app/services/cambio-idioma';
 import { DICCIONARIO } from 'src/assets/diccionario';
+import { TraducirComidasPipe } from 'src/app/pipes/traducir-comidas.pipe';
 
 @Component({
   selector: 'app-cocinero-delivery',
   templateUrl: './cocinero-delivery.component.html',
   styleUrls: ['./cocinero-delivery.component.scss'],
   standalone: true,
-  imports: [FontAwesomeModule, RouterLink, CommonModule],
+  imports: [FontAwesomeModule, RouterLink, CommonModule, TraducirComidasPipe],
 })
 export class CocineroDeliveryComponent implements OnInit {
 
@@ -35,6 +36,7 @@ export class CocineroDeliveryComponent implements OnInit {
   constructor(protected auth: AuthService, protected db: DatabaseService) { }
 
   ngOnInit() {
+    console.clear()
     this.cambioIdioma.idiomaActual$.subscribe(data => this.idioma.set(data[0]))
     this.isLoading = true;
     const observable = this.db.traerDelivery();
@@ -66,15 +68,15 @@ export class CocineroDeliveryComponent implements OnInit {
     if (pedido.cocinaFinalizada && barTermino) {
 
 
-await this.db.enviarNotificacion('dueño', {
-    titulo: this.diccionario[this.idioma()]['PedidoListoparaEntregar'],
-    cuerpo: `${this.diccionario[this.idioma()]['Elpedidode']} ${pedido.cliente} ${this.diccionario[this.idioma()]['estálistoencocinaybarra']}`,
-    pedidoId: pedido.id
-});
-await this.db.enviarNotificacion('supervisor', {
-    titulo: this.diccionario[this.idioma()]['PedidoListoparaEntregar'],
-    cuerpo: `${this.diccionario[this.idioma()]['Elpedidode']} ${pedido.cliente} ${this.diccionario[this.idioma()]['estálisto']}`,
-});
+      await this.db.enviarNotificacion('dueño', {
+        titulo: 'Pedido Listo para Entregar',
+        cuerpo: `El pedido de ${pedido.cliente} está listo en cocina y barra.`,
+        pedidoId: pedido.id
+      });
+      await this.db.enviarNotificacion('supervisor', {
+        titulo: 'Pedido Listo para Entregar',
+        cuerpo: `El pedido de ${pedido.cliente} está listo.`,
+      });
 
       Swal.fire({
         title: this.diccionario[this.idioma()]['PedidoFinalizado'],

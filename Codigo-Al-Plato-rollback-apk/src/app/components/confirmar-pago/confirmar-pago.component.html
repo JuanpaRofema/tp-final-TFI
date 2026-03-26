@@ -55,7 +55,7 @@
           <ul>
             <li *ngFor="let prod of cuenta.productos">
               <span class="qty">{{ prod.cantidad }}x</span>
-              <span class="prod-name">{{ prod.name }}</span>
+              <span class="prod-name">{{ prod.name | traducirComidas}}</span>
               <span class="prod-price">{{ (prod.precio * prod.cantidad) | currency }}</span>
             </li>
           </ul>

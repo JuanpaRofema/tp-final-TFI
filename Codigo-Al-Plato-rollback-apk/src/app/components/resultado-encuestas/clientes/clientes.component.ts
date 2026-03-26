@@ -68,8 +68,10 @@ export class ClientesComponent implements OnInit {
       LineController
     );
   }
-
+  
   ngOnInit() {
+    console.clear()
+    
     this.cambioIdioma.idiomaActual$.subscribe(data => this.idioma.set(data[0]))
   this.isLoading = true;
 
@@ -196,24 +198,43 @@ export class ClientesComponent implements OnInit {
       '5',
     ]);
     this.crearCanvaBar('myPieChart2', listaSabor, ['1', '2', '3', '4', '5']);
-    this.crearCanva('myPieChart3', listaComidaCaliente, ['Si', 'No']);
+    this.crearCanva('myPieChart3', listaComidaCaliente, [this.diccionario[this.idioma()]["Sí"], this.diccionario[this.idioma()]["No"]]);
     this.crearCanvaBar('myPieChart4', listaPorcionesAdecuadas, [
-      'Muy grandes',
-      'Adecuadas',
-      'Muy pequeñas',
+      this.diccionario[this.idioma()]['Muygrandes'],
+      this.diccionario[this.idioma()]['Adecuadas'],
+      this.diccionario[this.idioma()]['Muypequeñas'],
     ]);
-    this.crearCanva('myPieChart5', listaPresentacionAtractiva, ['Si', 'No']);
-    this.crearCanvaRadar('myPieChart6', listaValoresMenu, listaClavesMenu);
+    this.crearCanva('myPieChart5', listaPresentacionAtractiva, [this.diccionario[this.idioma()]["Sí"], this.diccionario[this.idioma()]["No"]]);
+    this.crearCanvaRadar('myPieChart6', listaValoresMenu, this.clavesFuncion(listaClavesMenu));
+    console.log("LA LISTA DE CLAVES TIENE ESTOOOO:   ", listaClavesMenu)
     this.crearCanvaBar('myPieChart7', listaTiempo, [
-      'Menos de 45 minutos',
-      '15-30 Minutos',
-      '30-45 Minutos',
-      'Más de 45 minutos',
+      this.diccionario[this.idioma()]['Menosde15minutos'],
+      this.diccionario[this.idioma()]['a1530minutos'],
+      this.diccionario[this.idioma()]['a3045minutos'],
+      this.diccionario[this.idioma()]['Másde45minutos'],
     ]);
 
     this.isLoading = false;
   }
-
+  clavesFuncion(lista:any) {
+    let lista_Nueva:any =[] 
+    for(let elemento of lista) {
+      if(elemento == "vegetariano") {
+        lista_Nueva.push(this.diccionario[this.idioma()]["Vegetariano"])
+      }
+      else if(elemento == "gluten-free") { 
+        lista_Nueva.push(this.diccionario[this.idioma()]["gluten-free"])
+      }
+      else if(elemento == "vegano") { 
+        lista_Nueva.push(this.diccionario[this.idioma()]["Vegano"])
+      }
+      else if(elemento == "organico") { 
+        lista_Nueva.push(this.diccionario[this.idioma()]["Orgánico"])
+      }
+    }
+    console.log("LA DE LA FUNCION ES ESTA: ", lista_Nueva)
+    return lista_Nueva
+  }
   crearCanva(div: string, datos: any[], etiquetas: any[]) {
     const ctx = document.getElementById(div) as HTMLCanvasElement;
 
@@ -224,7 +245,7 @@ export class ClientesComponent implements OnInit {
           labels: etiquetas,
           datasets: [
             {
-              label: 'votos',
+              label: this.diccionario[this.idioma()]['votos'],
               data: datos,
               backgroundColor: [
                 'rgba(75, 0, 130, 0.6)', // Indigo oscuro
@@ -272,7 +293,7 @@ export class ClientesComponent implements OnInit {
           labels: etiquetas,
           datasets: [
             {
-              label: 'votos',
+              label: this.diccionario[this.idioma()]['votos'],
               data: datos,
               backgroundColor: [
                 'rgba(75, 0, 130, 0.6)', // Indigo oscuro
@@ -344,7 +365,7 @@ export class ClientesComponent implements OnInit {
           labels: etiquetas,
           datasets: [
             {
-              label: 'votos',
+              label: this.diccionario[this.idioma()]['votos'],
               data: datos,
               backgroundColor: [
                 'rgba(75, 0, 130, 0.6)', // Indigo oscuro

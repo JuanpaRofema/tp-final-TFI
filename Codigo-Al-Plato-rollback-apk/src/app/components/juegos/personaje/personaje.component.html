@@ -35,7 +35,7 @@
 
   <button class="personajes" *ngFor="let personaje of personajes" (click)="seleccionarPersonaje(personaje)">
     <img [src]="personaje.img" alt="{{ personaje.nombre }}">
-    <p>{{ personaje.nombre }}</p>
+    <p>{{ personaje.nombre | personajes}}</p>
   </button>
 </div>
 

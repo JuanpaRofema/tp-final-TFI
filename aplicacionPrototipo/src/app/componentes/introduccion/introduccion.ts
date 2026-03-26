@@ -96,6 +96,7 @@ export class Introduccion implements OnInit {
       }
     }).then((result) => {
       if (result.isConfirmed) {
+        let idiomaViejo = this.idioma_actual()
         this.modificarIdioma();
         if (this.ultimaUbicacionAceptada) {
           Swal.fire({
@@ -107,10 +108,10 @@ export class Introduccion implements OnInit {
         }
         else {
           Swal.fire({
-            title: this.diccionario[this.idioma_actual()]["error_titulo"],
-            text: this.diccionario[this.idioma_actual()]["error_desc"],
+            title: this.diccionario[idiomaViejo]["error_titulo"],
+            text: this.diccionario[idiomaViejo]["error_desc"],
             icon: 'error',
-            confirmButtonText: this.diccionario[this.idioma_actual()]["OK"]
+            confirmButtonText: this.diccionario[idiomaViejo]["OK"]
           });
         }
       }

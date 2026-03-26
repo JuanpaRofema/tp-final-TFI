@@ -101,6 +101,7 @@ export class IniciarSesionComponent {
     this.auth.CerrarSesion()
   }
   ngOnInit() {
+    console.clear()
     this.cambioIdioma.idiomaActual$.subscribe(data => this.idioma.set(data[0]))
     console.log("ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
   }

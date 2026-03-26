@@ -9,13 +9,14 @@ import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 import { DICCIONARIO } from 'src/assets/diccionario';
 import { CambioIdioma } from 'src/app/services/cambio-idioma';
+import { TraducirComidasPipe } from 'src/app/pipes/traducir-comidas.pipe';
 
 @Component({
   selector: 'app-confirmar-pedido',
   templateUrl: './confirmar-pedido.component.html',
   styleUrls: ['./confirmar-pedido.component.scss'],
   standalone: true,
-  imports: [FontAwesomeModule, RouterLink, CommonModule],
+  imports: [FontAwesomeModule, RouterLink, CommonModule, TraducirComidasPipe],
 })
 export class ConfirmarPedidoComponent implements OnInit {
   diccionario: any = DICCIONARIO
@@ -36,6 +37,7 @@ export class ConfirmarPedidoComponent implements OnInit {
   constructor(protected auth: AuthService, protected db: DatabaseService) { }
 
   ngOnInit(): void {
+    console.clear()
     this.cambioIdioma.idiomaActual$.subscribe(data => this.idioma.set(data[0]))
     this.isLoading = true;
     setTimeout(() => { if (this.isLoading && this.pedidosPendientes.length === 0) this.isLoading = false; }, 1000);
@@ -92,15 +94,15 @@ export class ConfirmarPedidoComponent implements OnInit {
     try {
 
       await this.db.enviarNotificacion('chef', {
-        titulo: this.diccionario[this.idioma()]['NuevoPedido'],
-        cuerpo: `${this.diccionario[this.idioma()]['Mesa']} ${pedido.mesa} ${this.diccionario[this.idioma()]['esperacomida']}`,
+            titulo: 'Nuevo Pedido',
+            cuerpo: `Mesa ${pedido.mesa} espera comida.`,
       });
 
       const hayBebidas = pedido.productos.some((p: any) => p.tipoProducto === 'bebida');
       if (hayBebidas) {
         await this.db.enviarNotificacion('bartender', {
-          titulo: this.diccionario[this.idioma()]['NuevasBebidas'],
-          cuerpo: `${this.diccionario[this.idioma()]['Mesa']} ${pedido.mesa} ${this.diccionario[this.idioma()]['esperabebidas']}`,
+                titulo: 'Nuevas Bebidas',
+                cuerpo: `Mesa ${pedido.mesa} espera bebidas.`,
         });
       }
 
@@ -145,9 +147,10 @@ export class ConfirmarPedidoComponent implements OnInit {
     this.isLoading = true;
 
     await this.db.enviarNotificacion('cliente', {
-      titulo: this.diccionario[this.idioma()]['PedidoRechazado'],
-      cuerpo: `${this.diccionario[this.idioma()]['Motivo']} ${motivo}. ${this.diccionario[this.idioma()]['Porfavormodifiquesupedido']}`,
-      cliente: pedido.cliente
+        titulo: 'Pedido Rechazado',
+        cuerpo: `Motivo: ${motivo}. Por favor modifique su pedido.`,
+      cliente: pedido.cliente,
+      pedido: { ...pedido, cliente: 'cancelado' }
     });
 
 

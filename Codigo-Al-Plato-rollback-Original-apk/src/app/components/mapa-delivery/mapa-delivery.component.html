@@ -1,0 +1,78 @@
+<!-- SPINNER (Agregado) -->
+<div *ngIf="isLoading" class="spinner-overlay">
+  <div class="spinner-container">
+    <img src="assets/icono.png" class="spinning-logo">
+    <p>Calculando ruta...</p>
+  </div>
+</div>
+
+<div class="map-wrapper">
+  
+  <!-- CAPA 0: MAPA -->
+  <div id="map"></div>
+
+  <!-- CAPA 1: BOTÓN VOLVER -->
+  <button class="btn-float back" (click)="volver()">
+    <fa-icon [icon]="faArrowLeft"></fa-icon>
+  </button>
+
+  <!-- CAPA 2: TARJETA DE RUTA -->
+  <div class="active-route-card" [class.hidden]="mostrarSheet">
+    <div class="route-info">
+        <div class="icon-box">
+            <fa-icon [icon]="faMotorcycle"></fa-icon>
+        </div>
+        <div class="text">
+            <small>Destino Actual</small>
+            <h3>{{ clienteNombre || 'Cliente' }}</h3>
+            <p class="address"><fa-icon [icon]="faMapMarkerAlt"></fa-icon> {{ direccionCliente }}</p>
+        </div>
+    </div>
+    <div class="action-buttons">
+        <button class="btn-action chat" (click)="irAlChat()">
+            <fa-icon [icon]="faCommentDots"></fa-icon>
+            <span>Chat</span>
+        </button>
+        <button class="btn-action finish" (click)="toggleModalEntrega()">
+            <fa-icon [icon]="faFlagCheckered"></fa-icon>
+            <span>Finalizar</span>
+        </button>
+    </div>
+  </div>
+
+  <!-- CAPA 3: PANEL DESLIZABLE -->
+  <div class="delivery-sheet" [class.open]="mostrarSheet">
+    <div class="sheet-header" (click)="toggleModalEntrega()">
+        <div class="drag-handle"></div>
+    </div>
+    <div class="sheet-content">
+        <h2>Confirmar Entrega</h2>
+        
+        <div class="orders-list" *ngIf="!pedidoSeleccionado">
+            <p class="hint">Selecciona el pedido a entregar:</p>
+            <div class="mini-card" *ngFor="let p of pedidos" (click)="seleccionarParaEntregar(p)">
+                <div class="info">
+                    <h4>{{ p.cliente }}</h4>
+                    <span>Total: ${{ p.total }}</span>
+                </div>
+                <fa-icon [icon]="faArrowLeft" style="transform: rotate(180deg); color: #fff"></fa-icon>
+            </div>
+        </div>
+
+        <div class="confirm-view" *ngIf="pedidoSeleccionado">
+            <div class="summary-box">
+                <fa-icon [icon]="faBoxOpen" class="big-icon"></fa-icon>
+                <h3>{{ pedidoSeleccionado.cliente }}</h3>
+                <p class="total">Total: <span>${{ pedidoSeleccionado.total }}</span></p>
+                <ul class="products">
+                    <li *ngFor="let prod of pedidoSeleccionado.productos">
+                        <strong>{{ prod.cantidad }}x</strong> {{ prod.name }}
+                    </li>
+                </ul>
+            </div>
+            <button class="btn-confirm-final" (click)="entregarProducto()">ENTREGAR PEDIDO</button>
+            <button class="btn-cancel" (click)="toggleModalEntrega()">Cancelar</button>
+        </div>
+    </div>
+  </div>
+</div>

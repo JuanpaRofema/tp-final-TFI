@@ -10,13 +10,14 @@ import { PedidoService } from 'src/app/services/pedido.service';
 import { CommonModule } from '@angular/common';
 import { DICCIONARIO } from 'src/assets/diccionario';
 import { CambioIdioma } from 'src/app/services/cambio-idioma';
+import { TraducirComidasPipe } from 'src/app/pipes/traducir-comidas.pipe';
 
 @Component({
   selector: 'app-listado-productos-pendientes-mozo',
   templateUrl: './listado-productos-pendientes-mozo.component.html',
   styleUrls: ['./listado-productos-pendientes-mozo.component.scss'],
   standalone: true,
-  imports: [FontAwesomeModule, RouterLink, CommonModule],
+  imports: [FontAwesomeModule, RouterLink, CommonModule, TraducirComidasPipe],
 })
 export class ListadoProductosPendientesMozoComponent implements OnInit {
   diccionario: any = DICCIONARIO
@@ -40,6 +41,7 @@ export class ListadoProductosPendientesMozoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.clear()
     this.cambioIdioma.idiomaActual$.subscribe(data => this.idioma.set(data[0]))
     this.isLoading = true;
 

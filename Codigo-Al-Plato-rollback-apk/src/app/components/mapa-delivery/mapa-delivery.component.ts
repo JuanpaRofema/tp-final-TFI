@@ -14,6 +14,7 @@ import { pushService } from 'src/app/services/serviciosPush/push-notifications.s
 import { ViewDidLeave } from '@ionic/angular';
 import { DICCIONARIO } from 'src/assets/diccionario';
 import { CambioIdioma } from 'src/app/services/cambio-idioma';
+import { TraducirComidasPipe } from 'src/app/pipes/traducir-comidas.pipe';
 
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -28,7 +29,7 @@ L.Icon.Default.mergeOptions({
   templateUrl: './mapa-delivery.component.html',
   styleUrls: ['./mapa-delivery.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, FontAwesomeModule],
+  imports: [CommonModule, FormsModule, FontAwesomeModule, TraducirComidasPipe],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class MapaDeliveryComponent implements AfterViewInit, ViewDidLeave {
@@ -86,6 +87,7 @@ export class MapaDeliveryComponent implements AfterViewInit, ViewDidLeave {
     });
   }
   ngOnInit() {
+    console.clear()
     this.cambioIdioma.idiomaActual$.subscribe(data => this.idioma.set(data[0]))
   }
   ngAfterViewInit() {
@@ -105,10 +107,11 @@ export class MapaDeliveryComponent implements AfterViewInit, ViewDidLeave {
 
       if (!ultimaNotificacion.recibida && this.mostrarNotificacion) {
         console.log('LLEGO UNA NOTIFICACION - Delivery');
-
+        let res = this.cambioIdioma.modificarLasPush(ultimaNotificacion)
+        console.log("HERMANO, LO QUE LAS PUSH TIENEN ES ESTO, TITULO: ", ultimaNotificacion.titulo, "EL CONTENIDO: ", ultimaNotificacion.cuerpo)
         this.pushService.send(
-          ultimaNotificacion.titulo,
-          ultimaNotificacion.cuerpo,
+          res[0],
+          res[1],
           '/chat-delivery',
           true,
           '',
@@ -227,8 +230,8 @@ export class MapaDeliveryComponent implements AfterViewInit, ViewDidLeave {
     this.pedidoService.setMostrarInfo(false);
 
     await this.db.enviarNotificacion('cliente', {
-titulo: this.diccionario[this.idioma()]['PedidoEntregadoFinal'],
-cuerpo: this.diccionario[this.idioma()]['GraciasPorElegirnos'],
+        titulo: '¡Pedido Entregado!',
+        cuerpo: 'Gracias por elegirnos. ¡Que lo disfrutes!',
     });
 
     this.isLoading = false;

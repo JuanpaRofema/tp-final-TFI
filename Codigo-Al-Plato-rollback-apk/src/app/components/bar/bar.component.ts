@@ -9,13 +9,14 @@ import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 import { DICCIONARIO } from 'src/assets/diccionario';
 import { CambioIdioma } from 'src/app/services/cambio-idioma';
+import { TraducirComidasPipe } from 'src/app/pipes/traducir-comidas.pipe';
 
 @Component({
   selector: 'app-bar',
   templateUrl: './bar.component.html',
   styleUrls: ['./bar.component.scss'], // Usa el mismo SCSS o uno nuevo
   standalone: true,
-  imports: [FontAwesomeModule, RouterLink, CommonModule],
+  imports: [FontAwesomeModule, RouterLink, CommonModule,TraducirComidasPipe],
 })
 export class BarComponent implements OnInit {
 
@@ -35,6 +36,7 @@ export class BarComponent implements OnInit {
   constructor(protected auth: AuthService, protected db: DatabaseService) { }
 
   ngOnInit() {
+    console.clear()
     this.cambioIdioma.idiomaActual$.subscribe(data => this.idioma.set(data[0]))
     this.isLoading = true;
     setTimeout(() => { if (this.isLoading && this.pedidos.length === 0) this.isLoading = false; }, 900);
@@ -62,8 +64,8 @@ export class BarComponent implements OnInit {
     const cocinaTermino = pedido.cocinaFinalizada || !tieneComida;
 
     await this.db.enviarNotificacion('mesero', {
-      titulo: this.diccionario[this.idioma()]['BarFinalizado'],
-      cuerpo: `${this.diccionario[this.idioma()]['Mesa']} ${pedido.mesa}: ${this.diccionario[this.idioma()]['Bebidaslistas']}`,
+      titulo: 'Bar Finalizado',
+      cuerpo: `Mesa ${pedido.mesa}: Bebidas listas.`,
       pedidoEnProduccion: true,
       barFinalizado: true,
       cocinaFinalizada: pedido.cocinaFinalizada,

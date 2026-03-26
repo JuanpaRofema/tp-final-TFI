@@ -1,0 +1,277 @@
+
+/* Nombre del usuario */
+.user-name {
+  margin-right: 20px;
+  font-weight: bold;
+  color: #bf813f;
+  font-size: large;
+}
+
+
+.user-photo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%; /* Hace la imagen circular */
+}
+
+
+/* VARIABLES DE COLOR */
+$bg-dark: #121212;
+$card-bg: #1e1e1e;
+$primary: #d84f45; /* Rojo/Naranja marca */
+$accent: #f7b267; /* Amarillo/Naranja */
+$success: #4caf50;
+$text-light: #ffffff;
+$text-dim: #ffffff;
+
+/* ESTRUCTURA GENERAL */
+:host {
+  display: block;
+  min-height: 100vh;
+  background-color: transparent;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Estilos generales de la navbar */
+.navbar {
+  display: flex;
+  // position: absolute;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+}
+
+/* Área izquierda de la navbar */
+.navbar-left img {
+  width: 60px;
+  color: white;
+}
+
+/* Área derecha de la navbar */
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+/* CONTENEDOR PRINCIPAL */
+.main-container {
+  padding: 20px;
+  padding-bottom: 50px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* TARJETA DE ESTADO (Timeline) */
+.status-card {
+  background: $card-bg;
+  border-radius: 20px;
+  padding: 25px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+  margin-bottom: 30px;
+  animation: slideUp 0.5s ease-out;
+
+  .icon-header {
+    font-size: 3rem;
+    color: $primary;
+    margin-bottom: 10px;
+    
+    .pulse { animation: pulse 1.5s infinite; }
+  }
+
+  h2 {
+    color: $text-light;
+    margin-bottom: 30px;
+    font-size: 1.3rem;
+  }
+
+  /* ESTILOS DEL TIMELINE */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 20px;
+
+    .step {
+      display: flex;
+      align-items: flex-start; // Alineación arriba
+      position: relative;
+      padding-bottom: 30px;
+      width: 100%;
+
+      &:last-child { padding-bottom: 0; .line { display: none; } }
+
+      .circle {
+        width: 35px; height: 35px;
+        background-color: #333;
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        color: #666;
+        z-index: 2;
+        transition: all 0.3s ease;
+        flex-shrink: 0; // Evita que se aplaste
+      }
+
+      .line {
+        position: absolute;
+        left: 17px; /* Mitad de 35px */
+        top: 35px;
+        bottom: 0;
+        width: 2px;
+        background-color: #333;
+        z-index: 1;
+        transition: background-color 0.3s ease;
+      }
+
+      p {
+        margin: 0;
+        margin-left: 15px;
+        margin-top: 7px;
+        font-size: 1rem;
+        color: #666;
+        transition: color 0.3s ease;
+      }
+
+      /* ESTADO ACTIVO */
+      &.active {
+        .circle { background-color: $success; color: white; box-shadow: 0 0 10px rgba($success, 0.4); }
+        .line { background-color: $success; }
+        p { color: $text-light; font-weight: bold; }
+      }
+    }
+  }
+}
+
+/* BOTONES DE ACCIÓN */
+/* =========================================
+   BOTONES DE ACCIÓN (Corregido: Sacado afuera)
+   ========================================= */
+.action-btn {
+  width: 100%;
+  padding: 18px;
+  border: none;
+  border-radius: 15px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  margin-top: 10px; /* Separación extra */
+
+  &:active { transform: scale(0.98); }
+
+  /* Estilos específicos por tipo */
+  &.chat {
+    background: linear-gradient(90deg, #2196F3, #1976D2);
+    color: white;
+  }
+
+  &.pay {
+    background: linear-gradient(90deg, $success, #388E3C);
+    color: white;
+  }
+
+  &.survey {
+    background: linear-gradient(90deg, $accent, #F57C00);
+    color: white;
+  }
+
+  &.game {
+    background-color: #333;
+    color: $text-dim;
+    border: 1px solid #444;
+    &:hover { color: white; border-color: $primary; }
+  }
+
+  /* Estilo para el botón de volver (NUEVO) */
+  &.back {
+    background: #444; 
+    color: white;
+    border: 1px solid #666;
+    &:hover { background: #555; }
+  }
+}
+
+/* Contenedor de botones (Solo para espaciado) */
+.actions-area {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  .grid-buttons {
+    display: flex;
+    gap: 15px;
+  }
+}
+
+/* =========================================
+   ESTILOS DE RECHAZO (Mejorados)
+   ========================================= */
+.status-card.rejected {
+  /* Fondo rojo oscuro sólido para que se vea premium */
+  background: linear-gradient(145deg, #2a0f0f, #1a0505); 
+  border: 1px solid #ff4444; 
+  box-shadow: 0 0 20px rgba(255, 68, 68, 0.2); /* Resplandor rojo suave */
+  animation: shake 0.5s ease-in-out; /* Animación de error */
+}
+
+.icon-header-rejected {
+  font-size: 4rem; /* Icono más grande */
+  color: #ff4444;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 5px rgba(255,0,0,0.5));
+}
+
+.reason-box {
+  background: rgba(0, 0, 0, 0.4);
+  border-left: 3px solid #ff4444;
+  padding: 15px;
+  border-radius: 4px;
+  margin: 20px 0;
+  text-align: left; /* Texto alineado a la izquierda para leer mejor */
+  
+  p {
+    margin: 5px 0;
+    color: #e0e0e0;
+  }
+  
+  strong {
+    color: #ff6b6b;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+  }
+}
+
+/* ENTRETENIMIENTO Y SPINNER (Igual que antes) */
+.entertainment-section {
+  text-align: center;
+  margin-top: 20px;
+  p { color: $text-dim; font-size: 0.9rem; margin-bottom: 10px; }
+}
+
+.spinner-overlay {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.9);
+  display: flex; justify-content: center; align-items: center; z-index: 9999;
+  
+  .spinner-container {
+    display: flex; flex-direction: column; align-items: center;
+    p { color: #fff; margin-top: 15px; letter-spacing: 1px; }
+  }
+  .spinning-logo { width: 70px; height: 70px; animation: spin 1.5s linear infinite; }
+}
+
+/* ANIMACIONES */
+@keyframes spin { 100% { transform: rotate(360deg); } }
+@keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+@keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+/* Animación de temblor para el error */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}

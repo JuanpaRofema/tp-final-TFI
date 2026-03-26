@@ -89,6 +89,7 @@ export class AltaClienteComponent implements OnInit {
   emailDueño: string = '';
 
   async ngOnInit() {
+    console.clear()
     this.cambioIdioma.idiomaActual$.subscribe(data => this.idioma.set(data[0]))
     setTimeout(() => {
       this.isLoading = false;
@@ -180,7 +181,7 @@ export class AltaClienteComponent implements OnInit {
     const { data } = await modal.onWillDismiss();
     if (data) {
       this.scanResultDni = data?.barcode?.displayValue;
-      console.log((this.todosLosDatosDelDni = this.scanResultDni));
+      //console.log((this.todosLosDatosDelDni = this.scanResultDni));
 
       const datos = this.scanResultDni.split('@');
 
@@ -223,7 +224,7 @@ export class AltaClienteComponent implements OnInit {
 
         // Subir la imagen
         await uploadString(storageRef, dataUrl, 'data_url');
-        console.log('Imagen subida exitosamente');
+       // console.log('Imagen subida exitosamente');
 
         // Obtener URL de descarga
         const photoUrl = await getDownloadURL(storageRef);
@@ -241,8 +242,8 @@ export class AltaClienteComponent implements OnInit {
 
         await this.database.GuardarCliente(clienteData);
         await this.database.enviarNotificacion('dueño', {
-          titulo: this.diccionario[this.idioma()]['Nuevocliente'],
-          cuerpo: this.diccionario[this.idioma()]['Seregistróunnuevocliente'],
+          titulo: 'Nuevo cliente',
+          cuerpo: 'Se registró un nuevo cliente',
         });
 
         this.isLoading = false;
@@ -284,7 +285,7 @@ export class AltaClienteComponent implements OnInit {
 
         // Subir la imagen
         await uploadString(storageRef, dataUrl, 'data_url');
-        console.log('Imagen subida exitosamente');
+        //console.log('Imagen subida exitosamente');
 
         // Obtener URL de descarga
         const photoUrl = await getDownloadURL(storageRef);
@@ -327,7 +328,7 @@ export class AltaClienteComponent implements OnInit {
               contrasena: this.contrasenaDueño,
             });
           }
-          console.log(this.authService.usuarioIngresado)
+         // console.log(this.authService.usuarioIngresado)
           this.subirDatos(this.selectedImage);
         });
     }

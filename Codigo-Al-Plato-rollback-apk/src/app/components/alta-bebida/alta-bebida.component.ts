@@ -63,6 +63,7 @@ export class AltaBebidaComponent implements OnInit {
   ngOnInit() {
     this.cambioIdioma.idiomaActual$.subscribe(data => this.idioma.set(data[0]))
     setTimeout(() => { this.isLoading = false; }, 1000);
+    console.clear()
 
   }
 

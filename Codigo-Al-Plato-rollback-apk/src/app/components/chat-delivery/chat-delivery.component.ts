@@ -50,6 +50,7 @@ export class ChatDeliveryComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.clear()
     if (this.auth.usuarioIngresado.tipoCliente === 'delivery') {
       this.tituloChat = this.db.direccion || 'Cliente';
       this.subtituloChat = 'Destino del pedido';
@@ -100,15 +101,15 @@ export class ChatDeliveryComponent implements OnInit {
     );
 
     if (this.auth.usuarioIngresado.tipoCliente === 'cliente') {
-      await this.db.enviarNotificacion('delivery', {
-        titulo: this.diccionario[this.idioma()]['MensajedelCliente'],
-        cuerpo: this.mensajeInput,
-      });
+        await this.db.enviarNotificacion('delivery', {
+          titulo: 'Mensaje del Cliente',
+          cuerpo: this.mensajeInput,
+        });
     } else if (this.auth.usuarioIngresado.tipoCliente === 'delivery') {
-      await this.db.enviarNotificacion('cliente', {
-        titulo: this.diccionario[this.idioma()]['MensajedelRepartidor'],
-        cuerpo: this.mensajeInput,
-      });
+        await this.db.enviarNotificacion('cliente', {
+          titulo: 'Mensaje del Repartidor',
+          cuerpo: this.mensajeInput,
+        });
     }
 
     this.chat.AgregarMensaje(nuevoMensaje);

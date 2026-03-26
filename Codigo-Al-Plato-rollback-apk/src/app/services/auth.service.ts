@@ -43,7 +43,7 @@ export class AuthService {
         const observable = db.TraerUsuario('clientes');
         observable.subscribe((resultado) => {
           resultado.forEach((usuario) => {
-             console.log('Clientes en DB:', resultado);
+             //console.log('Clientes en DB:', resultado);
             this.usuarioDeDB = usuario;
             if (this.usuarioDeDB.email === this.usuarioIngresado.email) {
               this.usuarioIngresado = this.usuarioDeDB;

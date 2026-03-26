@@ -27,7 +27,7 @@
         <ul>
           <li *ngFor="let prod of pedidoActual.productos">
             <span class="qty">{{ prod.cantidad }}{{ diccionario[idioma()]['x'] }}</span>
-            <span class="name">{{ prod.name }}</span>
+            <span class="name">{{ prod.name | traducirComidas}}</span>
             <span class="price">${{ prod.precio * prod.cantidad }}</span>
           </li>
         </ul>

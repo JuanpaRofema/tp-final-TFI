@@ -1,3 +1,4 @@
+<ion-content class="caja">
 <div *ngIf="isLoading" class="spinner-overlay">
   <div class="spinner-container">
     <img src="assets/icono.png" class="spinning-logo">
@@ -100,7 +101,7 @@
 
     <div class="entertainment-section" *ngIf="pasoActual < 4">
       <p>{{ diccionario[idioma()]['Aburridodeesperar'] }}</p>
-      <button class="action-btn game" routerLink="/juego">
+      <button class="action-btn game" (click)="irAlJuego()">
         <fa-icon [icon]="faGamepad"></fa-icon>
         <span>{{ diccionario[idioma()]['Jugarunrato'] }}</span>
       </button>
@@ -109,3 +110,4 @@
   </div>
 
 </div>
+</ion-content>

@@ -1,0 +1,51 @@
+<button class="floating-btn" (click)="abrirModal()">
+  <fa-icon [icon]="faReceipt" class="icon-main"></fa-icon>
+  <span class="pulse-dot"></span> <!-- Puntito de estado -->
+</button>
+
+<!-- Modal Full Screen (Overlay) -->
+<div *ngIf="mostrarModal" class="modal-overlay fadeIn" (click)="cerrarModal()">
+  
+  <div class="modal-card slideUp" (click)="detenerPropagacion($event)">
+    
+    <button class="btn-close" (click)="cerrarModal()">✕</button>
+
+    <div class="modal-header">
+      <h3>Tu Pedido</h3>
+      <div class="status-badge">En Preparación</div>
+    </div>
+
+    <div class="modal-body" *ngIf="pedidoActual">
+      
+      <!-- Tiempo Estimado -->
+      <div class="info-row time">
+        <fa-icon [icon]="faClock"></fa-icon>
+        <span>Espera estimada: <strong>{{ pedidoActual.tiempoEstimado || '?' }} min</strong></span>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Lista de Productos -->
+      <div class="products-list">
+        <p class="list-title"><fa-icon [icon]="faUtensils"></fa-icon> Detalle:</p>
+        <ul>
+          <li *ngFor="let prod of pedidoActual.productos">
+            <span class="qty">{{ prod.cantidad }}x</span>
+            <span class="name">{{ prod.name }}</span>
+            <span class="price">${{ prod.precio * prod.cantidad }}</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Total -->
+      <div class="total-row">
+        <span>TOTAL</span>
+        <span class="total-amount">${{ pedidoActual.total }}</span>
+      </div>
+
+    </div>
+  </div>
+
+</div>

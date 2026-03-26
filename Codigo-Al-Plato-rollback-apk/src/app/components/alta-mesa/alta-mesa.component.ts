@@ -65,6 +65,7 @@ export class AltaMesaComponent {
     setTimeout(() => { this.isLoading = false; }, 1000);
   }
   ngOnInit() {
+    console.clear()
     this.cambioIdioma.idiomaActual$.subscribe(data => this.idioma.set(data[0]))
   }
   async tomarFoto() {

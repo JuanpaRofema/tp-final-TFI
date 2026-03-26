@@ -1,0 +1,229 @@
+<div class="body">
+  <h2 class="title">Encuesta de Satisfacción</h2>
+  <div class="survey-form">
+    <form [formGroup]="formEncuesta">
+      <div class="form-group">
+        <label for="service-rating" class="titulo-input"
+          >¿Cómo calificarías la atención?</label
+        >
+        <input
+          type="range"
+          id="service-rating"
+          name="service-rating"
+          min="1"
+          max="5"
+          [(ngModel)]="serviceRating"
+          formControlName="atencion"
+        />
+        <span>{{ serviceRating }}</span>
+      </div>
+      @if (errorAtencion){
+      <div class="error-message">
+        <p>{{ mensajeAtencion }}</p>
+      </div>
+      }
+      <div class="form-group">
+        <label for="food-rating" class="titulo-input"
+          >¿Cómo calificarías el sabor de la comida?</label
+        >
+        <input
+          type="range"
+          id="food-rating"
+          name="food-rating"
+          min="1"
+          max="5"
+          [(ngModel)]="saborComida"
+          formControlName="sabor"
+        />
+        <span>{{ saborComida }}</span>
+      </div>
+
+      @if (errorSabor){
+      <div class="error-message">
+        <p>{{ mensajeSabor }}</p>
+      </div>
+      }
+
+      <div class="form-group">
+        <label class="titulo-input">¿La comida estaba caliente?</label>
+        <label>
+          <input
+            type="radio"
+            name="comidaCaliente"
+            value="si"
+            formControlName="comidaCaliente"
+          />
+          Sí
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="comidaCaliente"
+            value="no"
+            formControlName="comidaCaliente"
+          />
+          No
+        </label>
+      </div>
+      @if (errorCaliente){
+      <div class="error-message">
+        <p>{{ mensajeCaliente }}</p>
+      </div>
+      }
+
+      <div class="form-group">
+        <label class="titulo-input">¿Las porciones fueron adecuadas?</label>
+        <label>
+          <input
+            type="radio"
+            name="porcionesAdecuadas"
+            value="Muy grandes"
+            formControlName="porcionesAdecuadas"
+          />
+          Muy grandes
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="porcionesAdecuadas"
+            value="Adecuadas"
+            formControlName="porcionesAdecuadas"
+          />
+          Adecuadas
+        </label>
+
+        <label>
+          <input
+            type="radio"
+            name="porcionesAdecuadas"
+            value="Muy pequeñas"
+            formControlName="porcionesAdecuadas"
+          />
+          Muy pequeñas
+        </label>
+      </div>
+      @if (errorPorciones){
+      <div class="error-message">
+        <p>{{ mensajePorciones }}</p>
+      </div>
+      }
+
+      <div class="form-group">
+        <label class="titulo-input"
+          >¿La presentación de los platillos fue atractiva?</label
+        >
+        <label>
+          <input
+            type="radio"
+            name="presentacionAtractiva"
+            value="si"
+            formControlName="presentacionAtractiva"
+          />
+          Sí
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="presentacionAtractiva"
+            value="no"
+            formControlName="presentacionAtractiva"
+          />
+          No
+        </label>
+      </div>
+
+      @if (errorPresentacion){
+      <div class="error-message">
+        <p>{{ mensajePresentacion }}</p>
+      </div>
+      }
+
+      <div class="form-group">
+        <label class="titulo-input"
+          >¿Qué tipos de menú prefiere en el restaurante?</label
+        >
+        <div class="checkbox-group">
+          <div class="checkbox-item">
+            <input
+              type="checkbox"
+              id="vegetariano"
+              value="vegetariano"
+              (change)="onCheckboxChange($event)"
+            />
+            <label for="vegetariano">Vegetariano</label>
+          </div>
+          <div class="checkbox-item">
+            <input
+              type="checkbox"
+              id="vegano"
+              value="vegano"
+              (change)="onCheckboxChange($event)"
+            />
+            <label for="vegano">Vegano</label>
+          </div>
+          <div class="checkbox-item">
+            <input
+              type="checkbox"
+              id="gluten-free"
+              value="gluten-free"
+              (change)="onCheckboxChange($event)"
+            />
+            <label for="gluten-free">Libre de gluten</label>
+          </div>
+          <div class="checkbox-item">
+            <input
+              type="checkbox"
+              id="organico"
+              value="organico"
+              (change)="onCheckboxChange($event)"
+            />
+            <label for="organico">Orgánico</label>
+          </div>
+        </div>
+      </div>
+
+      @if (errorTipoMenu){
+      <div class="error-message">
+        <p>{{ mensajeMenu }}</p>
+      </div>
+      }
+
+      <div class="form-group">
+        <label for="wait-time" class="titulo-input"
+          >¿Cuánto tiempo esperó por la comida?</label
+        >
+        <select
+          id="wait-time"
+          name="wait-time"
+          required
+          formControlName="tiempoEspera"
+        >
+          <option value="">Seleccione...</option>
+          <option value="menos de 15 minutos">Menos de 15 minutos</option>
+          <option value="15-30 minutos">15-30 minutos</option>
+          <option value="30-45 minutos">30-45 minutos</option>
+          <option value="más de 45 minutos">Más de 45 minutos</option>
+        </select>
+      </div>
+      @if (errorTiempo){
+      <div class="error-message">
+        <p>{{ mensajeTiempo }}</p>
+      </div>
+      }
+
+      <div class="form-group">
+        <label for="comments" class="titulo-input"
+          >Comentarios adicionales:</label
+        >
+        <textarea
+          id="comments"
+          name="comments"
+          rows="4"
+          formControlName="comentario"
+        ></textarea>
+      </div>
+
+      <button (click)="guardarEncuesta()">Enviar</button>
+    </form>
+  </div>
+</div>

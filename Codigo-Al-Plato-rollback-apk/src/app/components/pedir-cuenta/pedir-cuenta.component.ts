@@ -57,6 +57,7 @@ export class PedirCuentaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.clear()
     this.cambioIdioma.idiomaActual$.subscribe(data => this.idioma.set(data[0]))
     this.cargarDatos();
   }
@@ -150,7 +151,31 @@ export class PedirCuentaComponent implements OnInit {
       }
     }
   }
+  traduccionesSwal() {
+    const idioma = this.idioma();
 
+    if (idioma === "es") {
+      return ["Pago exitoso","Gracias por su visita"]
+    }
+    else if (idioma === "en") {
+      return ["Successful payment","Thanks for your visit"]
+    }
+    else if (idioma === "pt") {
+      return ["Pagamento bem-sucedido","Obrigado pela sua visita"]
+    }
+    else if (idioma === "ru") {
+      return ["Оплата прошла успешно", "Спасибо за визит"]
+    }
+    else if (idioma === "fr") {
+      return ["Paiement réussi", "Merci de votre visite "]
+    }
+    else if (idioma === "de") {
+      return ["Erfolgreiche Zahlung","Vielen Dank für Ihren Besuch"]
+    }
+    else {
+      return ["Pago exitoso","Gracias por su visita"]
+    }
+  }
   guardarCuenta() {
     this.isLoading = true;
 
@@ -177,20 +202,20 @@ export class PedirCuentaComponent implements OnInit {
       this.db.ModificarObjeto(this.pedidoActivo, coleccion);
 
       this.db.enviarNotificacion('dueño', {
-titulo: this.diccionario[this.idioma()]['PagoRecibido'],
-cuerpo: `${this.diccionario[this.idioma()]['Cliente']} ${cuenta.cliente} ${this.diccionario[this.idioma()]['Abono']} $${cuenta.total}`
+        titulo: 'Pago Recibido',
+        cuerpo: `Cliente ${cuenta.cliente} abonó $${cuenta.total}`
       });
       this.db.enviarNotificacion('mesero', {
-titulo: this.diccionario[this.idioma()]['PagoRecibido'],
-cuerpo: `${this.diccionario[this.idioma()]['Cliente']} ${cuenta.cliente} ${this.diccionario[this.idioma()]['Abono']} $${cuenta.total}`
+        titulo: 'Pago Recibido',
+        cuerpo: `Cliente ${cuenta.cliente} abonó $${cuenta.total}`
       });
 
-
+      let textos = this.traduccionesSwal()
       this.isLoading = false;
       Swal.fire({
         icon: 'success',
-        title: this.diccionario[this.idioma()]['PagoExitoso'],
-        text: this.diccionario[this.idioma()]['Graciasporsuvisita'],
+        title: textos[0],
+        text: textos[1],
         background: '#333',
         color: '#fff'
       }).then(() => {

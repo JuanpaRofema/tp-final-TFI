@@ -36,6 +36,7 @@ export class ListadoClientesComponent {
   constructor(protected auth: AuthService, protected db: DatabaseService) { }
 
   ngOnInit() {
+    console.clear()
     console.log("ACA ESTO PALABRA XD XD XDD", this.diccionario[this.idioma()]['permitir'])
     this.isLoading = true;
     this.cambioIdioma.idiomaActual$.subscribe(data => this.idioma.set(data[0]))
@@ -68,6 +69,7 @@ export class ListadoClientesComponent {
   async cambiarEstadoAcceso(cliente: any, estado: 'permitido' | 'denegado') {
     const texto = estado === 'permitido' ? this.diccionario[this.idioma()]['permitir'] : this.diccionario[this.idioma()]['denegar'];
     const colorBtn = estado === 'permitido' ? '#4caf50' : '#d33';
+    
 
     const confirm = await Swal.fire({
       title: `¿${texto} ${this.diccionario[this.idioma()]['acceso']}`,
@@ -88,13 +90,18 @@ export class ListadoClientesComponent {
       cliente.acceso = estado;
       await this.db.ModificarObjeto(cliente, 'clientes');
 
-      const esAceptado = estado === 'permitido';
+      const esAceptado = (estado === 'permitido');
       this.sendEmail(esAceptado, cliente.nombre, cliente.email);
 
       this.isLoading = false;
 
+      // Buscamos la traducción para que no salga el texto de la base de datos
+      const palabraEstado = esAceptado 
+        ? this.diccionario[this.idioma()]['permitir'] 
+        : this.diccionario[this.idioma()]['denegar'];
+
       Swal.fire({
-        title: `${this.diccionario[this.idioma()]['Acceso']} ${estado}`,
+        title: `${this.diccionario[this.idioma()]['Acceso']} ${palabraEstado}`,
         icon: esAceptado ? 'success' : 'error',
         timer: 1500,
         showConfirmButton: false,

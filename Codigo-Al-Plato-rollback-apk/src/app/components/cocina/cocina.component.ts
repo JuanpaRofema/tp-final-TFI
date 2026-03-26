@@ -9,13 +9,14 @@ import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 import { CambioIdioma } from 'src/app/services/cambio-idioma';
 import { DICCIONARIO } from 'src/assets/diccionario';
+import { TraducirComidasPipe } from 'src/app/pipes/traducir-comidas.pipe';
 
 @Component({
   selector: 'app-cocina',
   templateUrl: './cocina.component.html',
   styleUrls: ['./cocina.component.scss'],
   standalone: true,
-  imports: [FontAwesomeModule, RouterLink, CommonModule],
+  imports: [FontAwesomeModule, RouterLink, CommonModule, TraducirComidasPipe],
 })
 export class CocinaComponent implements OnInit {
   diccionario: any = DICCIONARIO
@@ -34,6 +35,7 @@ export class CocinaComponent implements OnInit {
   constructor(protected auth: AuthService, protected db: DatabaseService) { }
 
   ngOnInit() {
+    console.clear()
     this.cambioIdioma.idiomaActual$.subscribe(data => this.idioma.set(data[0]))
     this.isLoading = true;
     setTimeout(() => { if (this.isLoading && this.pedidos.length === 0) this.isLoading = false; }, 1000);
@@ -69,8 +71,8 @@ export class CocinaComponent implements OnInit {
 
 
     await this.db.enviarNotificacion('mesero', {
-      titulo: this.diccionario[this.idioma()]['Cocinafinalizado'],
-      cuerpo: this.diccionario[this.idioma()]['Comidaslistasparaenviar'],
+      titulo: 'Cocina finalizado',
+      cuerpo: `Comidas listas para enviar`,
       pedidoEnProduccion: true,
       cocinaFinalizada: true,
       barFinalizado: barFinalizado,

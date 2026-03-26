@@ -1,3 +1,4 @@
+<ion-content class="cosa">
 @if (this.auth.usuarioIngresado !== null){
 <nav class="navbar">
   <div class="navbar-left">
@@ -38,14 +39,14 @@
     <button class="custom-button" [routerLink]="['/ahorcado']">
       <img src="assets\iconos\juego-del-ahorcado.png" alt="" />
     </button>
-    <h2>Ahorcado</h2>
+    <h2> {{diccionario[idioma()]["Ahorcado"]}}</h2>
     </div>
 
     <div class="card-opcion">
     <button [routerLink]="['/mayormenor']" class="custom-button">
       <img src="assets\HIGHER-removebg-preview.png" alt="" />
     </button>
-    <h2>Mayor o Menor</h2>
+    <h2>{{diccionario[idioma()]["MayoroMenor"]}}</h2>
     </div>
 
     <div class="card-opcion">
@@ -55,14 +56,14 @@
     >
       <img src="assets\superheroeicono.png" alt="" />
     </button>
-    <h2>Juego Superheroe</h2>
+    <h2>{{diccionario[idioma()]["JuegoSuperheroe"]}}</h2>
     </div>
 
     <div class="card-opcion">
       <button class="custom-button" [routerLink]="['/juego-esquiva']">
       <img src="assets\iconos\iconoJuego.png" alt="" />
     </button>
-    <h2>Ayudar al Mozo</h2>
+    <h2>{{diccionario[idioma()]["AyudaralMozo"]}}</h2>
     </div>
   </div>
 </div>  
@@ -74,3 +75,4 @@
     </button>
   </div>
 
+</ion-content>

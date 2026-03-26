@@ -49,6 +49,7 @@ export class ConfirmarReservaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.clear()
     this.cambioIdioma.idiomaActual$.subscribe(data => this.idioma.set(data[0]))
     this.isLoading = true;
 

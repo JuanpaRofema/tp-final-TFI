@@ -1,0 +1,246 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  overflow-y: auto;
+  min-height: 100vh;
+  background-color: #111;
+  color: #f7b267;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+/* TÍTULO */
+.title {
+  color: #f7b267;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+/* LISTA DE CLIENTES */
+.user-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+}
+
+.user-card {
+  display: flex;
+  align-items: center;
+  background-color: #222;
+  border-radius: 10px;
+  padding: 10px;
+  color: #f7b267;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s;
+}
+
+.user-card:hover {
+  transform: scale(1.02);
+}
+
+.profile-pic {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+.user-info {
+  flex-grow: 1;
+}
+
+.user-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* DETALLE DEL CLIENTE */
+.user-details-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 90%;
+  max-width: 420px;
+  background-color: #333;
+  transform: translate(-50%, -50%);
+  border-radius: 12px;
+  padding: 20px;
+  color: #fff;
+  text-align: center;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.user-details-modal h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.user-details-modal p {
+  font-size: 1.1rem;
+  margin: 6px 0;
+}
+
+.profile-pic-large {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 15px auto;
+}
+
+/* BOTÓN CERRAR */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* ESTADOS */
+.permitido { color: #4caf50; font-weight: bold; }
+.denegado { color: #f44336; font-weight: bold; }
+.pendiente { color: #ffeb3b; font-weight: bold; cursor: pointer; }
+
+/* BOTÓN VOLVER */
+.back-button {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+
+.back-button button {
+  background-color: #f7b267;
+  color: #000;
+  border: none;
+  padding: 15px;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s;
+}
+
+.back-button button:hover {
+  background-color: #dc9952;
+}
+
+/*  BOTONES DE ASIGNACIÓN */
+.asignar-mesa-btn,
+.modal-button {
+  background: linear-gradient(to top left, #f98f1e, #f09819);
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  padding: 12px;
+  transition: all 0.3s;
+  width: 100%;
+}
+
+.asignar-mesa-btn:hover,
+.modal-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.disabled {
+  background: #666;
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+/*  MODAL (para elegir fecha o mesas) */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 60px;
+  z-index: 500;
+}
+
+.modal-content {
+  background-color: #1a1a1a;
+  border-radius: 20px; /* Bordes más redondeados */
+  padding: 30px; /* Más aire interno */
+  width: 90%;
+  max-width: 500px; /* Un poco más ancho */
+  color: #fff;
+  margin-top: 50px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5); /* Sombra para profundidad */
+  border: 1px solid #f7b267; /* Borde del color de la marca */
+}
+
+label {
+  font-size: 1.3rem; /* Fuente más grande */
+  color: #f7b267; /* Color destacado */
+  margin-bottom: 12px;
+  display: block;
+  font-weight: bold;
+}
+
+input[type="datetime-local"], ion-select, ion-input {
+  width: 100%;
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #444;
+  background: #333;
+  color: #fff;
+  font-size: 1.2rem; /* Texto interno más grande */
+  margin-bottom: 20px;
+}
+
+.botones {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.botones button {
+    flex: 1;
+    margin: 0 5px;
+    padding: 15px;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    border: none;
+    color: white;
+    font-weight: bold;
+    transition: transform 0.2s;
+    background-color:  color-mix(in srgb, #780000, var(--swal2-action-button-hover));
+}
+
+.botones button:hover {
+  transform: scale(1.05);
+}
+
+
+
+.spinner-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.8);
+  display: flex; justify-content: center; align-items: center; z-index: 9999;
+  
+  .spinner-container {
+    display: flex; flex-direction: column; align-items: center;
+    p { color: #fff; margin-top: 10px; font-weight: bold; }
+  }
+  .spinning-logo { width: 80px; height: 80px; animation: spin 1.5s linear infinite; }
+}
+@keyframes spin { 100% { transform: rotate(360deg); } }
+

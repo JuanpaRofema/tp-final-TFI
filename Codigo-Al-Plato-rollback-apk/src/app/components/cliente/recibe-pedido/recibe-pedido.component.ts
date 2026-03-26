@@ -118,8 +118,8 @@ export class RecibePedidoComponent {
     this.auth.usuarioIngresado.estadoPedido = 'cuentaSolicitada';
     this.db.ModificarObjeto(this.auth.usuarioIngresado, 'clientes');
     this.db.enviarNotificacion('mesero', {
-      titulo: this.diccionario[this.idioma()]['Cuentasolicitada'],
-      cuerpo: `${this.diccionario[this.idioma()]['Lamesa']} ${this.auth.usuarioIngresado.estadoMesa} ${this.diccionario[this.idioma()]['solicitólacuenta']}`,
+      titulo: 'Cuenta solicitada',
+      cuerpo: `La mesa ${this.auth.usuarioIngresado.estadoMesa} solicitó la cuenta`,
       mesa: this.auth.usuarioIngresado.estadoMesa,
       noRedirigir: true,
       cliente: this.auth.usuarioIngresado,

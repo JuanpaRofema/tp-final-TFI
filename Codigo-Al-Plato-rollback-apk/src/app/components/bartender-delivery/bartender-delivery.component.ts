@@ -9,13 +9,14 @@ import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 import { DICCIONARIO } from 'src/assets/diccionario';
 import { CambioIdioma } from 'src/app/services/cambio-idioma';
+import { TraducirComidasPipe } from 'src/app/pipes/traducir-comidas.pipe';
 
 @Component({
   selector: 'app-bartender-delivery',
   templateUrl: './bartender-delivery.component.html',
   styleUrls: ['./bartender-delivery.component.scss'],
   standalone: true,
-  imports: [FontAwesomeModule, RouterLink, CommonModule],
+  imports: [FontAwesomeModule, RouterLink, CommonModule, TraducirComidasPipe],
 })
 export class BartenderDeliveryComponent implements OnInit {
 
@@ -35,6 +36,7 @@ export class BartenderDeliveryComponent implements OnInit {
   constructor(protected auth: AuthService, protected db: DatabaseService) { }
 
   ngOnInit() {
+    console.clear()
     this.cambioIdioma.idiomaActual$.subscribe(data => this.idioma.set(data[0]))
     this.isLoading = true;
     const observable = this.db.traerDelivery();
@@ -64,15 +66,15 @@ export class BartenderDeliveryComponent implements OnInit {
 
     if (pedido.barFinalizado && cocinaTermino) {
 
-      await this.db.enviarNotificacion('dueño', {
-        titulo: this.diccionario[this.idioma()]['PedidoListoparaEntregar'],
-        cuerpo: `${this.diccionario[this.idioma()]['Elpedidode']} ${pedido.cliente}${this.diccionario[this.idioma()]['estálistoenbarraycocina']}`,
-        pedidoId: pedido.id
-      });
-      await this.db.enviarNotificacion('supervisor', {
-        titulo: this.diccionario[this.idioma()]['PedidoListoparaEntregar'],
-        cuerpo: `${this.diccionario[this.idioma()]['Elpedidode']} ${pedido.cliente}${this.diccionario[this.idioma()]['Estálisto']}`,
-      });
+        await this.db.enviarNotificacion('dueño', {
+            titulo: 'Pedido Listo para Entregar',
+            cuerpo: `El pedido de ${pedido.cliente} está listo en barra y cocina.`,
+            pedidoId: pedido.id
+        });
+        await this.db.enviarNotificacion('supervisor', {
+            titulo: 'Pedido Listo para Entregar',
+            cuerpo: `El pedido de ${pedido.cliente} está listo.`,
+        });
 
       Swal.fire({
         title: this.diccionario[this.idioma()]['PedidoFinalizado'],

@@ -1,0 +1,195 @@
+/* CONTENEDOR GENERAL */
+.map-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #222;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+
+/* BOTÓN VOLVER */
+.btn-float {
+  position: absolute;
+  top: 50px;
+  left: 20px;
+  z-index: 100;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: #222;
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  font-size: 1.2rem;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* TARJETA DE RUTA ACTIVA (Flotante Abajo) */
+.active-route-card {
+  position: absolute;
+  bottom: 30px;
+  left: 20px;
+  right: 20px;
+  z-index: 100;
+  background-color: #1e1e1e;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  border: 1px solid #333;
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+  .route-info {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .client-avatar {
+        width: 50px; height: 50px;
+        background: #333;
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        color: #d84f45;
+        font-size: 1.2rem;
+    }
+
+    .text {
+        small { color: #aaa; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+        h3 { margin: 2px 0; color: #fff; font-size: 1.3rem; }
+        .address { margin: 0; color: #ddd; font-size: 0.9rem; fa-icon { color: #d84f45; margin-right: 5px;} }
+    }
+  }
+
+  .action-buttons {
+      display: flex;
+      gap: 15px;
+
+      .btn-action {
+          flex: 1;
+          padding: 15px;
+          border-radius: 12px;
+          border: none;
+          font-weight: bold;
+          font-size: 1rem;
+          display: flex; align-items: center; justify-content: center; gap: 8px;
+          
+          &.chat { background: #333; color: #fff; }
+          &.finish { background: #d84f45; color: #fff; box-shadow: 0 4px 15px rgba(216, 79, 69, 0.4); }
+      }
+  }
+}
+
+/* PANEL DESLIZABLE (BOTTOM SHEET) */
+.delivery-sheet {
+    position: absolute;
+    bottom: 0; left: 0; width: 100%;
+    background-color: #1a1a1a;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    z-index: 200;
+    padding: 20px;
+    padding-bottom: 40px;
+    box-shadow: 0 -5px 30px rgba(0,0,0,0.8);
+    transform: translateY(100%); /* Oculto por defecto */
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    
+    &.open { transform: translateY(0); }
+
+    .sheet-header {
+        text-align: center;
+        margin-bottom: 20px;
+        position: relative;
+        
+        .drag-handle {
+            width: 40px; height: 5px; background: #444; border-radius: 10px; margin: 0 auto 15px;
+        }
+        h2 { margin: 0; color: #fff; font-size: 1.4rem; }
+        .close-sheet {
+            position: absolute; right: 0; top: 0;
+            background: none; border: none; color: #aaa; font-size: 0.9rem;
+        }
+    }
+
+    .orders-list {
+        .hint { color: #888; margin-bottom: 15px; font-size: 0.9rem; }
+        
+        .mini-card {
+            background: #252525;
+            padding: 15px;
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 10px;
+            border: 1px solid #333;
+            
+            .info h4 { margin: 0 0 5px; color: #fff; }
+            .info span { color: #aaa; font-size: 0.85rem; }
+            .price { font-weight: bold; color: #4caf50; font-size: 1.1rem; }
+        }
+    }
+
+    /* Confirmación Final */
+    .confirm-view {
+        text-align: center;
+        animation: fadeIn 0.3s;
+
+        .big-icon { 
+            font-size: 3rem; color: #d84f45; margin-bottom: 10px; 
+        }
+        h3 { color: #fff; margin-bottom: 5px; }
+        .total { color: #aaa; font-size: 1.1rem; span { color: #4caf50; font-weight: bold; font-size: 1.5rem;} }
+        
+        .products {
+            list-style: none; padding: 0; margin: 20px 0;
+            background: #252525; border-radius: 10px; padding: 15px;
+            li { color: #ddd; border-bottom: 1px solid #333; padding: 5px 0; &:last-child { border:none;} }
+        }
+
+        .btn-confirm-final {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(90deg, #4caf50, #2e7d32);
+            border: none; border-radius: 30px;
+            color: #fff; font-weight: bold; font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+            margin-bottom: 10px;
+        }
+        .btn-text {
+            background: none; border: none; color: #aaa; text-decoration: underline;
+        }
+
+        .btn-cancel {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(90deg, #c7402f, #dd4620);
+            border: none; border-radius: 30px;
+            color: #fff; font-weight: bold; font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(214, 66, 46, 0.4);
+            margin-bottom: 10px;
+        }
+
+    }
+}
+
+@keyframes slideUp { from { transform: translateY(100px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.spinner-overlay {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.8);
+  display: flex; justify-content: center; align-items: center; 
+  z-index: 9999; /* Por encima de todo, incluso el mapa */
+  
+  .spinner-container { 
+      display: flex; flex-direction: column; align-items: center; 
+      p { color: #fff; font-weight: bold; margin-top: 10px; }
+  }
+  .spinning-logo { width: 80px; height: 80px; animation: spin 1.5s linear infinite; }
+}
+@keyframes spin { 100% { transform: rotate(360deg); } }

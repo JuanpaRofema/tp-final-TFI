@@ -1,0 +1,61 @@
+<!-- SPINNER -->
+<div *ngIf="isLoading" class="spinner-overlay">
+  <div class="spinner-container">
+    <img src="assets/icono.png" class="spinning-logo">
+    <p>Cargando Comandas...</p>
+  </div>
+</div>
+
+<div class="container">
+  <h1 class="title">BARRA - DELIVERY</h1>
+
+  <div class="cards-list" *ngIf="pedidos.length > 0; else noPedidos">
+    
+    <div class="order-card" *ngFor="let p of pedidos">
+      
+      <!-- Cabecera -->
+      <div class="card-header">
+        <div class="header-info">
+            <h3>Cliente: {{ p.cliente }}</h3>
+            <span class="time-badge">
+                <fa-icon [icon]="faClock"></fa-icon> {{ p.fecha | date:'shortTime' }}
+            </span>
+        </div>
+      </div>
+
+      <!-- Lista de Bebidas -->
+      <div class="card-body">
+        <p class="section-title"><fa-icon [icon]="faGlassMartiniAlt"></fa-icon> A Preparar:</p>
+        <ul class="items-list">
+            <ng-container *ngFor="let prod of p.productos">
+                <li *ngIf="prod.tipoProducto === 'bebida'">
+                    <span class="qty">x{{ prod.cantidad }}</span>
+                    <span class="name">{{ prod.name }}</span>
+                </li>
+            </ng-container>
+        </ul>
+      </div>
+
+      <!-- Acción -->
+      <div class="card-actions">
+        <button class="btn-finish" (click)="finalizarPedido(p)">
+            <fa-icon [icon]="faCheckCircle"></fa-icon> MARCAR COMO LISTO
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <ng-template #noPedidos>
+    <div class="empty-state">
+        <p>No hay bebidas pendientes.</p>
+    </div>
+  </ng-template>
+
+</div>
+
+<div class="back-button">
+  <button routerLink="/home">
+    <fa-icon [icon]="faArrowLeft"></fa-icon>
+  </button>
+</div>

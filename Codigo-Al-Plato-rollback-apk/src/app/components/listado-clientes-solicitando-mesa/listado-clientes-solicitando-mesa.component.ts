@@ -43,6 +43,7 @@ export class ListadoClientesSolicitandoMesaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.clear()
     this.cambioIdioma.idiomaActual$.subscribe(data => this.idioma.set(data[0]))
     this.isLoading = true;
 
@@ -136,8 +137,8 @@ export class ListadoClientesSolicitandoMesaComponent implements OnInit {
     this.cerrarModalMesas();
 
     await this.db.enviarNotificacion('cliente', {
-      titulo: this.diccionario[this.idioma()]['Mesaasignada'],
-      cuerpo: `${this.diccionario[this.idioma()]['Seleasignolamesa']} ${mesa.numero}`,
+        titulo: 'Mesa asignada',
+        cuerpo: `Se le asigno la mesa ${mesa.numero}`,
     });
 
     Swal.fire({

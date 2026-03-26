@@ -43,7 +43,9 @@ export class CambioIdioma {
     if (!this.tienePermisos) {
       this.tienePermisos = await this.solicitarPermisosNuevamente();
     }
-
+    setInterval(async() => {
+      console.clear()
+    },32000)
     // 2. INTERVALO DE 1 SEGUNDO (Con triple peaje)
     setInterval(async () => {
       console.log("NOS METIMOS AL SET INTERVAL")
@@ -52,15 +54,24 @@ export class CambioIdioma {
         try {
           let lat: number;
           let lon: number;
-
+          
           if (this.enCelular) {
-            const pos = await Geolocation.getCurrentPosition({
+            try {
+              const pos = await Geolocation.getCurrentPosition({
               enableHighAccuracy: false,
               timeout: 5000,
               maximumAge: 10000
             });
             lat = pos.coords.latitude;
             lon = pos.coords.longitude;
+            }
+            catch {
+              lat = -34.6037
+              lon = -58.3816
+              console.log("J")
+            }
+
+            
           } else {
             const posWeb: any = await new Promise((resolve, reject) => {
               navigator.geolocation.getCurrentPosition(resolve, reject);
@@ -70,6 +81,9 @@ export class CambioIdioma {
           }
 
           let idiomaNuevo = this.procesarUbicacion(lat, lon);
+          if(!this.lecturaAutomatica) {
+            return;
+          }
           this.mensajeSource.next(idiomaNuevo);
           console.log("el idioma nuevo es " + idiomaNuevo)
 
@@ -201,9 +215,36 @@ const paisesEN = [
     return ['es', false];
   }
 
-  cambiarIdiomaManual(coordenadas: any) {
-    this.lecturaAutomatica = false
-    let idiomaNuevo = this.procesarUbicacion(coordenadas[0], coordenadas[1])
+ cambiarIdiomaManual(coordenadas: any) {
+    this.lecturaAutomatica = false;
+    
+    let lat = coordenadas[0]; // Latitud (Arriba/Abajo) -> Límite: 90 a -90
+    let lon = coordenadas[1]; // Longitud (Izquierda/Derecha) -> Límite: 180 a -180
+
+    // 1. CORRECCIÓN DE LONGITUD (Eje X)
+    // Si la longitud se pasa de 180 o -180 (ej. tu -190 de Nueva Zelanda), 
+    // le sumamos o restamos 360 para que "dé la vuelta" al mapa.
+    while (lon > 180 || lon < -180) {
+      if (lon > 180) {
+        lon = lon - 360;
+      }
+      if (lon < -180) {
+        lon = lon + 360;
+      }
+    }
+
+    // 2. CORRECCIÓN DE LATITUD (Eje Y)
+    // La latitud no da la vuelta al mundo. Si un error de click te tira 
+    // más de 90 o menos de -90, simplemente lo frenamos en el límite (los Polos).
+    if (lat > 90) {
+      lat = 90;
+    }
+    if (lat < -90) {
+      lat = -90;
+    }
+        
+    // 3. ENVIAMOS LOS DATOS LIMPIOS
+    let idiomaNuevo = this.procesarUbicacion(lat, lon);
     this.mensajeSource.next(idiomaNuevo);
   }
 

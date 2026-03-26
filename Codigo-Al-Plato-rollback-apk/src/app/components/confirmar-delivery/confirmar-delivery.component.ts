@@ -11,13 +11,14 @@ import { RouterLink } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { DICCIONARIO } from 'src/assets/diccionario';
 import { CambioIdioma } from 'src/app/services/cambio-idioma';
+import { TraducirComidasPipe } from 'src/app/pipes/traducir-comidas.pipe';
 
 @Component({
   selector: 'app-confirmar-delivery',
   templateUrl: './confirmar-delivery.component.html',
   styleUrls: ['./confirmar-delivery.component.scss'],
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule, RouterLink, IonicModule]
+  imports: [CommonModule, FontAwesomeModule, RouterLink, IonicModule,TraducirComidasPipe]
 })
 export class ConfirmarDeliveryComponent implements OnInit {
 
@@ -41,6 +42,7 @@ export class ConfirmarDeliveryComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.clear()
     this.cambioIdioma.idiomaActual$.subscribe(data => this.idioma.set(data[0]))
     this.isLoading = true;
     const observable = this.db.traerDelivery();
@@ -83,22 +85,20 @@ export class ConfirmarDeliveryComponent implements OnInit {
     this.isLoading = true;
 
     try {
+        await this.db.enviarNotificacion('chef', {
+            titulo: 'Nuevo Delivery',
+            cuerpo: `Hay un pedido de delivery para preparar.`,
+        });
 
-      await this.db.enviarNotificacion('chef', {
-        titulo: this.diccionario[this.idioma()]['NuevoDelivery'],
-        cuerpo: this.diccionario[this.idioma()]['Hayunpedidodedeliveryparapreparar'],
-      });
-
-
-      await this.db.enviarNotificacion('bartender', {
-        titulo: this.diccionario[this.idioma()]['NuevoDelivery'],
-        cuerpo: this.diccionario[this.idioma()]['Haybebidasdedeliveryparapreparar'],
-      });
-
-
+        
+        await this.db.enviarNotificacion('bartender', {
+            titulo: 'Nuevo Delivery',
+            cuerpo: `Hay bebidas de delivery para preparar.`,
+        });
+        let res = this.cambioIdioma.modificarLasPush({titulo:'Pedido Aceptado',cuerpo:`Tu pedido está en preparación. Tiempo aprox: ${pedido.tiempoEstimado} min.`})
       await this.pushService.send(
-        'Pedido Aceptado',
-        `Tu pedido está en preparación. Tiempo aprox: ${pedido.tiempoEstimado} min.`,
+        res[0],
+        res[1],
         '',
       );
 
@@ -141,9 +141,9 @@ export class ConfirmarDeliveryComponent implements OnInit {
     this.isLoading = true;
 
     await this.db.enviarNotificacion('cliente', {
-      titulo: this.diccionario[this.idioma()]['PedidoRechazado'],
-      cuerpo: `${this.diccionario[this.idioma()]['Motivo']} ${motivo}. ${this.diccionario[this.idioma()]['Porfavormodifiquesupedido']}`,
-      cliente: pedido.cliente
+        titulo: 'Pedido Rechazado',
+        cuerpo: `Motivo: ${motivo}. Por favor modifique su pedido.`,
+        cliente: pedido.cliente 
     });
 
     pedido.productos = [];
@@ -210,8 +210,8 @@ export class ConfirmarDeliveryComponent implements OnInit {
 
 
       await this.db.enviarNotificacion('delivery', {
-        titulo: this.diccionario[this.idioma()]['PedidoListo'],
-        cuerpo: `${this.diccionario[this.idioma()]['Tienesunpedidonuevopararetiraryentregara']}${pedido.cliente}.`,
+            titulo: '¡Pedido Listo!',
+            cuerpo: `Tienes un pedido nuevo para retirar y entregar a ${pedido.cliente}.`,
       });
 
       Swal.fire({

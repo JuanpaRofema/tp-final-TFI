@@ -8,6 +8,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faComment, faRightFromBracket, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from 'src/app/services/auth.service';
 import { DatabaseService } from 'src/app/services/database.service';
+import { PersonajesPipe } from '../../personajes.pipe';
 
 
 @Component({
@@ -15,7 +16,7 @@ import { DatabaseService } from 'src/app/services/database.service';
   templateUrl: './personaje.component.html',
   styleUrls: ['./personaje.component.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, FontAwesomeModule]
+  imports: [IonicModule, CommonModule, FormsModule, FontAwesomeModule, PersonajesPipe]
 })
 export class PersonajeComponent implements OnInit {
 

@@ -48,6 +48,7 @@ export class ChatComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.clear()
     this.cambioIdioma.idiomaActual$.subscribe(data => this.idioma.set(data[0]))
     this.mesa = this.db.mesa;
 
@@ -74,7 +75,7 @@ export class ChatComponent implements OnInit {
     });
   }
 
-  async EnviarMensaje() {
+    async EnviarMensaje() {
     if (this.mensajeInput.trim() === '') return;
 
     let nuevoMensaje = new Mensaje(
@@ -89,22 +90,22 @@ export class ChatComponent implements OnInit {
     const numero: any = str.match(/\d+/)?.[0] || '0';
 
     if (['anonimo', 'cliente'].includes(this.auth.usuarioIngresado.tipoCliente)) {
-      await this.db.enviarNotificacion('mesero', {
-        titulo: this.diccionario[this.idioma()]['Nuevomensaje'],
-        cuerpo: `${this.diccionario[this.idioma()]['Clienteconsultóenlamesa']} ${numero}`,
-        mesa: this.db.mesa,
-      });
+        await this.db.enviarNotificacion('mesero', {
+          titulo: 'Nuevo mensaje',
+          cuerpo: `Cliente consultó en la mesa ${numero}`,
+          mesa: this.db.mesa,
+        });
     } else if (this.auth.usuarioIngresado.tipoCliente === 'mesero') {
-      await this.db.enviarNotificacion('cliente', {
-        titulo: this.diccionario[this.idioma()]['Nuevomensaje'],
-        cuerpo: `${this.diccionario[this.idioma()]['Meserorespondióenmesa']} ${numero}`,
-        mesa: this.db.mesa,
-      });
-      await this.db.enviarNotificacion('anonimo', {
-        titulo: this.diccionario[this.idioma()]['Nuevomensaje'],
-        cuerpo: `${this.diccionario[this.idioma()]['Meserorespondióenmesa']} ${numero}`,
-        mesa: this.db.mesa,
-      });
+        await this.db.enviarNotificacion('cliente', {
+          titulo: 'Nuevo mensaje',
+          cuerpo: `Mesero respondió en mesa ${numero}`,
+          mesa: this.db.mesa,
+        });
+        await this.db.enviarNotificacion('anonimo', {
+          titulo: 'Nuevo mensaje',
+          cuerpo: `Mesero respondió en mesa ${numero}`,
+          mesa: this.db.mesa,
+        });
     }
 
     this.chat.AgregarMensaje(nuevoMensaje);

@@ -1,0 +1,56 @@
+    <div class="game-container">
+      
+      <!-- Pantalla de Overlay (Inicio / Fin) -->
+      <div *ngIf="!isPlaying" class="overlay">
+        
+        <h2 *ngIf="gameState === 'start'">¡Ayuda al Mozo!</h2>
+        <h2 *ngIf="gameState === 'win'" class="text-green-500">¡Pedido Entregado! 🎉</h2>
+        <h2 *ngIf="gameState === 'lose'" class="text-red-500">¡Se cayó el pedido! 😱</h2>
+        
+        <p class="description" *ngIf="gameState === 'start'">
+          Lleva la pizza a la mesa inclinando el celular.<br>
+        </p>
+
+        <button (click)="startGame()" class="play-btn">
+          {{ gameState === 'start' ? 'COMENZAR' : 'INTENTAR DE NUEVO' }}
+        </button>
+
+        <p class="debug-text" *ngIf="isDesktop">
+          💻 Usa las flechas del teclado para moverte
+        </p>
+      </div>
+
+      <!-- Área de Juego -->
+      <div #gameArea class="game-board" [style.opacity]="isPlaying ? '1' : '0.3'">
+        
+        <!-- Mesa (Meta) -->
+        <div class="game-item goal"
+             [style.left.px]="goal.x"
+             [style.top.px]="goal.y"
+             [style.width.px]="goal.width"
+             [style.height.px]="goal.height">
+             🍽️
+        </div>
+
+        <!-- Obstáculos -->
+        <div *ngFor="let obs of obstacles" 
+             class="game-item obstacle"
+             [style.left.px]="obs.x"
+             [style.top.px]="obs.y"
+             [style.width.px]="obs.width"
+             [style.height.px]="obs.height">
+             {{ obs.icon }}
+        </div>
+
+        <!-- Mozo (Jugador) -->
+        <div class="game-item player"
+             [style.left.px]="player.x"
+             [style.top.px]="player.y"
+             [style.width.px]="player.width"
+             [style.height.px]="player.height">
+             🤵
+             <div class="tray">🍕</div>
+        </div>
+
+      </div>
+    </div>

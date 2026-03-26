@@ -106,6 +106,7 @@ export class IngresoAnonimoComponent implements OnDestroy {
 
   }
   ngOnInit() {
+    console.clear()
     this.cambioIdioma.idiomaActual$.subscribe(data => this.idioma.set(data[0]))
   }
   ngOnDestroy() {

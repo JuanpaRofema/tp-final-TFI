@@ -74,6 +74,7 @@ export class HomeComponent implements ViewWillEnter, ViewDidLeave {
     this.escucharClickNotificacion();
   }
   ngOnInit() {
+    console.clear()
     this.cambioIdioma.idiomaActual$.subscribe(data => this.idioma.set(data[0]))
   }
 
@@ -106,9 +107,11 @@ export class HomeComponent implements ViewWillEnter, ViewDidLeave {
           if (!ultimaNotificacion.recibida) {
             if (this.mostrarNotificacion) {
               console.log('LLEGO UNA NOTIFICACION');
+              let res = this.cambioIdioma.modificarLasPush(ultimaNotificacion)
+              console.log("HERMANO, LO QUE LAS PUSH TIENEN ES ESTO, TITULO: ", ultimaNotificacion.titulo, "EL CONTENIDO: ", ultimaNotificacion.cuerpo)
               this.pushService.send(
-                ultimaNotificacion.titulo,
-                ultimaNotificacion.cuerpo,
+                res[0],
+                res[1],
                 ''
               );
               this.mostrarNotificacion = false;
@@ -138,9 +141,11 @@ export class HomeComponent implements ViewWillEnter, ViewDidLeave {
           if (!ultimaNotificacion.recibida) {
             if (this.mostrarNotificacion) {
               console.log('LLEGO UNA NOTIFICACION');
+              let res1 = this.cambioIdioma.modificarLasPush(ultimaNotificacion)
+              console.log("HERMANO, LO QUE LAS PUSH TIENEN ES ESTO, TITULO: ", ultimaNotificacion.titulo, "EL CONTENIDO: ", ultimaNotificacion.cuerpo)
               this.pushService.send(
-                "holaaaaaaaaaaaaaaaaaa",
-                "holaaaaaaaaaaaaaaaaa",
+                res1[0],
+                res1[1],
                 ''
               );
 
@@ -174,9 +179,11 @@ export class HomeComponent implements ViewWillEnter, ViewDidLeave {
             if (ultimaNotificacion.cocinaFinalizada && ultimaNotificacion.barFinalizado) {
               if (this.mostrarNotificacion) {
                 console.log('LLEGO UNA NOTIFICACION - Pedido listo');
+                let res2 = this.cambioIdioma.modificarLasPush(ultimaNotificacion)
+                console.log("HERMANO, LO QUE LAS PUSH TIENEN ES ESTO, TITULO: ", ultimaNotificacion.titulo, "EL CONTENIDO: ", ultimaNotificacion.cuerpo)
                 this.pushService.send(
-                  this.diccionario[this.idioma()]['PedidoListoTitulo'],
-                  `${this.diccionario[this.idioma()]['LlevarPedidoMesa']} ${ultimaNotificacion.mesa}`,
+                  res2[0],
+                  res2[1],
                   ''
                 );
                 this.mostrarNotificacion = false;
@@ -189,9 +196,11 @@ export class HomeComponent implements ViewWillEnter, ViewDidLeave {
               if (this.mostrarNotificacion) {
                 this.mostrarNotificacion = false;
                 console.log('LLEGO UNA NOTIFICACION - Sin redirigir');
+                let res3 = this.cambioIdioma.modificarLasPush(ultimaNotificacion)
+                console.log("HERMANO, LO QUE LAS PUSH TIENEN ES ESTO, TITULO: ", ultimaNotificacion.titulo, "EL CONTENIDO: ", ultimaNotificacion.cuerpo)
                 this.pushService.send(
-                  ultimaNotificacion.titulo,
-                  ultimaNotificacion.cuerpo,
+                  res3[0],
+                  res3[1],
                   '',
                   false,
                   ultimaNotificacion.mesa
@@ -206,9 +215,11 @@ export class HomeComponent implements ViewWillEnter, ViewDidLeave {
 
             if (this.mostrarNotificacion) {
               console.log('LLEGO UNA NOTIFICACION - Chat');
+              let res4 = this.cambioIdioma.modificarLasPush(ultimaNotificacion)
+              console.log("HERMANO, LO QUE LAS PUSH TIENEN ES ESTO, TITULO: ", ultimaNotificacion.titulo, "EL CONTENIDO: ", ultimaNotificacion.cuerpo)
               this.pushService.send(
-                ultimaNotificacion.titulo,
-                ultimaNotificacion.cuerpo,
+                res4[0],
+                res4[1],
                 '/chat',
                 true,
                 '',
@@ -240,10 +251,11 @@ export class HomeComponent implements ViewWillEnter, ViewDidLeave {
 
         if (!ultimaNotificacion.recibida && this.mostrarNotificacion) {
           console.log('LLEGO UNA NOTIFICACION - Maitre');
-
+          let res5 = this.cambioIdioma.modificarLasPush(ultimaNotificacion)
+          console.log("HERMANO, LO QUE LAS PUSH TIENEN ES ESTO, TITULO: ", ultimaNotificacion.titulo, "EL CONTENIDO: ", ultimaNotificacion.cuerpo)
           this.pushService.send(
-            ultimaNotificacion.titulo,
-            ultimaNotificacion.cuerpo,
+            res5[0],
+            res5[1],
             ''
           );
 
@@ -277,10 +289,11 @@ export class HomeComponent implements ViewWillEnter, ViewDidLeave {
 
             this.cliente = ultimaNotificacion.cliente;
             this.pedido = ultimaNotificacion.pedido;
-
+            let res6 = this.cambioIdioma.modificarLasPush(ultimaNotificacion)
+            console.log("HERMANO, LO QUE LAS PUSH TIENEN ES ESTO, TITULO: ", ultimaNotificacion.titulo, "EL CONTENIDO: ", ultimaNotificacion.cuerpo)
             this.pushService.send(
-              ultimaNotificacion.titulo,
-              ultimaNotificacion.cuerpo,
+              res6[0],
+              res6[1],
               '',
               true,
               '',
@@ -290,9 +303,11 @@ export class HomeComponent implements ViewWillEnter, ViewDidLeave {
 
           else {
             console.log('--- NOTIFICACION GENERICA ---');
+            let res7 = this.cambioIdioma.modificarLasPush(ultimaNotificacion)
+            console.log("HERMANO, LO QUE LAS PUSH TIENEN ES ESTO, TITULO: ", ultimaNotificacion.titulo, "EL CONTENIDO: ", ultimaNotificacion.cuerpo)
             this.pushService.send(
-              ultimaNotificacion.titulo,
-              ultimaNotificacion.cuerpo,
+              res7[0],
+              res7[1],
               '',
               true
             );
@@ -324,10 +339,11 @@ export class HomeComponent implements ViewWillEnter, ViewDidLeave {
 
         if (!ultimaNotificacion.recibida && this.mostrarNotificacion) {
           console.log('LLEGO UNA NOTIFICACION -', rol);
-
+          let res= this.cambioIdioma.modificarLasPush(ultimaNotificacion)
+          console.log("HERMANO, LO QUE LAS PUSH TIENEN ES ESTO, TITULO: ", ultimaNotificacion.titulo, "EL CONTENIDO: ", ultimaNotificacion.cuerpo)
           this.pushService.send(
-            ultimaNotificacion.titulo,
-            ultimaNotificacion.cuerpo,
+            res[0] ,
+            res[1] ,
             ''
           );
 
@@ -353,10 +369,11 @@ export class HomeComponent implements ViewWillEnter, ViewDidLeave {
       if (this.auth.usuarioIngresado.tipoCliente === 'anonimo') {
         if (!ultimaNotificacion.recibida && this.mostrarNotificacion) {
           console.log('LLEGO UNA NOTIFICACION');
-
+          let res8 = this.cambioIdioma.modificarLasPush(ultimaNotificacion)
+          console.log("HERMANO, LO QUE LAS PUSH TIENEN ES ESTO, TITULO: ", ultimaNotificacion.titulo, "EL CONTENIDO: ", ultimaNotificacion.cuerpo)
           this.pushService.send(
-            ultimaNotificacion.titulo,
-            ultimaNotificacion.cuerpo,
+            res8[0],
+            res8[1],
             ultimaNotificacion.pdfUrl,
             true,
             '',
@@ -388,7 +405,10 @@ export class HomeComponent implements ViewWillEnter, ViewDidLeave {
           if (
             c.cliente === this.auth.usuarioIngresado.nombre &&
             c.estadoCuenta === 'cuentaConfirmada'
+            && !c.notificado
           ) {
+            c.notificado = true;
+            this.db.ModificarObjeto(c,"cuenta")
             Swal.fire({
               title: this.diccionario[this.idioma()]['Pagoexitoso'],
               text: this.diccionario[this.idioma()]['SupagoseregistróconéxitoVuelvapronto'],
@@ -562,8 +582,8 @@ export class HomeComponent implements ViewWillEnter, ViewDidLeave {
         }
 
         await this.db.enviarNotificacion('maitre', {
-          titulo: this.diccionario[this.idioma()]['Clienteesperamesa'],
-          cuerpo: `${this.diccionario[this.idioma()]['Asigneunamesaalcliente']} ${this.auth.usuarioIngresado.nombre}`,
+          titulo: 'Cliente espera mesa',
+          cuerpo: `Asigne una mesa al cliente ${this.auth.usuarioIngresado.nombre}`,
         });
 
         this.router.navigateByUrl('/cliente-espera-mesa');
@@ -575,90 +595,123 @@ export class HomeComponent implements ViewWillEnter, ViewDidLeave {
   }
 
   escucharClickNotificacion() {
-    LocalNotifications.addListener(
-      'localNotificationActionPerformed',
-      (notification) => {
+  LocalNotifications.addListener(
+    'localNotificationActionPerformed',
+    (notification) => {
+      
+      // --- CASO 1: DELIVERY ---
+      if (notification.actionId === 'entregarCuentaDelivery') {
+        Swal.fire({
+          title: this.diccionario[this.idioma()]['CobrarDelivery'],
+          text: `${this.diccionario[this.idioma()]['Elcliente']} ${this.cliente} ${this.diccionario[this.idioma()]['solicitalacuentaConfirmarentregadecuenta']}`,
+          icon: 'info',
+          background: '#333',
+          color: '#fff',
+          confirmButtonText: this.diccionario[this.idioma()]['EntregarCuenta'],
+          confirmButtonColor: '#780000',
+          showCancelButton: true,
+          cancelButtonText: this.diccionario[this.idioma()]['Cancelar'],
+          heightAuto: false,
+        }).then((resp) => {
+          if (resp.isConfirmed && this.pedido) {
+            // Lógica reparada: busca el objeto real y evita bucles
+            const sub = this.db.traerDelivery().subscribe((lista: any[]) => {
+              const idPedido = this.pedido?.id || this.pedido;
+              const pedidoReal = lista.find((p: any) => p.id === idPedido);
 
-
-        if (notification.actionId === 'entregarCuentaDelivery') {
-
-          Swal.fire({
-            title: this.diccionario[this.idioma()]['CobrarDelivery'],
-            text: `${this.diccionario[this.idioma()]['Elcliente']} ${this.cliente} ${this.diccionario[this.idioma()]['solicitalacuentaConfirmarentregadecuenta']}`,
-            icon: 'info',
-            background: '#333',
-            color: '#fff',
-            confirmButtonText: this.diccionario[this.idioma()]['EntregarCuenta'],
-            confirmButtonColor: '#780000',
-            showCancelButton: true,
-            cancelButtonText: this.diccionario[this.idioma()]['Cancelar'],
-            heightAuto: false,
-          }).then((resp) => {
-            if (resp.isConfirmed) {
-              if (this.pedido) {
-                console.log(this.pedido)
-                this.pedido.estadoPedido = 'cuentaEntregada';
-                this.db.ModificarObjeto(this.pedido, 'delivery')
+              if (pedidoReal) {
+                this.db.ModificarObjeto({
+                  ...pedidoReal,
+                  estadoPedido: 'cuentaEntregada',
+                  fechaCuentaEntregada: new Date()
+                }, 'delivery');
+                console.log('✅ Pedido de delivery actualizado');
               }
-            }
-          });
+              sub.unsubscribe(); 
+            });
+          }
+        });
+      } 
+      
+      // --- CASO 2: GENERAL (MESERO / SALÓN) ---
+      else {
+        const esDelivery = this.auth.usuarioIngresado.tipoCliente === 'delivery';
+
+        if (!esDelivery && this.mesas && this.cliente) {
+          const nombreCliente = typeof this.cliente === 'string' ? this.cliente : this.cliente.nombre;
+          this.mesa = this.mesas.find((m: any) => m.ocupadaPor === nombreCliente);
+        }
+
+        let numMesa = this.db.mesa; 
+        if(this.auth.usuarioIngresado.tipoCliente === 'cliente') {
 
         }
         else {
-
-          this.mesas.forEach((m: any) => {
-
-            if (m.estado === 'ocupada' && m.ocupadaPor === this.cliente.nombre) {
-              this.mesa = m;
-            }
-          });
-
-          let numMesa = this.db.mesa;
-
           Swal.fire({
-            title: this.diccionario[this.idioma()]['Enviarcuenta'],
-            text: `${this.diccionario[this.idioma()]['Lamesa']} ${numMesa} ${this.diccionario[this.idioma()]['estásolicitandolacuenta']}`,
-            icon: 'info',
-            background: '#333',
-            color: '#fff',
-            confirmButtonText: this.diccionario[this.idioma()]['Enviar'],
-            confirmButtonColor: '#780000',
-            heightAuto: false,
-          }).then((resp) => {
-            if (resp.isConfirmed) {
-
-              if (this.cliente && this.cliente.estadoPedido) {
+          title: this.diccionario[this.idioma()]['Enviarcuenta'],
+          text: `${this.diccionario[this.idioma()]['Lamesa']} ${numMesa} ${this.diccionario[this.idioma()]['estásolicitandolacuenta']}`,
+          icon: 'info',
+          background: '#333',
+          color: '#fff',
+          confirmButtonText: this.diccionario[this.idioma()]['Enviar'],
+          confirmButtonColor: '#780000',
+          heightAuto: false,
+        }).then((resp) => {
+          if (resp.isConfirmed) {
+            
+            // Lógica reparada: Verifica que cliente sea objeto antes de modificar
+            if (this.cliente && typeof this.cliente === 'object') {
                 this.cliente.estadoPedido = 'cuentaEntregada';
                 this.db.ModificarObjeto(this.cliente, 'clientes');
-              }
+            }
 
-              if (this.mesa) {
+            // Lógica reparada: Desocupa la mesa solo si existe y no es delivery
+            if (!esDelivery && this.mesa) {
                 this.mesa.estado = 'desocupada';
                 this.mesa.ocupadaPor = '';
                 this.db.ModificarObjeto(this.mesa, 'mesas');
-              }
-
-              if (this.pedido) {
-                this.pedido.estadoPedido = 'cuentaEntregada';
-                this.db.ModificarObjeto(this.pedido, 'pedidos');
-              }
-
-              Swal.fire({
-                title: this.diccionario[this.idioma()]['Cuentaenviada'],
-                text: `${this.diccionario[this.idioma()]['Lamesa']} ${numMesa} ${this.diccionario[this.idioma()]['recibirásucuenta']}`,
-                icon: 'success',
-                confirmButtonText: this.diccionario[this.idioma()]['Aceptar'],
-                confirmButtonColor: '#780000',
-                heightAuto: false,
-                background: '#333',
-                color: '#fff',
-              });
             }
-          });
+            
+            // Lógica reparada: El corazón del arreglo para los pedidos
+            if (this.pedido) {
+                const coleccion = esDelivery ? 'delivery' : 'pedidos';
+                
+                // Si el pedido es objeto, lo pisamos directo
+                if (typeof this.pedido === 'object') {
+                    this.pedido.estadoPedido = 'cuentaEntregada';
+                    this.db.ModificarObjeto(this.pedido, coleccion);
+                } else {
+                    // Si el pedido es un string (ID), lo buscamos en la base de datos primero
+                    const obs = esDelivery ? this.db.traerDelivery() : this.db.traerPedidos();
+                    const sub = obs.subscribe((lista: any[]) => {
+                        const pedidoReal = lista.find((p: any) => p.id === this.pedido);
+                        if (pedidoReal) {
+                            pedidoReal.estadoPedido = 'cuentaEntregada';
+                            this.db.ModificarObjeto(pedidoReal, coleccion);
+                        }
+                        sub.unsubscribe(); // Desuscribimos para no hacer bucle infinito
+                    });
+                }
+            }
+
+            Swal.fire({
+              title: this.diccionario[this.idioma()]['Cuentaenviada'],
+              text: `${this.diccionario[this.idioma()]['Lamesa']} ${numMesa} ${this.diccionario[this.idioma()]['recibirásucuenta']}`,
+              icon: 'success',
+              confirmButtonText: this.diccionario[this.idioma()]['Aceptar'],
+              confirmButtonColor: '#780000',
+              heightAuto: false,
+              background: '#333',
+              color: '#fff',
+            });
+          }
+        });
         }
+        
       }
-    );
-  }
+    }
+  );
+}
 
   ngAfterViewInit() {
     const container = document.getElementById('snapContainer');

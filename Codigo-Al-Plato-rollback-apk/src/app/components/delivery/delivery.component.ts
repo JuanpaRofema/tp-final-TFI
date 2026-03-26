@@ -70,6 +70,7 @@ export class DeliveryComponent implements ViewWillEnter, ViewDidLeave {
 
   }
   ngOnInit() {
+    console.clear()
     this.cambioIdioma.idiomaActual$.subscribe(data => this.idioma.set(data[0]))
   }
   ionViewWillEnter(): void {
@@ -88,10 +89,11 @@ export class DeliveryComponent implements ViewWillEnter, ViewDidLeave {
 
       this.productsComidaGeneral = prods.filter(p => p.tipoProducto === 'comida');
       this.productsBebidaGeneral = prods.filter(p => p.tipoProducto === 'bebida');
+      console.log("las bebidas son estas:", this.productsBebidaGeneral)
       this.productsPostresGeneral = prods.filter(p => p.tipoProducto === 'postre');
-      this.productsComida = this.transform(this.productsComidaGeneral,1)
-      this.productsBebida = this.transform(this.productsBebidaGeneral,2)
-      this.productsPostres = this.transform(this.productsPostresGeneral,3)
+      this.productsComida = this.transform1(this.productsComidaGeneral, 1)
+      this.productsBebida = this.transform1(this.productsBebidaGeneral, 2)
+      this.productsPostres = this.transform1(this.productsPostresGeneral, 3)
 
       this.isLoading = false;
     });
@@ -103,9 +105,11 @@ export class DeliveryComponent implements ViewWillEnter, ViewDidLeave {
         console.log(ultimaNotificacion);
         if (this.auth.usuarioIngresado.tipoCliente === 'cliente') {
           if (!ultimaNotificacion.recibida) {
+            let res = this.cambioIdioma.modificarLasPush(ultimaNotificacion)
+            console.log("HERMANO, LO QUE LAS PUSH TIENEN ES ESTO, TITULO: ", ultimaNotificacion.titulo, "EL CONTENIDO: ", ultimaNotificacion.cuerpo)
             this.pushService.send(
-              ultimaNotificacion.titulo,
-              ultimaNotificacion.cuerpo,
+              res[0],
+              res[1],
               '/chat-delivery'
             );
 
@@ -125,42 +129,86 @@ export class DeliveryComponent implements ViewWillEnter, ViewDidLeave {
       this.subscription4 = null;
     }
   }
-
-transform(value: any, numero: number): any {
-  // Protección por si la lista viene vacía
-  if (!value) return value;
-
-  let idioma: any = this.cambioIdioma.mensajeSource.value[0];
-  idioma = String(idioma);
-  
-  let categoriaSeleccionada = "";
-
-  // 1. TUS 3 IFs para decidir qué lista del diccionario usar
-  if (numero === 1) {
-    categoriaSeleccionada = "menu_comida";
-  } else if (numero === 2) {
-    categoriaSeleccionada = "menu_bebida";
-  } else if (numero === 3) {
-    categoriaSeleccionada = "menu_postre";
-  }
-
-  // Si no elegimos ninguna categoría válida, devolvemos la lista tal cual
-  if (categoriaSeleccionada === "") return value;
-
-  // 2. Recorremos y traducimos usando la categoría que ganamos en los IFs
-  value.forEach((producto: any, i: any) => {
-    // Recuperamos la traducción específica para ese índice
-    const traduccion = DICCIONARIO[idioma][categoriaSeleccionada][i];
-
-    // Verificamos que exista traducción para no romper el código
-    if (traduccion) {
-      producto.name = traduccion.nombre;
-      producto.description = traduccion.descripcion;
+  buscarProductoTraducido(id: string, tipoComida: string) {
+    let idioma = this.idioma()
+    let registros = DICCIONARIO[idioma][tipoComida]
+    for (let producto of registros) {
+      if (producto.id == id) {
+        return producto
+      }
+      else {
+        continue
+      }
     }
-  });
+  }
+  transform1(value: any, numero: any) {
+    if (numero === 1) {
+      value.forEach((producto: any) => {
+        let idActual = producto.id
+        let productoTraducido = this.buscarProductoTraducido(idActual,"menu_comida")
+        producto.name = productoTraducido.nombre
+        producto.description = productoTraducido.descripcion
 
-  return value;
-}
+      });
+      return value
+    }
+    if (numero === 2) {
+      value.forEach((producto: any) => {
+        let idActual = producto.id
+        let productoTraducido = this.buscarProductoTraducido(idActual,"menu_bebida")
+        producto.name = productoTraducido.nombre
+        producto.description = productoTraducido.descripcion
+
+      });
+      return value
+    }
+    if (numero === 3) {
+      value.forEach((producto: any) => {
+        let idActual = producto.id
+        let productoTraducido = this.buscarProductoTraducido(idActual,"menu_postre")
+        producto.name = productoTraducido.nombre
+        producto.description = productoTraducido.descripcion
+
+      });
+      return value
+    }
+
+  }
+  transform(value: any, numero: number): any {
+    // Protección por si la lista viene vacía
+    if (!value) return value;
+
+    let idioma: any = this.cambioIdioma.mensajeSource.value[0];
+    idioma = String(idioma);
+
+    let categoriaSeleccionada = "";
+
+    // 1. TUS 3 IFs para decidir qué lista del diccionario usar
+    if (numero === 1) {
+      categoriaSeleccionada = "menu_comida";
+    } else if (numero === 2) {
+      categoriaSeleccionada = "menu_bebida";
+    } else if (numero === 3) {
+      categoriaSeleccionada = "menu_postre";
+    }
+
+    // Si no elegimos ninguna categoría válida, devolvemos la lista tal cual
+    if (categoriaSeleccionada === "") return value;
+
+    // 2. Recorremos y traducimos usando la categoría que ganamos en los IFs
+    value.forEach((producto: any, i: any) => {
+      // Recuperamos la traducción específica para ese índice
+      const traduccion = DICCIONARIO[idioma][categoriaSeleccionada][i];
+
+      // Verificamos que exista traducción para no romper el código
+      if (traduccion) {
+        producto.name = traduccion.nombre;
+        producto.description = traduccion.descripcion;
+      }
+    });
+
+    return value;
+  }
 
   cerrarModal() {
     this.isModalOpen = false;
@@ -328,13 +376,13 @@ transform(value: any, numero: number): any {
     try {
       this.db.guardarObjeto(pedido, 'delivery')
       await this.db.enviarNotificacion('dueño', {
-        titulo: this.diccionario[this.idioma()]['Nuevopedido'],
-        cuerpo: this.diccionario[this.idioma()]['Clienterealizoundelivery'],
+        titulo: 'Nuevo pedido',
+        cuerpo: `Cliente realizo un delivery`,
       });
 
       await this.db.enviarNotificacion('supervisor', {
-        titulo: this.diccionario[this.idioma()]['Nuevopedido'],
-        cuerpo: this.diccionario[this.idioma()]['Clienterealizoundelivery'],
+        titulo: 'Nuevo pedido',
+        cuerpo: `Cliente realizo un delivery`,
       });
 
       this.auth.usuarioIngresado.tipoPedido = 'delivery';

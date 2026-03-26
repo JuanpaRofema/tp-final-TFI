@@ -61,7 +61,7 @@
                 <p class="total">{{ diccionario[idioma()]['Total'] }} <span>${{ pedidoSeleccionado.total }}</span></p>
                 <ul class="products">
                     <li *ngFor="let prod of pedidoSeleccionado.productos">
-                        <strong>{{ prod.cantidad }}x</strong> {{ prod.name }}
+                        <strong>{{ prod.cantidad }}x</strong> {{ prod.name | traducirComidas }}
                     </li>
                 </ul>
             </div>

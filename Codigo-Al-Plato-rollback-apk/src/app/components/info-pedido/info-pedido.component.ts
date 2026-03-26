@@ -5,11 +5,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faClock, faReceipt, faUtensils } from '@fortawesome/free-solid-svg-icons';
 import { DICCIONARIO } from 'src/assets/diccionario';
 import { CambioIdioma } from 'src/app/services/cambio-idioma';
+import { TraducirComidasPipe } from 'src/app/pipes/traducir-comidas.pipe';
 
 @Component({
   selector: 'app-info-pedido',
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule],
+  imports: [CommonModule, FontAwesomeModule, TraducirComidasPipe],
   templateUrl: './info-pedido.component.html',
   styleUrls: ['./info-pedido.component.scss']
 })
@@ -27,6 +28,7 @@ export class InfoPedidoComponent implements OnInit {
   constructor(private pedidoService: PedidoService) { }
 
   ngOnInit() {
+    console.clear()
     this.cambioIdioma.idiomaActual$.subscribe(data => this.idioma.set(data[0]))
     this.pedidoService.pedidoActual$.subscribe(pedido => {
       this.pedidoActual = pedido;

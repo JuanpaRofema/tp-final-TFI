@@ -29,7 +29,7 @@
             <fa-icon [icon]="faBoxOpen"></fa-icon>
             <p>
                 <span *ngFor="let prod of p.productos; let last = last">
-                    {{ prod.cantidad }}x {{ prod.name }}<span *ngIf="!last">, </span>
+                    {{ prod.cantidad }}x {{ prod.name | traducirComidas }}<span *ngIf="!last">, </span>
                 </span>
             </p>
         </div>

@@ -33,7 +33,7 @@
             <div class="items-list">
                 <ul>
                     <li *ngFor="let prod of p.productos">
-                        <strong>x{{ prod.cantidad }}</strong> {{ prod.name }}
+                        <strong>x{{ prod.cantidad }}</strong> {{ prod.name | traducirComidas}}
                     </li>
                 </ul>
             </div>

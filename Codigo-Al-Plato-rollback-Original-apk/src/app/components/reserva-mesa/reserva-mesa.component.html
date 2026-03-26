@@ -1,0 +1,42 @@
+
+  <div class="modal-overlay" id="modalOverlay">
+  <div class="modal-content">
+    <div class="button-grid">
+          <label for="fecha">Seleccioná fecha y hora:</label>
+          <input type="datetime-local" [(ngModel)]="fechaSeleccionada" />
+          <label for="fecha">Tipo de Mesa:</label>
+          <ion-select [(ngModel)]="tipoMesa" name="tipo">
+            <ion-select-option value="vip">Vip</ion-select-option>
+            <ion-select-option value="estandar">Estandar</ion-select-option>
+            <ion-select-option value="movilidad reducida">Movilidad reducida</ion-select-option>
+          </ion-select>
+          <label for="fecha">Cantidad de comensales:</label>
+          <ion-input type="number" required name="cantidadComensales" [(ngModel)]="cantidadComensales"></ion-input>
+
+        <div class="botones">
+          <button (click)="confirmarReserva()">Confirmar</button>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+    
+
+<!-- } -->
+
+
+<div class="back-button">
+  <button (click)="volverFuncionalidad()">
+    <fa-icon [icon]="faArrowLeft"></fa-icon>
+  </button>
+</div>
+
+
+@if (isLoading) {
+  <div class="spinner-overlay">
+    <div class="spinner-container">
+      <img src="assets/icono.png" alt="Cargando..." class="spinning-logo">
+      <p>Procesando...</p>
+    </div>
+  </div>
+}

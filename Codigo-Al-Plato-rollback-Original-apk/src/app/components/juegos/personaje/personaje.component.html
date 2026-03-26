@@ -1,0 +1,47 @@
+@if (this.auth.usuarioIngresado !== null){
+<nav class="navbar">
+  <div class="navbar-left">
+    <!-- Ícono de usuario usando Font Awesome -->
+    @if (this.auth.usuarioIngresado.tipoCliente === "dueño"){
+    <img src="assets/iconos/man_11379344.png" alt="" />
+    } @else if (this.auth.usuarioIngresado.tipoCliente === "cliente"){
+    <img src="assets/iconos/profile_7310896.png" alt="" />
+    } @else if (this.auth.usuarioIngresado.tipoCliente === "anonimo"){
+    <img src="assets/iconos/intruder_3584762.png" alt="" />
+    } @else if (this.auth.usuarioIngresado.tipoCliente === "chef"){
+    <img src="assets/iconos/chef_2702326.png" alt="" />
+    } @else if (this.auth.usuarioIngresado.tipoCliente === "supervisor"){
+    <img src="assets/iconos/graphic-designer_1596960.png" alt="" />
+    } @else if (this.auth.usuarioIngresado.tipoCliente === "bartender"){
+    <img src="assets/iconos/bartender_3474515.png" alt="" />
+    } @else if (this.auth.usuarioIngresado.tipoCliente === "mesero"){
+    <img src="assets/iconos/waiter_3462052.png" alt="" />
+    } @else if (this.auth.usuarioIngresado.tipoCliente === "maitre"){
+    <img src="assets/iconos/consultant_3473755.png" alt="" />
+    }
+  </div>
+  <div class="navbar-right">
+    <span class="user-name">{{ this.auth.usuarioIngresado.nombre }}</span>
+    <img
+      src="{{ this.auth.usuarioIngresado.foto }}"
+      alt="Foto del usuario"
+      class="user-photo"
+    />
+  </div>
+</nav>
+}
+
+<div class="personajes-grid">
+
+  <button class="personajes" *ngFor="let personaje of personajes" (click)="seleccionarPersonaje(personaje)">
+    <img [src]="personaje.img" alt="{{ personaje.nombre }}">
+    <p>{{ personaje.nombre }}</p>
+  </button>
+</div>
+
+<div class="back-button">
+<button (click)="logOut()">
+    <fa-icon [icon]="faRightFromBracket"></fa-icon>
+</button>
+</div>
+

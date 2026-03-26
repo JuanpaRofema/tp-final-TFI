@@ -58,6 +58,7 @@ export class AgregarEmpleadoComponent implements OnInit {
   cambioIdioma = inject(CambioIdioma)
 
   constructor(
+    
     private fb: FormBuilder,
     private database: DatabaseService,
     public authService: AuthService,
@@ -89,6 +90,7 @@ export class AgregarEmpleadoComponent implements OnInit {
 
   async ngOnInit() {
     this.cambioIdioma.idiomaActual$.subscribe(data => this.idioma.set(data[0]))
+    console.clear()
 
     setTimeout(() => {
       this.isLoading = false;
@@ -236,8 +238,8 @@ export class AgregarEmpleadoComponent implements OnInit {
       }
 
       await this.database.enviarNotificacion('dueño', {
-        titulo: this.diccionario[this.idioma()]['NuevoEmpleado'],
-        cuerpo: `${this.diccionario[this.idioma()]['SeRegistroUn']} ${empleadoData.tipoCliente}.`,
+        titulo: 'Nuevo Empleado',
+        cuerpo: `Se registró un ${empleadoData.tipoCliente}.`,
       });
 
       this.isLoading = false;

@@ -75,6 +75,7 @@ export class ListadoProductosComponent implements OnInit, ViewWillEnter, ViewDid
   ) { }
 
   ngOnInit() {
+    console.clear()
     this.cambioIdioma.idiomaActual$.subscribe(data => {this.idioma.set(data[0])
             this.productsComida = this.transform(this.productsComidaGeneral,1)
       this.productsBebida = this.transform(this.productsBebidaGeneral,2)
@@ -131,14 +132,17 @@ transform(value: any, numero: number): any {
     this.db.TraerObjeto('productos').subscribe((productos: any[]) => {
 
       const prods = productos.map(p => ({ ...p, cantidad: 0, fotoActiva: 1 }));
-      console.log("LOS PRODUCTOS SON ESTE FORMATO "+prods)
+      
 
       this.productsComidaGeneral = prods.filter(p => p.tipoProducto === 'comida');
+      console.log("LOS PRODUCTOS COMIDA SON ASI ", this.productsComidaGeneral)
       this.productsBebidaGeneral = prods.filter(p => p.tipoProducto === 'bebida');
+      console.log("LOS PRODUCTOS BEBIDA SON ASI ", this.productsBebidaGeneral)
       this.productsPostresGeneral = prods.filter(p => p.tipoProducto === 'postre');
-      this.productsComida = this.transform(this.productsComidaGeneral,1)
-      this.productsBebida = this.transform(this.productsBebidaGeneral,2)
-      this.productsPostres = this.transform(this.productsPostresGeneral,3)
+      console.log("LOS PRODUCTOS POSTRE SON ASI ", this.productsPostresGeneral)
+      this.productsComida = this.transform1(this.productsComidaGeneral,1)
+      this.productsBebida = this.transform1(this.productsBebidaGeneral,2)
+      this.productsPostres = this.transform1(this.productsPostresGeneral,3)
 
 
       if (this.productsComida.length > 0) {
@@ -162,6 +166,51 @@ transform(value: any, numero: number): any {
 
     producto.cantidad += operacion;
     this.actualizarCarrito(producto);
+  }
+  buscarProductoTraducido(id: string, tipoComida: string) {
+    let idioma = this.idioma()
+    let registros = DICCIONARIO[idioma][tipoComida]
+    for (let producto of registros) {
+      if (producto.id == id) {
+        return producto
+      }
+      else {
+        continue
+      }
+    }
+  }
+  transform1(value: any, numero: any) {
+    if (numero === 1) {
+      value.forEach((producto: any) => {
+        let idActual = producto.id
+        let productoTraducido = this.buscarProductoTraducido(idActual,"menu_comida")
+        producto.name = productoTraducido.nombre
+        producto.description = productoTraducido.descripcion
+
+      });
+      return value
+    }
+    if (numero === 2) {
+      value.forEach((producto: any) => {
+        let idActual = producto.id
+        let productoTraducido = this.buscarProductoTraducido(idActual,"menu_bebida")
+        producto.name = productoTraducido.nombre
+        producto.description = productoTraducido.descripcion
+
+      });
+      return value
+    }
+    if (numero === 3) {
+      value.forEach((producto: any) => {
+        let idActual = producto.id
+        let productoTraducido = this.buscarProductoTraducido(idActual,"menu_postre")
+        producto.name = productoTraducido.nombre
+        producto.description = productoTraducido.descripcion
+
+      });
+      return value
+    }
+
   }
 
   actualizarCarrito(producto: any) {
@@ -370,10 +419,11 @@ transform(value: any, numero: number): any {
 
 
       if (!ultimaNotificacion.recibida && debeMostrarPush) {
-
+        let res = this.cambioIdioma.modificarLasPush(ultimaNotificacion)
+        console.log("HERMANO, LO QUE LAS PUSH TIENEN ES ESTO, TITULO: ", ultimaNotificacion.titulo, "EL CONTENIDO: ", ultimaNotificacion.cuerpo)
         this.pushService.send(
-          ultimaNotificacion.titulo,
-          ultimaNotificacion.cuerpo,
+          res[0],
+          res[1],
           '/chat',
           true,
           '',

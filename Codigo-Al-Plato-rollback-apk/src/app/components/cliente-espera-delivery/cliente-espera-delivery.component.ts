@@ -1,4 +1,4 @@
-import { Component, inject, NgZone, signal } from '@angular/core';
+import { Component, inject, NgZone, signal,ChangeDetectorRef  } from '@angular/core';
 import { RouterLink, Router } from '@angular/router';
 import { ViewDidLeave, ViewWillEnter, ViewWillLeave } from '@ionic/angular';
 import { Subscription } from 'rxjs';
@@ -12,13 +12,14 @@ import { faCheck, faUtensils, faMotorcycle, faFlagCheckered, faGamepad, faClipbo
 import { PedidoService } from 'src/app/services/pedido.service';
 import { DICCIONARIO } from 'src/assets/diccionario';
 import { CambioIdioma } from 'src/app/services/cambio-idioma';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-cliente-espera-delivery',
   templateUrl: './cliente-espera-delivery.component.html',
   styleUrls: ['./cliente-espera-delivery.component.scss'],
   standalone: true,
-  imports: [RouterLink, CommonModule, FontAwesomeModule]
+  imports: [RouterLink, CommonModule, FontAwesomeModule,IonicModule]
 })
 export class ClienteEsperaDeliveryComponent implements ViewWillEnter, ViewDidLeave {
 
@@ -54,9 +55,11 @@ export class ClienteEsperaDeliveryComponent implements ViewWillEnter, ViewDidLea
     private router: Router,
     private pushService: pushService,
     private ngZone: NgZone,
-    private pedidoService: PedidoService
+    private pedidoService: PedidoService,
+    private cdr: ChangeDetectorRef
   ) { }
   ngOnInit() {
+    console.clear()
     this.cambioIdioma.idiomaActual$.subscribe(data => this.idioma.set(data[0]))
   }
   ionViewWillEnter(): void {
@@ -105,10 +108,11 @@ export class ClienteEsperaDeliveryComponent implements ViewWillEnter, ViewDidLea
         if (this.auth.usuarioIngresado.tipoCliente === 'cliente' && this.pasoActual !== -1) {
           console.log(ultimaNotificacion);
           if (!ultimaNotificacion.recibida) {
-
+            let res = this.cambioIdioma.modificarLasPush(ultimaNotificacion)
+            //console.log("HERMANO, LO QUE LAS PUSH TIENEN ES ESTO, TITULO: ", ultimaNotificacion.titulo, "EL CONTENIDO: ", ultimaNotificacion.cuerpo)
             this.pushService.send(
-              ultimaNotificacion.titulo,
-              ultimaNotificacion.cuerpo,
+              res[0],
+              res[1],
               '/chat-delivery'
             );
             this.db.actualizarNotificacion('cliente', ultimaNotificacion.id, { recibida: true });
@@ -117,7 +121,11 @@ export class ClienteEsperaDeliveryComponent implements ViewWillEnter, ViewDidLea
       }
     });
   }
-
+irAlJuego() {
+  // 1. Mandamos la orden de navegar
+  this.router.navigate(['/juego']);
+  this.router.navigate(['/juego']);
+}
   calcularEstado() {
     if (!this.delivery) return;
 
@@ -125,8 +133,8 @@ export class ClienteEsperaDeliveryComponent implements ViewWillEnter, ViewDidLea
       const estadoP = this.delivery.estadoPedido;
       const estadoD = this.delivery.estadoDelivery;
 
-      console.log('Estado Pedido:', estadoP);
-      console.log('Estado Delivery:', estadoD);
+     // console.log('Estado Pedido:', estadoP);
+     // console.log('Estado Delivery:', estadoD);
 
       // 2. Lógica paso a paso
       if (estadoD === 'cancelado') {
@@ -180,10 +188,11 @@ export class ClienteEsperaDeliveryComponent implements ViewWillEnter, ViewDidLea
         const notif = res[0];
 
         if (!notif.recibida && this.mostrarNotificacion) {
-
+          let res1 = this.cambioIdioma.modificarLasPush(notif)
+          //console.log("HERMANO, LO QUE LAS PUSH TIENEN ES ESTO, TITULO: ", notif.titulo, "EL CONTENIDO: ", notif.cuerpo)
           this.pushService.send(
-            notif.titulo,
-            notif.cuerpo,
+            res1[0],
+            res1[1],
             '/delivery',
             true,
             '',
@@ -207,8 +216,8 @@ export class ClienteEsperaDeliveryComponent implements ViewWillEnter, ViewDidLea
     this.db.ModificarObjeto(this.auth.usuarioIngresado, 'clientes');
 
     this.db.enviarNotificacion('delivery', {
-      titulo: this.diccionario[this.idioma()]['Cuentasolicitada'],
-      cuerpo: `${this.diccionario[this.idioma()]['Elcliente']} ${this.auth.usuarioIngresado.nombre} ${this.diccionario[this.idioma()]['solicitólacuenta']}`,
+        titulo: 'Cuenta solicitada',
+        cuerpo: `El cliente ${this.auth.usuarioIngresado.nombre} solicitó la cuenta`,
       noRedirigir: true,
       cliente: this.auth.usuarioIngresado.nombre,
       pedido: this.delivery

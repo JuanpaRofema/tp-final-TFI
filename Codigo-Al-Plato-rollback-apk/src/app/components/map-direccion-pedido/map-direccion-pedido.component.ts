@@ -53,6 +53,7 @@ export class MapDireccionPedidoComponent implements AfterViewInit {
     this.initMap();
   }
   ngOnInit(){
+    console.clear()
     this.cambioIdioma.idiomaActual$.subscribe(data => this.idioma.set(data[0]))
   }
 

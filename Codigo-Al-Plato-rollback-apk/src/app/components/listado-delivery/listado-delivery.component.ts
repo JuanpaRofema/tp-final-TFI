@@ -10,13 +10,14 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { CambioIdioma } from 'src/app/services/cambio-idioma';
 import { DICCIONARIO } from 'src/assets/diccionario';
+import { TraducirComidasPipe } from 'src/app/pipes/traducir-comidas.pipe';
 
 @Component({
   selector: 'app-listado-delivery',
   templateUrl: './listado-delivery.component.html',
   styleUrls: ['./listado-delivery.component.scss'],
   standalone: true,
-  imports: [FontAwesomeModule, CommonModule, IonicModule]
+  imports: [FontAwesomeModule, CommonModule, IonicModule, TraducirComidasPipe]
 })
 export class ListadoDeliveryComponent implements OnInit {
 
@@ -46,6 +47,7 @@ export class ListadoDeliveryComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.clear()
     this.cambioIdioma.idiomaActual$.subscribe(data => this.idioma.set(data[0]))
     this.isLoading = true;
     const observable = this.db.traerDelivery();
@@ -89,8 +91,8 @@ export class ListadoDeliveryComponent implements OnInit {
       await this.db.ModificarObjeto(pedido, 'delivery');
 
       await this.db.enviarNotificacion('cliente', {
-        titulo: this.diccionario[this.idioma()]['PedidoEnCaminoTitulo'],
-        cuerpo: `${this.auth.usuarioIngresado.nombre} ${this.diccionario[this.idioma()]['LlevandoPedido']}`,
+            titulo: '¡Pedido en Camino!',
+            cuerpo: `${this.auth.usuarioIngresado.nombre} está llevando tu pedido.`,
         pedidoId: pedido.id
       });
 
